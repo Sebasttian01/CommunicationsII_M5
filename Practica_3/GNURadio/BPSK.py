@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: GPL-3.0
 #
 # GNU Radio Python Flow Graph
-# Title: ook
+# Title: BPSK
 # Author: radiogis_director
 # GNU Radio version: v3.11.0.0git-810-g1ecb8565
 
@@ -25,21 +25,21 @@ from PyQt5 import Qt
 from argparse import ArgumentParser
 from gnuradio.eng_arg import eng_float, intx
 from gnuradio import eng_notation
+import BPSK_epy_block_0 as epy_block_0  # embedded python block
+import BPSK_epy_block_0_0 as epy_block_0_0  # embedded python block
 import math
 import numpy as np
-import ook_epy_block_0 as epy_block_0  # embedded python block
-import ook_epy_block_0_0 as epy_block_0_0  # embedded python block
 import sip
 import threading
 
 
 
-class ook(gr.top_block, Qt.QWidget):
+class BPSK(gr.top_block, Qt.QWidget):
 
     def __init__(self):
-        gr.top_block.__init__(self, "ook", catch_exceptions=True)
+        gr.top_block.__init__(self, "BPSK", catch_exceptions=True)
         Qt.QWidget.__init__(self)
-        self.setWindowTitle("ook")
+        self.setWindowTitle("BPSK")
         qtgui.util.check_set_qss()
         try:
             self.setWindowIcon(Qt.QIcon.fromTheme('gnuradio-grc'))
@@ -57,7 +57,7 @@ class ook(gr.top_block, Qt.QWidget):
         self.top_grid_layout = Qt.QGridLayout()
         self.top_layout.addLayout(self.top_grid_layout)
 
-        self.settings = Qt.QSettings("gnuradio/flowgraphs", "ook")
+        self.settings = Qt.QSettings("gnuradio/flowgraphs", "BPSK")
 
         try:
             geometry = self.settings.value("geometry")
@@ -501,7 +501,7 @@ class ook(gr.top_block, Qt.QWidget):
 
 
     def closeEvent(self, event):
-        self.settings = Qt.QSettings("gnuradio/flowgraphs", "ook")
+        self.settings = Qt.QSettings("gnuradio/flowgraphs", "BPSK")
         self.settings.setValue("geometry", self.saveGeometry())
         self.stop()
         self.wait()
@@ -561,7 +561,7 @@ class ook(gr.top_block, Qt.QWidget):
 
 
 
-def main(top_block_cls=ook, options=None):
+def main(top_block_cls=BPSK, options=None):
 
     qapp = Qt.QApplication(sys.argv)
 
