@@ -1,0 +1,529 @@
+options:
+  parameters:
+    author: ''
+    catch_exceptions: 'True'
+    category: Custom
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: top_block
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: run_stop
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 12]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: Ensayos
+  id: variable
+  parameters:
+    comment: ''
+    value: '1000000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [759, 97]
+    rotation: 0
+    state: enabled
+- name: Mean_reset
+  id: variable_qtgui_push_button
+  parameters:
+    comment: ''
+    gui_hint: 0,3,1,1
+    label: Push here to restart averaging procces
+    pressed: '0'
+    released: '1'
+    type: int
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [392, 592]
+    rotation: 0
+    state: enabled
+- name: N
+  id: variable
+  parameters:
+    comment: ''
+    value: 16*Sps
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [630, 123]
+    rotation: 0
+    state: enabled
+- name: Rb
+  id: variable
+  parameters:
+    comment: ''
+    value: samp_rate/Sps
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [368, 12]
+    rotation: 0
+    state: enabled
+- name: Sps
+  id: variable
+  parameters:
+    comment: ''
+    value: '32'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [296, 12]
+    rotation: 0
+    state: enabled
+- name: h
+  id: variable
+  parameters:
+    comment: ''
+    value: wform.rect(Sps)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [429, 72]
+    rotation: 0
+    state: enabled
+- name: run_stop
+  id: variable_qtgui_check_box
+  parameters:
+    comment: ''
+    'false': 'False'
+    gui_hint: 0,0,1,1
+    label: Inicial/Parar
+    'true': 'True'
+    type: int
+    value: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [252, 588]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '1953125'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 12]
+    rotation: 0
+    state: enabled
+- name: E3TRadio_v_autocorr_ff_0
+  id: E3TRadio_v_autocorr_ff
+  parameters:
+    N: N
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [528, 219]
+    rotation: 0
+    state: true
+- name: E3TRadio_vector_average_hob_0
+  id: E3TRadio_vector_average_hob
+  parameters:
+    N: N
+    Nensayos: Ensayos
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [638, 209]
+    rotation: 0
+    state: enabled
+- name: Menu
+  id: qtgui_tab_widget
+  parameters:
+    alias: ''
+    comment: ''
+    gui_hint: 1,0,1,4
+    label0: banary random signal
+    label1: sinc wave form random signal
+    label10: Tab 10
+    label11: Tab 11
+    label12: Tab 12
+    label13: Tab 13
+    label14: Tab 14
+    label15: Tab 15
+    label16: Tab 16
+    label17: Tab 17
+    label18: Tab 18
+    label19: Tab 19
+    label2: saw random signal
+    label3: gaussian white noise
+    label4: voice noise
+    label5: signal5
+    label6: signal6
+    label7: signal7
+    label8: signal8
+    label9: signal9
+    num_tabs: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [70, 584]
+    rotation: 0
+    state: enabled
+- name: b_binary_bipolar_source1_f_0
+  id: b_binary_bipolar_source1_f
+  parameters:
+    Am: '1.'
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [5, 222]
+    rotation: 0
+    state: true
+- name: blocks_complex_to_mag_0
+  id: blocks_complex_to_mag
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: N
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1013, 450]
+    rotation: 0
+    state: true
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: N*[1/samp_rate,]
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: N
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1149, 443]
+    rotation: 0
+    state: true
+- name: blocks_stream_to_vector_0
+  id: blocks_stream_to_vector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: N
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [387, 225]
+    rotation: 0
+    state: enabled
+- name: fft_vxx_1
+  id: fft_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    fft_size: N
+    forward: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nthreads: '1'
+    shift: 'True'
+    type: float
+    window: window.rectangular(N)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [817, 417]
+    rotation: 0
+    state: true
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import numpy
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [744, 12]
+    rotation: 0
+    state: enabled
+- name: interp_fir_filter_xxx_0
+  id: interp_fir_filter_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    interp: Sps
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_delay: '0'
+    taps: h
+    type: fff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [210, 213]
+    rotation: 0
+    state: enabled
+- name: qtgui_vector_sink_f_0
+  id: qtgui_vector_sink_f
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '1.0'
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    grid: 'False'
+    gui_hint: Menu@0:1,0,1,1
+    label1: .
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: Autocorrelacin
+    nconnections: '1'
+    ref_level: '0'
+    showports: 'True'
+    update_time: '0.10'
+    vlen: N
+    width1: '4'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    x_axis_label: '"Rx(T)"'
+    x_start: -(N/2)/samp_rate
+    x_step: (N/2)/samp_rate
+    x_units: '"T"'
+    y_axis_label: '"Amplitud"'
+    y_units: '"Watt/Hz"'
+    ymax: '2'
+    ymin: '-1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1321, 156]
+    rotation: 0
+    state: enabled
+- name: qtgui_vector_sink_f_0_1
+  id: qtgui_vector_sink_f
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '1.0'
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    grid: 'False'
+    gui_hint: Menu@0:2,0,1,1
+    label1: .
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: PSD
+    nconnections: '1'
+    ref_level: '0'
+    showports: 'True'
+    update_time: '0.10'
+    vlen: N
+    width1: '4'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    x_axis_label: '"Frecuencia"'
+    x_start: -samp_rate/2
+    x_step: (samp_rate-1)/N
+    x_units: '"Hz"'
+    y_axis_label: '"Amplitud (Watt/Hz)"'
+    y_units: '"Watt/Hz"'
+    ymax: 1/Rb
+    ymin: '0.'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1325, 387]
+    rotation: 0
+    state: enabled
+- name: wform
+  id: epy_module
+  parameters:
+    alias: ''
+    comment: ''
+    source_code: "import math\nimport numpy\n#######################################################\n\
+      ##        Hecho por Homero Ortega Boada              ##\n##        comdiguis@saber.uis.edu.co\
+      \                 ##\n##     Universidad Industrial de Santander           ##\n\
+      #######################################################\n\n#######################################################\n\
+      ##               Forma rectangular                   ##\n#######################################################\
+      \                       \ndef rect(Sps):\n    return Sps*[1.,]\n\n#######################################################\n\
+      ##               Forma de Nyquist                    ##\n#######################################################\
+      \                       \ndef nyq(Sps,ntaps):\n    n=numpy.linspace(-int(ntaps/2),\
+      \ int(ntaps/2-1),ntaps)\n    h=numpy.sinc(n/Sps)\n#    return h/numpy.amax(h)\n\
+      \    return h\n#######################################################\n## \
+      \              Forma Coseno Alzado                 ##\n#######################################################\
+      \                       \ndef rcos(Sps,ntaps,beta):\n    if beta==0:\n     \
+      \   h=nyq(Sps,ntaps)\n    else:\n        h=ntaps*[0,]\n        for n in range(ntaps):\n\
+      \            k=n-ntaps/2. # esto es para que h[n] quede centrada en la mitad\
+      \ del vector\n            if abs(k)==Sps/(2.*beta):\n                h[n]=numpy.sinc(1./(2.*beta))*math.pi/4.\n\
+      \            else:\n                h[n]=numpy.sinc(k/Sps)*math.cos(beta*k*math.pi/Sps)/(1.-(2.*beta*k/Sps)**2)\
+      \                \n    Amp=numpy.amax(h)\n    return h/Amp\n#######################################################\n\
+      ##            Forma Raiz de Coseno Alzado            ##\n#######################################################\
+      \                       \n\ndef rrcos(Sps,ntaps,beta):\n    if beta==0:\n  \
+      \      h=nyq(Sps,ntaps)\n    else:\n        h=ntaps*[0,]\n        beta4=4.*beta\n\
+      \        for n in range(ntaps):\n            k=n-ntaps/2. # esto es para que\
+      \ h[n] quede centrada en la mitad del vector\n            if k==0:\n       \
+      \         h[n]=1+beta*(4./math.pi-1.)\n            elif abs(k)==Sps/beta4:\n\
+      \                ha=(1.+2./math.pi)*math.sin(math.pi/beta4)\n              \
+      \  hb=(1.-2./math.pi)*math.cos(math.pi/beta4)\n                h[n]=(ha+hb)*beta/math.sqrt(2.)\n\
+      \            else:\n                ks=k/Sps\n                kspi=math.pi*ks\n\
+      \                Num=math.sin(kspi*(1-beta))+beta4*ks*math.cos(kspi*(1+beta))\n\
+      \                Den=kspi*(1.-(beta4*ks)**2)\n                h[n]=Num/Den \
+      \               \n    Amp=numpy.amax(h)\n    return h/Amp\n"
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 81]
+    rotation: 0
+    state: enabled
+
+connections:
+- [E3TRadio_v_autocorr_ff_0, '0', E3TRadio_vector_average_hob_0, '0']
+- [E3TRadio_vector_average_hob_0, '0', fft_vxx_1, '0']
+- [E3TRadio_vector_average_hob_0, '0', qtgui_vector_sink_f_0, '0']
+- [b_binary_bipolar_source1_f_0, '0', interp_fir_filter_xxx_0, '0']
+- [blocks_complex_to_mag_0, '0', blocks_multiply_const_vxx_0, '0']
+- [blocks_multiply_const_vxx_0, '0', qtgui_vector_sink_f_0_1, '0']
+- [blocks_stream_to_vector_0, '0', E3TRadio_v_autocorr_ff_0, '0']
+- [fft_vxx_1, '0', blocks_complex_to_mag_0, '0']
+- [interp_fir_filter_xxx_0, '0', blocks_stream_to_vector_0, '0']
+
+metadata:
+  file_format: 1

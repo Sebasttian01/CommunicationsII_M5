@@ -1,0 +1,247 @@
+options:
+  parameters:
+    author: Homero Ortega Boada. Universidad Industrial de Santander
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGis Universidad Industrial de Santander
+    description: 'Es un simulador del bloque USRP_Sink con el hardware tipo USRP 2920.
+      Entrega una senal pasobandas, con una frecuencia de muestreo que se calcula
+      asi: samp_rate_o=(Center_Freq+samp_rate/2)*8'
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_USRP_Sink_simul_f
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_USRP_Sink_simul_f
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: Samp_Rate_o
+  id: variable
+  parameters:
+    comment: ''
+    value: int((Center_Freq+Samp_Rate/2)*8)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [856, 21]
+    rotation: 0
+    state: enabled
+- name: Bandwidth
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: 'Ch0: Bandwidth (Hz)'
+    short_id: ''
+    type: ''
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [576, 6]
+    rotation: 0
+    state: enabled
+- name: Center_Freq
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: 'Ch0: Center_Freq'
+    short_id: ''
+    type: ''
+    value: '50000000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [288, 6]
+    rotation: 0
+    state: enabled
+- name: Gain_Value_dB
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: 'Ch0: Gain_Value (dB)'
+    short_id: ''
+    type: ''
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [432, 6]
+    rotation: 0
+    state: enabled
+- name: Lo_que_falta
+  id: note
+  parameters:
+    alias: ''
+    comment: ''
+    note: poner amplificador, poner rango dinamico
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [352, 228]
+    rotation: 0
+    state: enabled
+- name: Samp_Rate
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Samp Rate (Sps)
+    short_id: ''
+    type: ''
+    value: '200000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [168, 286]
+    rotation: 0
+    state: enabled
+- name: b_upconverter_cf_0
+  id: b_upconverter_cf
+  parameters:
+    Fc: Center_Freq
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: Samp_Rate_o
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [448, 117]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [632, 124]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [112, 124]
+    rotation: 0
+    state: enabled
+- name: rational_resampler_xxx_0
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: Samp_Rate
+    fbw: '0'
+    interp: Samp_Rate_o
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: ''
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [248, 103]
+    rotation: 0
+    state: enabled
+- name: samp_rate_o
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: samp_rate_o
+    short_id: ''
+    type: intx
+    value: 50000000+200000
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [712, -1]
+    rotation: 0
+    state: disabled
+- name: tag_name
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: TSB tag name
+    short_id: ''
+    type: ''
+    value: '"    "'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 278]
+    rotation: 0
+    state: enabled
+
+connections:
+- [b_upconverter_cf_0, '0', pad_sink_0, '0']
+- [pad_source_0, '0', rational_resampler_xxx_0, '0']
+- [rational_resampler_xxx_0, '0', b_upconverter_cf_0, '0']
+
+metadata:
+  file_format: 1

@@ -1,0 +1,11 @@
+Estos bloques presentan dificultades de instalación pero en las máquinas en google cloud, pero ya no se presentan en otros casos.
+De manera que si no trabajas con una imagen de Carlos Mario en google cloud, ignora todo lo que dice aquí.
+
+Suponemos que eso es debido a la manera en que se crea la imagen de la máquina y hay una confunsión con los usuarios, suponemos
+que el ususario que creo la maquina original instaló gnuradio y no el nuevo usuario que aparece con la imagen.
+Los bloques que aparecen en esta carpeta tienen las siguientes caracteristicas:
+1) son bloques jerarquicos que incluyen bloques "Python block" y/o "Python Module"
+2) No se dejan instalar de manera tan sencilla como otros bloques, ya que cada pyhton block
+ y cada Python Module genera un *.py, pero resulta almacenado en la misma carpeta donde está 
+el grc y no en la carpeta definitiva de gnuradio que es: /home/usuario/.grc_gnuradio/, donde usuario es el nombre del usuario Ubuntu.
+En el Readme principal se explica como lograr instalar todo bien.

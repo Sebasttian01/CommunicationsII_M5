@@ -1,0 +1,26 @@
+
+id: E3TRadio_FFT_SDRCol_triangular
+label: FFT_SDRCol.Triangular
+category: '[E3TRadio]'
+
+parameters:
+-   id: N
+    label: fft size
+    dtype: int
+    hide: ${ 'part' if vlen == 1 else 'none' }
+
+inputs:
+-   domain: stream
+    dtype: complex
+    vlen: ${ N }
+
+outputs:
+-   domain: stream
+    dtype: complex
+    vlen: ${ N }
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.FFT_SDRCol_triangular(${N})
+
+file_format: 1

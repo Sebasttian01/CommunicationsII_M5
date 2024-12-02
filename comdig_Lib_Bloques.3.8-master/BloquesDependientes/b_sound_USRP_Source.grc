@@ -1,0 +1,281 @@
+options:
+  parameters:
+    author: Homero Ortega Boada. Universidad Industrial de Santander
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGIS Universidad Industrial de Santander
+    description: "Es algo parecido a un USRP Sink pero en vez de usar una antena receptora,\
+      \ usa el microfono del computador, en un rango de frecuencias que esta entre\
+      \ 0 Hz y  22500 Hz para explotar al maximo las capacidades de audio que usualmente\
+      \ tienen los computadores. Tiene dos salida, una es la senala bandabase, la\
+      \ otra es opci\xF3n, para pruebaas y corresponde a la senal pasobandas. Parametros\
+      \ usados: samp_rate (Hz) - es la frecuencia de muestreo de la senal que entrega\
+      \ nuestro bloque; Fc (Hz) - es la frecuencia de la portadora; Gain Value - es\
+      \ la ganancia en dB del amplificador interno; B (Hz) ancho de banda del canal\
+      \ pasobandas."
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_sound_USRP_Source
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_sound_USRP_Source
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [0, 3]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: BW
+  id: variable
+  parameters:
+    comment: ''
+    value: B/2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [864, 11]
+    rotation: 0
+    state: enabled
+- name: Gain_volts
+  id: variable
+  parameters:
+    comment: ''
+    value: math.pow(10,Gain_dB/20.)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [936, 11]
+    rotation: 0
+    state: enabled
+- name: samp_rate_passband
+  id: variable
+  parameters:
+    comment: ''
+    value: '44100'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 11]
+    rotation: 0
+    state: enabled
+- name: B
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Bandwidth (Hz)
+    short_id: ''
+    type: ''
+    value: '2000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [728, 3]
+    rotation: 0
+    state: enabled
+- name: Fc
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Center Freq (Hz)
+    short_id: ''
+    type: ''
+    value: '4000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [456, 3]
+    rotation: 0
+    state: enabled
+- name: Gain_dB
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Gain Value (dB)
+    short_id: ''
+    type: ''
+    value: '0.'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 3]
+    rotation: 0
+    state: enabled
+- name: audio_source_0
+  id: audio_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    device_name: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_outputs: '1'
+    ok_to_block: 'True'
+    samp_rate: samp_rate_passband
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [0, 187]
+    rotation: 0
+    state: enabled
+- name: b_downconverter_fc_0
+  id: b_downconverter_fc
+  parameters:
+    BW: BW
+    Fc: Fc
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate_passband
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [360, 171]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: Gain_volts
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [192, 187]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import math
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1032, 3]
+    rotation: 0
+    state: enabled
+- name: pad_sink_1
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [776, 187]
+    rotation: 0
+    state: enabled
+- name: pad_sink_1_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: passband
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [360, 291]
+    rotation: 0
+    state: enabled
+- name: rational_resampler_xxx_0
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: samp_rate_passband
+    fbw: '0'
+    interp: samp_rate
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: ''
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [552, 163]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: samp_rate (Hz)
+    short_id: ''
+    type: ''
+    value: '2000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [176, 3]
+    rotation: 0
+    state: enabled
+
+connections:
+- [audio_source_0, '0', blocks_multiply_const_vxx_0, '0']
+- [b_downconverter_fc_0, '0', rational_resampler_xxx_0, '0']
+- [blocks_multiply_const_vxx_0, '0', b_downconverter_fc_0, '0']
+- [blocks_multiply_const_vxx_0, '0', pad_sink_1_0, '0']
+- [rational_resampler_xxx_0, '0', pad_sink_1, '0']
+
+metadata:
+  file_format: 1

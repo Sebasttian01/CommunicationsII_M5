@@ -1,0 +1,541 @@
+options:
+  parameters:
+    author: 'Done by: Homero Ortega Boada. Universidad Industrial de Santander'
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: 'Let you to see the eye diagram '
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb_qt_gui
+    hier_block_src_path: '.:'
+    id: b_Eye_Diagram_simple_f
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_Eye_Diagram_simple_f
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: Delay
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 0,0,1,1
+    label: Centrar el Ojo
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: int
+    start: '0'
+    step: '1'
+    stop: Sps
+    value: Delay_i
+    widget: counter
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [792, 524]
+    rotation: 0
+    state: enabled
+- name: AlphaLineas
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: AlphaLineas
+    short_id: ''
+    type: ''
+    value: '0.5'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1016, 291]
+    rotation: 0
+    state: enabled
+- name: Delay_i
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Delay in samples
+    short_id: ''
+    type: intx
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [512, 3]
+    rotation: 0
+    state: enabled
+- name: GrosorLineas
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: GrosorLineas
+    short_id: ''
+    type: ''
+    value: '20'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1016, 203]
+    rotation: 0
+    state: enabled
+- name: N_eyes
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Number of eyes
+    short_id: ''
+    type: intx
+    value: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [656, 3]
+    rotation: 0
+    state: enabled
+- name: Samprate
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Sample Rate
+    short_id: ''
+    type: eng_float
+    value: '1000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [232, 3]
+    rotation: 0
+    state: enabled
+- name: Sps
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Samples per symbol
+    short_id: ''
+    type: intx
+    value: '64'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [352, 3]
+    rotation: 0
+    state: enabled
+- name: Title
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Titulo de la grafica
+    short_id: ''
+    type: ''
+    value: '"Eye Diagramm"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1000, 3]
+    rotation: 0
+    state: enabled
+- name: Ymax
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Ymax
+    short_id: ''
+    type: eng_float
+    value: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [888, 3]
+    rotation: 0
+    state: enabled
+- name: Ymin
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Ymin
+    short_id: ''
+    type: eng_float
+    value: '-2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [800, 3]
+    rotation: 0
+    state: enabled
+- name: blocks_delay_0
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: Sps*2+Delay
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [408, 587]
+    rotation: 180
+    state: enabled
+- name: blocks_delay_0_0
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: Sps*3+Delay
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [408, 539]
+    rotation: 180
+    state: enabled
+- name: blocks_delay_0_1
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: Sps*4+Delay
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [408, 491]
+    rotation: 180
+    state: enabled
+- name: blocks_delay_0_2
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: Sps*5+Delay
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [408, 451]
+    rotation: 180
+    state: enabled
+- name: blocks_delay_0_3
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: Sps*6+Delay
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [408, 411]
+    rotation: 180
+    state: enabled
+- name: blocks_delay_0_3_0
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: Sps*9+Delay
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [376, 187]
+    rotation: 180
+    state: enabled
+- name: blocks_delay_0_3_0_0
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: Delay
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [392, 131]
+    rotation: 180
+    state: enabled
+- name: blocks_delay_0_4
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: Sps*7+Delay
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [376, 267]
+    rotation: 180
+    state: enabled
+- name: blocks_delay_0_5
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: Sps*8+Delay
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [376, 227]
+    rotation: 180
+    state: enabled
+- name: blocks_delay_0_6
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: Sps*1+Delay
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [416, 627]
+    rotation: 180
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [840, 371]
+    rotation: 180
+    state: enabled
+- name: qtgui_time_sink_x_0_0_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: AlphaLineas
+    alpha10: AlphaLineas
+    alpha2: AlphaLineas
+    alpha3: AlphaLineas
+    alpha4: AlphaLineas
+    alpha5: AlphaLineas
+    alpha6: AlphaLineas
+    alpha7: AlphaLineas
+    alpha8: AlphaLineas
+    alpha9: AlphaLineas
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'False'
+    entags: 'True'
+    grid: 'False'
+    gui_hint: 1,0,1,1
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: Title
+    nconnections: '10'
+    size: int(Sps*N_eyes)
+    srate: Samprate
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: float
+    update_time: '1'
+    width1: GrosorLineas
+    width10: GrosorLineas
+    width2: GrosorLineas
+    width3: GrosorLineas
+    width4: GrosorLineas
+    width5: GrosorLineas
+    width6: GrosorLineas
+    width7: GrosorLineas
+    width8: GrosorLineas
+    width9: GrosorLineas
+    ylabel: Amplitude
+    ymax: Ymax
+    ymin: Ymin
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [80, 233]
+    rotation: 180
+    state: enabled
+
+connections:
+- [blocks_delay_0, '0', qtgui_time_sink_x_0_0_0, '1']
+- [blocks_delay_0_0, '0', qtgui_time_sink_x_0_0_0, '2']
+- [blocks_delay_0_1, '0', qtgui_time_sink_x_0_0_0, '3']
+- [blocks_delay_0_2, '0', qtgui_time_sink_x_0_0_0, '4']
+- [blocks_delay_0_3, '0', qtgui_time_sink_x_0_0_0, '5']
+- [blocks_delay_0_3_0, '0', qtgui_time_sink_x_0_0_0, '8']
+- [blocks_delay_0_3_0_0, '0', qtgui_time_sink_x_0_0_0, '9']
+- [blocks_delay_0_4, '0', qtgui_time_sink_x_0_0_0, '6']
+- [blocks_delay_0_5, '0', qtgui_time_sink_x_0_0_0, '7']
+- [blocks_delay_0_6, '0', qtgui_time_sink_x_0_0_0, '0']
+- [pad_source_0, '0', blocks_delay_0, '0']
+- [pad_source_0, '0', blocks_delay_0_0, '0']
+- [pad_source_0, '0', blocks_delay_0_1, '0']
+- [pad_source_0, '0', blocks_delay_0_2, '0']
+- [pad_source_0, '0', blocks_delay_0_3, '0']
+- [pad_source_0, '0', blocks_delay_0_3_0, '0']
+- [pad_source_0, '0', blocks_delay_0_3_0_0, '0']
+- [pad_source_0, '0', blocks_delay_0_4, '0']
+- [pad_source_0, '0', blocks_delay_0_5, '0']
+- [pad_source_0, '0', blocks_delay_0_6, '0']
+
+metadata:
+  file_format: 1

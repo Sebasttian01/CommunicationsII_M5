@@ -1,0 +1,32 @@
+
+id: E3TRadio_diezma_ff
+label: diez
+category: '[E3TRadio]'
+
+parameters:
+-   id: N
+    label: N
+    dtype: int
+    default: '8'
+-   id: M
+    label: M
+    dtype: int
+    default: '0'
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: stream
+    dtype: float
+asserts:
+- ${ N > 0 }
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.diezma_ff(${N}, ${M})
+    callbacks:
+    - set_ka(${M})
+
+file_format: 1

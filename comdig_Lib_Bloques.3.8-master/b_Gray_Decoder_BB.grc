@@ -1,0 +1,138 @@
+options:
+  parameters:
+    author: Homero Ortega
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: apply Gray Decoding to input byte signal. This block may be paired
+      with b_Gray_Encoder_BB
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_Gray_Decoder_BB
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_Gray_Decoder_BB
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: cod_gray
+  id: variable
+  parameters:
+    comment: ''
+    value: digital.utils.gray_code.gray_code(M)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [319, 20]
+    rotation: 0
+    state: enabled
+- name: cod_gray_inv
+  id: variable
+  parameters:
+    comment: ''
+    value: digital.mod_codes.invert_code(cod_gray)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [488, 20]
+    rotation: 0
+    state: enabled
+- name: M
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Modulus
+    short_id: ''
+    type: intx
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [216, 12]
+    rotation: 0
+    state: enabled
+- name: digital_map_bb_0
+  id: digital_map_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    map: cod_gray_inv
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [376, 204]
+    rotation: 0
+    state: enabled
+- name: pad_sink_1
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [568, 204]
+    rotation: 0
+    state: enabled
+- name: pad_source_0_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [240, 204]
+    rotation: 0
+    state: enabled
+
+connections:
+- [digital_map_bb_0, '0', pad_sink_1, '0']
+- [pad_source_0_0, '0', digital_map_bb_0, '0']
+
+metadata:
+  file_format: 1

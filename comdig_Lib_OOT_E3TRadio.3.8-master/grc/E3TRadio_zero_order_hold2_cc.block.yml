@@ -1,0 +1,25 @@
+
+id: E3TRadio_zero_order_hold2_cc
+label: zeroh2_cc
+category: '[E3TRadio]'
+
+parameters:
+-   id: k
+    label: hold time
+    dtype: int
+
+inputs:
+-   domain: stream
+    dtype: complex
+
+outputs:
+-   domain: stream
+    dtype: complex
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.zero_order_hold2_cc(${k})
+    callbacks:
+    - set_retardo(${k})
+
+file_format: 1

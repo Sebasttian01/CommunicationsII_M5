@@ -1,0 +1,162 @@
+options:
+  parameters:
+    author: Homero Ortega Boada
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGIS Universidad Industrial de Santander
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_symb_source
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_symb_source
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: Bps
+  id: variable
+  parameters:
+    comment: ''
+    value: int(math.log(len(Constelacion),2))
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [352, 5]
+    rotation: 0
+    state: enabled
+- name: Constelacion
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Tabla de Verdad
+    short_id: ''
+    type: ''
+    value: '[1+.0j,-1+.0j, .0+1j,0 -1j ]'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [192, 3]
+    rotation: 0
+    state: enabled
+- name: analog_random_source_x_0
+  id: analog_random_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    max: '256'
+    maxoutbuf: '0'
+    min: '0'
+    minoutbuf: '0'
+    num_samps: '1000'
+    repeat: 'True'
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 127]
+    rotation: 0
+    state: enabled
+- name: blocks_packed_to_unpacked_xx_0
+  id: blocks_packed_to_unpacked_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    bits_per_chunk: Bps
+    comment: ''
+    endianness: gr.GR_MSB_FIRST
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [168, 141]
+    rotation: 0
+    state: enabled
+- name: digital_chunks_to_symbols_xx_0
+  id: digital_chunks_to_symbols_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    dimension: '1'
+    in_type: byte
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    out_type: complex
+    symbol_table: Constelacion
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [360, 141]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import math
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [464, 12]
+    rotation: 0
+    state: enabled
+- name: pad_sink_1
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [568, 148]
+    rotation: 0
+    state: enabled
+
+connections:
+- [analog_random_source_x_0, '0', blocks_packed_to_unpacked_xx_0, '0']
+- [blocks_packed_to_unpacked_xx_0, '0', digital_chunks_to_symbols_xx_0, '0']
+- [digital_chunks_to_symbols_xx_0, '0', pad_sink_1, '0']
+
+metadata:
+  file_format: 1

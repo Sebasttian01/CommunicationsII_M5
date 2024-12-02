@@ -1,0 +1,314 @@
+options:
+  parameters:
+    author: 'Done by: Homero Ortega Boada. Universidad Industrial de Santander'
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: 'It is the Root Nyquist Filter in a proof period. I means that that
+      two of this blocks, for example one on the transmitter and one on the receiver
+      form a Nyquist Filter. Parameters: Sps - the number of samples per simbol the
+      filter will produce; ntaps- the number of components in the impulse response'
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_RNyquis_Filter_cc
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_RNyquist_Filter_cc
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, -5]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: Amp
+  id: variable
+  parameters:
+    comment: ''
+    value: numpy.amax(taps)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [872, 5]
+    rotation: 0
+    state: enabled
+- name: n_vector
+  id: variable
+  parameters:
+    comment: ''
+    value: numpy.linspace(ntaps_min,ntaps_max,ntaps)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [536, 5]
+    rotation: 0
+    state: enabled
+- name: ntaps_max
+  id: variable
+  parameters:
+    comment: ''
+    value: abs(ntaps_min)-1+math.ceil(ntaps/2.-abs(ntaps_min))
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [440, 5]
+    rotation: 0
+    state: enabled
+- name: ntaps_min
+  id: variable
+  parameters:
+    comment: ''
+    value: -int(ntaps/2)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [352, 5]
+    rotation: 0
+    state: enabled
+- name: taps
+  id: variable
+  parameters:
+    comment: ''
+    value: numpy.sqrt(numpy.sinc(n_vector/Sps))
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [704, 5]
+    rotation: 0
+    state: enabled
+- name: Ganancia
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Ganancia
+    short_id: ''
+    type: eng_float
+    value: '1.'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1008, 187]
+    rotation: 0
+    state: enabled
+- name: Interpolation
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Interpolation
+    short_id: ''
+    type: intx
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1008, 91]
+    rotation: 0
+    state: disabled
+- name: Sps
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: ''
+    short_id: ''
+    type: intx
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [192, -5]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: Ganancia
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [216, 187]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_source_x_0_0
+  id: blocks_vector_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    repeat: 'True'
+    tags: '[]'
+    type: complex
+    vector: taps
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [448, 259]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import numpy
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1120, 4]
+    rotation: 0
+    state: enabled
+- name: import_0_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import math
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1024, 4]
+    rotation: 0
+    state: enabled
+- name: interp_fir_filter_xxx_0_0
+  id: interp_fir_filter_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    interp: Sps
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_delay: '0'
+    taps: taps/Amp
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [384, 179]
+    rotation: 0
+    state: enabled
+- name: ntaps
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: ''
+    short_id: ''
+    type: intx
+    value: '16'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [272, -2]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [776, 187]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0_0_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: h[n]
+    num_streams: '1'
+    optional: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [608, 275]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [80, 187]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_multiply_const_vxx_0, '0', interp_fir_filter_xxx_0_0, '0']
+- [blocks_vector_source_x_0_0, '0', pad_sink_0_0_0, '0']
+- [interp_fir_filter_xxx_0_0, '0', pad_sink_0, '0']
+- [pad_source_0, '0', blocks_multiply_const_vxx_0, '0']
+
+metadata:
+  file_format: 1

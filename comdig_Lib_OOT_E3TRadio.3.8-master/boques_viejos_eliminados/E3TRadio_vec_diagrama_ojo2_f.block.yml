@@ -1,0 +1,24 @@
+
+id: E3TRadio_vec_diagrama_ojo2_f
+label: vec_diagrama_ojo2_f
+category: '[E3TRadio]'
+
+parameters:
+-   id: N
+    label: N
+    dtype: int
+    hide: ${ 'part' if vlen == 1 else 'none' }
+-   id: samp_rate
+    label: samp_rate
+    dtype: float
+
+inputs:
+-   domain: stream
+    dtype: float
+    vlen: ${ N }
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.vec_diagrama_ojo2_f(${N}, ${samp_rate})
+
+file_format: 1

@@ -1,0 +1,39 @@
+
+id: E3TRadio_max_xx
+label: N vector max
+category: '[E3TRadio]'
+
+parameters:
+-   id: tipo
+    label: tipo de entrada
+    dtype: enum
+    options: [float, complex]
+    option_labels: [float, complex]
+    hide: part
+-   id: vec_long
+    label: longitud del vector
+    dtype: int
+    default: '1024'
+    hide: ${ 'part' if vlen == 1 else 'none' }
+-   id: n_entradas
+    label: Numero de entradas
+    dtype: int
+    default: '2'
+    hide: part
+
+inputs:
+-   domain: stream
+    dtype: ${ tipo }
+    vlen: ${ vec_long }
+    multiplicity: ${ n_entradas }
+
+outputs:
+-   domain: stream
+    dtype: ${ tipo }
+    vlen: ${ vec_long }
+
+templates:
+    imports: import E3TRadio
+    make: '% if tipo == "complex"         :'
+
+file_format: 1

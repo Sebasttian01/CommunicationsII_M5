@@ -1,0 +1,4 @@
+Averager_onate: tiene unos ciclos que pueden ser traducidos a operaciones vectoriales
+Zero_Order_Hold
+acumulador_truncado_ff: es realmente terrible la programacion que tiene
+diezma_ff: un buen ejemplo para corregir esto es: diezmador_cc

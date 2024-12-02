@@ -1,0 +1,28 @@
+
+id: E3TRadio_acumulador_truncado_ff
+label: accum
+category: '[E3TRadio]'
+
+parameters:
+-   id: N
+    label: N
+    dtype: int
+-   id: M
+    label: M
+    dtype: int
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: stream
+    dtype: float
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.acumulador_truncado_ff(${N},${M})
+    callbacks:
+    - set_ka(${M})
+
+file_format: 1

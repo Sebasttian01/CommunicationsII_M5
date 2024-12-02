@@ -1,0 +1,237 @@
+options:
+  parameters:
+    author: Homero Ortega Boada. Universidad Industrial de Santander
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGIS Universidad Industrial de Santander
+    description: Se refierea al Slope Circuit que enn el libro de Haykin, capitulo
+      2.7 esta representado como H2(f)
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_slope_circuit_H2_cc
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_slope_circuit_H2_cc
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [7, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: BW
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Ancho de banda
+    short_id: ''
+    type: eng_float
+    value: '1000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [320, 12]
+    rotation: 0
+    state: enabled
+- name: F_muestreo
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: F_muestreo
+    short_id: ''
+    type: eng_float
+    value: '1000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 11]
+    rotation: 0
+    state: enabled
+- name: analog_const_source_x_0
+  id: analog_const_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: BW*2*math.pi*1.j
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [240, 308]
+    rotation: 0
+    state: enabled
+- name: b_derivador_cc_0
+  id: b_derivador_cc
+  parameters:
+    F_muestreo: F_muestreo
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [272, 388]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: pendiente
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [744, 332]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_xx_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [424, 280]
+    rotation: 0
+    state: enabled
+- name: blocks_sub_xx_0
+  id: blocks_sub_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [600, 328]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import math
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [864, 32]
+    rotation: 0
+    state: enabled
+- name: pad_sink_1
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [984, 332]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [88, 276]
+    rotation: 0
+    state: enabled
+- name: pendiente
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: pendiente
+    short_id: ''
+    type: eng_float
+    value: '1.'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [464, 12]
+    rotation: 0
+    state: enabled
+
+connections:
+- [analog_const_source_x_0, '0', blocks_multiply_xx_0, '1']
+- [b_derivador_cc_0, '0', blocks_sub_xx_0, '1']
+- [blocks_multiply_const_vxx_0, '0', pad_sink_1, '0']
+- [blocks_multiply_xx_0, '0', blocks_sub_xx_0, '0']
+- [blocks_sub_xx_0, '0', blocks_multiply_const_vxx_0, '0']
+- [pad_source_0, '0', b_derivador_cc_0, '0']
+- [pad_source_0, '0', blocks_multiply_xx_0, '0']
+
+metadata:
+  file_format: 1

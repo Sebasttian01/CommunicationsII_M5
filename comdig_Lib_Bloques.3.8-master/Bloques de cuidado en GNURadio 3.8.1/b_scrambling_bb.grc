@@ -1,0 +1,397 @@
+options:
+  parameters:
+    author: Homero Ortega Boada
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: Realiza el scrambling
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_scrambling_bb
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_scrambling_bb
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: E3TRadio_unipolar_to_bipolar_ff_0_0
+  id: E3TRadio_unipolar_to_bipolar_ff
+  parameters:
+    Amp: '1.'
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [504, 236]
+    rotation: 0
+    state: disabled
+- name: analog_random_uniform_source_x_0
+  id: analog_random_uniform_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maximum: '2'
+    maxoutbuf: '0'
+    minimum: '0'
+    minoutbuf: '0'
+    seed: semilla
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [72, 222]
+    rotation: 0
+    state: disabled
+- name: analog_random_uniform_source_x_0_0
+  id: analog_random_uniform_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maximum: '2'
+    maxoutbuf: '0'
+    minimum: '0'
+    minoutbuf: '0'
+    seed: semilla
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [72, 412]
+    rotation: 0
+    state: enabled
+- name: blocks_char_to_float_0
+  id: blocks_char_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [336, 140]
+    rotation: 0
+    state: disabled
+- name: blocks_char_to_float_0_0_0
+  id: blocks_char_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [352, 236]
+    rotation: 0
+    state: disabled
+- name: blocks_delay_0
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: retardo
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [264, 236]
+    rotation: 0
+    state: disabled
+- name: blocks_delay_0_0
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: retardo
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [264, 428]
+    rotation: 0
+    state: enabled
+- name: blocks_float_to_char_0
+  id: blocks_float_to_char
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [896, 156]
+    rotation: 0
+    state: disabled
+- name: blocks_multiply_xx_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [784, 145]
+    rotation: 0
+    state: disabled
+- name: e_Multiply
+  id: epy_block
+  parameters:
+    _source_code: "import numpy as np\nfrom gnuradio import gr\n\nclass blk(gr.sync_block):\
+      \  \n#    \"\"\"Multiplica dos senales tipo char\"\"\"\n    def __init__(self,):\
+      \  # only default arguments here\n        gr.sync_block.__init__(\n        \
+      \    self,\n            name='e_Multiply_bb',   # will show up in GRC\n    \
+      \        in_sig=[np.int8, np.int8],\n            out_sig=[np.int8]\n       \
+      \ )\n\n    def work(self, input_items, output_items):\n        output_items[0][:]\
+      \ = input_items[0]*input_items[1]\n        return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: ('e_Multiply_bb', 'blk', [], [('0', 'byte', 1), ('1', 'byte', 1)],
+      [('0', 'byte', 1)], '', [])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [608, 368]
+    rotation: 0
+    state: enabled
+- name: e_unip_to_bipol
+  id: epy_block
+  parameters:
+    _source_code: "import numpy as np\nfrom gnuradio import gr\n\nclass blk(gr.sync_block):\
+      \  \n#    \"\"\"convierte de unipolar a bipolar una senal tipo char\"\"\"\n\
+      \    def __init__(self,):  # only default arguments here\n        gr.sync_block.__init__(\n\
+      \            self,\n            name='e_unipolar to bipolar_bb',   # will show\
+      \ up in GRC\n            in_sig=[np.int8],\n            out_sig=[np.int8]\n\
+      \        )\n\n    def work(self, input_items, output_items):\n\n        output_items[0][:]\
+      \ = input_items[0]*2-1\n        return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: ('e_unipolar to bipolar_bb', 'blk', [], [('0', 'byte', 1)], [('0',
+      'byte', 1)], '', [])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [376, 336]
+    rotation: 0
+    state: enabled
+- name: e_unip_to_bipol_0
+  id: epy_block
+  parameters:
+    _source_code: "import numpy as np\nfrom gnuradio import gr\n\nclass blk(gr.sync_block):\
+      \  \n#    \"\"\"convierte de unipolar a bipolar una senal tipo char\"\"\"\n\
+      \    def __init__(self,):  # only default arguments here\n        gr.sync_block.__init__(\n\
+      \            self,\n            name='e_unipolar to bipolar_bb',   # will show\
+      \ up in GRC\n            in_sig=[np.int8],\n            out_sig=[np.int8]\n\
+      \        )\n\n    def work(self, input_items, output_items):\n\n        output_items[0][:]\
+      \ = input_items[0]*2-1\n        return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: ('e_unipolar to bipolar_bb', 'blk', [], [('0', 'byte', 1)], [('0',
+      'byte', 1)], '', [])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [368, 432]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1056, 156]
+    rotation: 0
+    state: disabled
+- name: pad_sink_0_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [760, 380]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 140]
+    rotation: 0
+    state: disabled
+- name: pad_source_0_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [80, 332]
+    rotation: 0
+    state: enabled
+- name: retardo
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: retardo
+    short_id: ''
+    type: intx
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [496, -1]
+    rotation: 0
+    state: enabled
+- name: semilla
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: semilla
+    short_id: ''
+    type: intx
+    value: '42'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 6]
+    rotation: 0
+    state: enabled
+
+connections:
+- [E3TRadio_unipolar_to_bipolar_ff_0_0, '0', blocks_multiply_xx_0, '1']
+- [analog_random_uniform_source_x_0, '0', blocks_delay_0, '0']
+- [analog_random_uniform_source_x_0_0, '0', blocks_delay_0_0, '0']
+- [blocks_char_to_float_0, '0', blocks_multiply_xx_0, '0']
+- [blocks_char_to_float_0_0_0, '0', E3TRadio_unipolar_to_bipolar_ff_0_0, '0']
+- [blocks_delay_0, '0', blocks_char_to_float_0_0_0, '0']
+- [blocks_delay_0_0, '0', e_unip_to_bipol_0, '0']
+- [blocks_float_to_char_0, '0', pad_sink_0, '0']
+- [blocks_multiply_xx_0, '0', blocks_float_to_char_0, '0']
+- [e_Multiply, '0', pad_sink_0_0, '0']
+- [e_unip_to_bipol, '0', e_Multiply, '0']
+- [e_unip_to_bipol_0, '0', e_Multiply, '1']
+- [pad_source_0, '0', blocks_char_to_float_0, '0']
+- [pad_source_0_0, '0', e_unip_to_bipol, '0']
+
+metadata:
+  file_format: 1

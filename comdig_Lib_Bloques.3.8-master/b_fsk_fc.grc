@@ -1,0 +1,307 @@
+options:
+  parameters:
+    author: Andres Carrillo
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: b_FDM_Monousuario
+    description: produce senal FSK bandabase
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_fsk_fc
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_fsk_fc
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: BW
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Band Width
+    short_id: ''
+    type: ''
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [496, 5]
+    rotation: 0
+    state: enabled
+- name: Sps
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Sps
+    short_id: ''
+    type: ''
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [400, 5]
+    rotation: 0
+    state: enabled
+- name: analog_sig_source_x_0
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '1'
+    comment: ''
+    freq: f0
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: samp_rate
+    type: complex
+    waveform: analog.GR_COS_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [360, 136]
+    rotation: 0
+    state: enabled
+- name: blocks_add_const_vxx_0
+  id: blocks_add_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: '-1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [248, 260]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_float_0
+  id: blocks_complex_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [488, 153]
+    rotation: 0
+    state: enabled
+- name: blocks_float_to_complex_0
+  id: blocks_float_to_complex
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [720, 153]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: '2'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [112, 260]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_xx_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [576, 233]
+    rotation: 0
+    state: enabled
+- name: f0
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: f0
+    short_id: ''
+    type: ''
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 5]
+    rotation: 0
+    state: enabled
+- name: interp_fir_filter_xxx_0_0_0
+  id: interp_fir_filter_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    interp: Sps
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_delay: '0'
+    taps: 'Sps*[1.,] '
+    type: fff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [368, 253]
+    rotation: 0
+    state: enabled
+- name: low_pass_filter_0
+  id: low_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: BW
+    decim: '1'
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    type: fir_filter_ccf
+    width: BW/8.
+    win: window.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [880, 122]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1016, 164]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 260]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: samp_rate
+    short_id: ''
+    type: ''
+    value: '4800'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 5]
+    rotation: 0
+    state: enabled
+
+connections:
+- [analog_sig_source_x_0, '0', blocks_complex_to_float_0, '0']
+- [blocks_add_const_vxx_0, '0', interp_fir_filter_xxx_0_0_0, '0']
+- [blocks_complex_to_float_0, '0', blocks_float_to_complex_0, '0']
+- [blocks_complex_to_float_0, '1', blocks_multiply_xx_0, '0']
+- [blocks_float_to_complex_0, '0', low_pass_filter_0, '0']
+- [blocks_multiply_const_vxx_0, '0', blocks_add_const_vxx_0, '0']
+- [blocks_multiply_xx_0, '0', blocks_float_to_complex_0, '1']
+- [interp_fir_filter_xxx_0_0_0, '0', blocks_multiply_xx_0, '1']
+- [low_pass_filter_0, '0', pad_sink_0, '0']
+- [pad_source_0, '0', blocks_multiply_const_vxx_0, '0']
+
+metadata:
+  file_format: 1

@@ -1,0 +1,431 @@
+options:
+  parameters:
+    author: Homero Ortega
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGis Universidad Industrial de Santander
+    description: Demultiplexa una senal que ha sido multiplexada con el bloque b_TDM
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_deTDM_cc
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_deTDM_cc
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [536, 3]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: N
+  id: variable
+  parameters:
+    comment: ''
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [448, 3]
+    rotation: 0
+    state: enabled
+- name: Nspcell
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: simb per t-s
+    short_id: ''
+    type: ''
+    value: '16'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 3]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_to_vector_0_0_0_0_0
+  id: blocks_stream_to_vector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: Nspcell*N
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [288, 499]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_to_stream_1_0
+  id: blocks_vector_to_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: Nspcell
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [696, 667]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_to_stream_1_0_0
+  id: blocks_vector_to_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: Nspcell
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [696, 619]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_to_stream_1_0_0_0
+  id: blocks_vector_to_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: Nspcell
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [696, 523]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_to_stream_1_0_0_0_0
+  id: blocks_vector_to_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: Nspcell
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [696, 331]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_to_stream_1_0_0_1
+  id: blocks_vector_to_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: Nspcell
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [696, 427]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_to_stream_1_0_1
+  id: blocks_vector_to_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: Nspcell
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [696, 571]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_to_stream_1_0_1_0
+  id: blocks_vector_to_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: Nspcell
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [696, 379]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_to_stream_1_0_2
+  id: blocks_vector_to_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: Nspcell
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [696, 475]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_to_streams_0
+  id: blocks_vector_to_streams
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: N
+    type: complex
+    vlen: Nspcell
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [464, 393]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [864, 331]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [864, 379]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0_0_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [864, 475]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0_0_0_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [864, 667]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0_0_1
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [864, 571]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0_1
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [864, 427]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0_1_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [864, 619]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0_2
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [864, 523]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [144, 499]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_stream_to_vector_0_0_0_0_0, '0', blocks_vector_to_streams_0, '0']
+- [blocks_vector_to_stream_1_0, '0', pad_sink_0_0_0_0, '0']
+- [blocks_vector_to_stream_1_0_0, '0', pad_sink_0_1_0, '0']
+- [blocks_vector_to_stream_1_0_0_0, '0', pad_sink_0_2, '0']
+- [blocks_vector_to_stream_1_0_0_0_0, '0', pad_sink_0, '0']
+- [blocks_vector_to_stream_1_0_0_1, '0', pad_sink_0_1, '0']
+- [blocks_vector_to_stream_1_0_1, '0', pad_sink_0_0_1, '0']
+- [blocks_vector_to_stream_1_0_1_0, '0', pad_sink_0_0, '0']
+- [blocks_vector_to_stream_1_0_2, '0', pad_sink_0_0_0, '0']
+- [blocks_vector_to_streams_0, '0', blocks_vector_to_stream_1_0_0_0_0, '0']
+- [blocks_vector_to_streams_0, '1', blocks_vector_to_stream_1_0_1_0, '0']
+- [blocks_vector_to_streams_0, '2', blocks_vector_to_stream_1_0_0_1, '0']
+- [blocks_vector_to_streams_0, '3', blocks_vector_to_stream_1_0_2, '0']
+- [blocks_vector_to_streams_0, '4', blocks_vector_to_stream_1_0_0_0, '0']
+- [blocks_vector_to_streams_0, '5', blocks_vector_to_stream_1_0_1, '0']
+- [blocks_vector_to_streams_0, '6', blocks_vector_to_stream_1_0_0, '0']
+- [blocks_vector_to_streams_0, '7', blocks_vector_to_stream_1_0, '0']
+- [pad_source_0, '0', blocks_stream_to_vector_0_0_0_0_0, '0']
+
+metadata:
+  file_format: 1

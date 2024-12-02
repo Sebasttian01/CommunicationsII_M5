@@ -1,0 +1,351 @@
+options:
+  parameters:
+    author: Homero Ortega Boada. Universidad Industrial de Santander
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGis Universidad Industrial de Santander
+    description: 'multiplica la entrada dsss por codigo para producir una senal inversa
+      al Direc Sequence Spread Spectrum (DSSS). El cuidado que hay que tener es que
+      el Spreading Factor (SF) se cuadra desde afuera, para la cual la senal de la
+      informacion debe entrar con un sobremuestreo SF. Los parametros usados son:
+      codigo - es el codigo que se usara para producir la senal DSSS; CodeDelay (muestras)
+      permite introducir un retrazo en la aplicacion del codigo lo cual es util para
+      tener en cuenta que la senal a des ensanchar puede llegar con un retrazo'
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_de_ds_spreadspect_cc
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_de_ds_spreadspect_cc
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: AccDelay
+  id: variable
+  parameters:
+    comment: ''
+    value: int((float(ChipsSysDelay)/SF-ChipsSysDelay/SF)*SF)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [576, 11]
+    rotation: 0
+    state: enabled
+- name: SamplerDelay
+  id: variable
+  parameters:
+    comment: ''
+    value: ((AccDelay+SF-1)/SF-int((AccDelay+SF-1)/SF))*SF
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [680, 11]
+    rotation: 0
+    state: enabled
+- name: ChipsSysDelay
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: ChipsSysDelay
+    short_id: ''
+    type: ''
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [440, 11]
+    rotation: 0
+    state: enabled
+- name: SF
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: SF
+    short_id: ''
+    type: ''
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [192, 11]
+    rotation: 0
+    state: enabled
+- name: b_accum_cc_0
+  id: b_accum_cc
+  parameters:
+    M: AccDelay
+    N: SF
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [448, 219]
+    rotation: 0
+    state: enabled
+- name: b_sampler_cc_0
+  id: b_sampler_cc
+  parameters:
+    DelayDiez: SamplerDelay
+    Sps: SF
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [728, 217]
+    rotation: 0
+    state: enabled
+- name: blocks_delay_0
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: ChipsSysDelay
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [192, 299]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: 1./SF
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [568, 227]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_xx_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 217]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_source_x_0
+  id: blocks_vector_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    repeat: 'True'
+    tags: '[]'
+    type: complex
+    vector: codigo
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [0, 283]
+    rotation: 0
+    state: enabled
+- name: codigo
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: codigo
+    short_id: ''
+    type: ''
+    value: (1,1,1,1,1,1,1,1)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [288, 11]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [968, 171]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0_1
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: diezm
+    num_streams: '1'
+    optional: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1040, 347]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0_1_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: multiplicador
+    num_streams: '1'
+    optional: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1016, 235]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0_1_0_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: Accum
+    num_streams: '1'
+    optional: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1088, 283]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0_1_1
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: cod
+    num_streams: '1'
+    optional: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [888, 403]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 211]
+    rotation: 0
+    state: enabled
+
+connections:
+- [b_accum_cc_0, '0', blocks_multiply_const_vxx_0, '0']
+- [b_sampler_cc_0, '0', pad_sink_0_1, '0']
+- [b_sampler_cc_0, '1', pad_sink_0, '0']
+- [blocks_delay_0, '0', blocks_multiply_xx_0, '1']
+- [blocks_delay_0, '0', pad_sink_0_1_1, '0']
+- [blocks_multiply_const_vxx_0, '0', b_sampler_cc_0, '0']
+- [blocks_multiply_const_vxx_0, '0', pad_sink_0_1_0_0, '0']
+- [blocks_multiply_xx_0, '0', b_accum_cc_0, '0']
+- [blocks_multiply_xx_0, '0', pad_sink_0_1_0, '0']
+- [blocks_vector_source_x_0, '0', blocks_delay_0, '0']
+- [pad_source_0, '0', blocks_multiply_xx_0, '0']
+
+metadata:
+  file_format: 1

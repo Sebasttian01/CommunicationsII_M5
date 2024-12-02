@@ -1,0 +1,29 @@
+
+id: E3TRadio_time_averager_jesus
+label: time_averager_jesus
+category: '[E3TRadio]'
+
+parameters:
+-   id: N
+    label: Vector size
+    dtype: int
+    hide: ${ 'part' if vlen == 1 else 'none' }
+-   id: t
+    label: time (s)
+    dtype: int
+
+inputs:
+-   domain: stream
+    dtype: float
+    vlen: ${ N }
+
+outputs:
+-   domain: stream
+    dtype: float
+    vlen: ${ N }
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.time_averager_jesus(${N}, ${t})
+
+file_format: 1

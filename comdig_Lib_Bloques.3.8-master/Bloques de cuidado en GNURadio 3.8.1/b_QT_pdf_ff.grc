@@ -1,0 +1,311 @@
+options:
+  parameters:
+    author: Homero Ortega Boada. Universidad Industrial de Santander
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGIS Universidad Industrial de Santander
+    description: Hecho por Homero Ortega. Recibe an input with values between Xmin
+      and Xmax and calculate the Probaility Density Function (PDF) dinamically.
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb_qt_gui
+    hier_block_src_path: '.:'
+    id: b_pdf_ff
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_pdf_ff
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [0, 3]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: N
+  id: variable
+  parameters:
+    comment: ''
+    value: '1024'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [520, 4]
+    rotation: 0
+    state: enabled
+- name: step
+  id: variable
+  parameters:
+    comment: ''
+    value: float(Xmax-Xmin)/N
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [800, 12]
+    rotation: 0
+    state: disabled
+- name: EjeX
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Nombre Eje Horiz
+    short_id: ''
+    type: ''
+    value: '''potencia'''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [628, 9]
+    rotation: 0
+    state: enabled
+- name: Note
+  id: note
+  parameters:
+    alias: ''
+    comment: ''
+    note: Esta ramificacion de abajo es la que introduce las fluctuaciones en magnitud
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [600, 924]
+    rotation: 0
+    state: enabled
+- name: Xmax
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Xmax
+    short_id: ''
+    type: eng_float
+    value: '4.'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [224, 4]
+    rotation: 0
+    state: enabled
+- name: Xmin
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Xmin
+    short_id: ''
+    type: eng_float
+    value: '-4.'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 4]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_to_vector_0_0
+  id: blocks_stream_to_vector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: N
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [192, 212]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [0, 212]
+    rotation: 0
+    state: enabled
+- name: pdf_ff
+  id: epy_block
+  parameters:
+    N: N
+    Xmax: Xmax
+    Xmin: Xmin
+    _source_code: "\"\"\"\nEmbedded Python Blocks:\n\nEach time this file is saved,\
+      \ GRC will instantiate the first class it finds\nto get ports and parameters\
+      \ of your block. The arguments to __init__  will\nbe the parameters. All of\
+      \ them are required to have default values!\n\"\"\"\n\nimport numpy as np\n\
+      from gnuradio import gr\n#from scipy import integrate\nimport scipy.stats\n\n\
+      class e_pdf_ff(gr.sync_block):  # other base classes are basic_block, decim_block,\
+      \ interp_block\n    \"\"\"Hecho por Homero Ortega. Xmin is the minimum value\
+      \ that the input signal can take, Xmax is the maximum value that the input signal\
+      \ can take; N es the number of steps the signal will be analized in amplitud\
+      \ and is the number of samples for the histogram\"\"\"\n\n    def __init__(self,\
+      \ Xmin=-1., Xmax=1., N=1024):  # only default arguments here\n        gr.sync_block.__init__(\n\
+      \            self,\n            name='e_pdf_ff',   # will show up in GRC\n \
+      \           in_sig=[(np.float32, N)],\n            out_sig=[(np.float32,N)]\n\
+      \        )\n        self.Xmin = Xmin\n        self.Xmax = Xmax\n        self.N\
+      \ = N\n        self.X=np.linspace(self.Xmin,self.Xmax,self.N) # Se le pueden\
+      \ dar menos valores, pero el bloque seria de tipo decimador\n        self.counts=np.array([0.]*self.N)\n\
+      \        self.N_hist=0. #numero de histogramas procesados\n        \n    def\
+      \ work(self, input_items, output_items):\n     \n        x=input_items[0] #\
+      \ las muestras entrantes a analizar\n        h=np.histogram(x,bins=self.N, range=(self.Xmin,\
+      \ self.Xmax)) # h[0] es el histograma propiamente, h[1] los bins\n        hist_dist=scipy.stats.rv_histogram(h)\
+      \ # objeto que identifica muchos parametros de un histograma incluyento pdf\n\
+      \        pdf=hist_dist.pdf(self.X) # es la pdf instantanea (del vector actual)\n\
+      \n        # cdf=hist_dist.cdf(self.X) # Este seria el comando si necesitamos\
+      \ cdf en vez de pdf\n\n        self.N_hist += 1     # se eleva el contador de\
+      \ histrogramas calculados\n        self.counts += pdf  # pdf acumulada\n   \
+      \     output_items[0][:]=self.counts/(self.N_hist)   # pdf promediada\n\n  \
+      \      return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: ('e_pdf_ff', 'e_pdf_ff', [('Xmin', '-1.0'), ('Xmax', '1.0'), ('N',
+      '1024')], [('0', 'float', 1024)], [('0', 'float', 1024)], 'Hecho por Homero
+      Ortega. Xmin is the minimum value that the input signal can take, Xmax is the
+      maximum value that the input signal can take; N es the number of steps the signal
+      will be analized in amplitud and is the number of samples for the histogram',
+      ['N', 'Xmax', 'Xmin'])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [359, 192]
+    rotation: 0
+    state: enabled
+- name: pdf_max
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: pdf_max
+    short_id: ''
+    type: eng_float
+    value: '0.025'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [408, 4]
+    rotation: 0
+    state: enabled
+- name: qtgui_vector_sink_f_0_0_0
+  id: qtgui_vector_sink_f
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '1.0'
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    grid: 'False'
+    gui_hint: ''
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"Probability Density Function (PDF)"'
+    nconnections: '1'
+    ref_level: '0'
+    showports: 'True'
+    update_time: '0.10'
+    vlen: N
+    width1: '3'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    x_axis_label: EjeX
+    x_start: Xmin
+    x_step: (Xmax-Xmin)/N
+    x_units: '""'
+    y_axis_label: '"PDF"'
+    y_units: '""'
+    ymax: pdf_max
+    ymin: '0.'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [487, 144]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_stream_to_vector_0_0, '0', pdf_ff, '0']
+- [pad_source_0, '0', blocks_stream_to_vector_0_0, '0']
+- [pdf_ff, '0', qtgui_vector_sink_f_0_0_0, '0']
+
+metadata:
+  file_format: 1

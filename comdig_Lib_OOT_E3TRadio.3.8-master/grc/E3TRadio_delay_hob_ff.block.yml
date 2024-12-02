@@ -1,0 +1,28 @@
+
+id: E3TRadio_delay_hob_ff
+label: delay_hob
+category: '[E3TRadio]'
+
+parameters:
+-   id: NN
+    label: Delaymax
+    dtype: int
+-   id: M
+    label: Delay
+    dtype: int
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: stream
+    dtype: float
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.delay_hob_ff(${NN}, ${M})
+    callbacks:
+    - set_delay(${M})
+
+file_format: 1

@@ -1,0 +1,7 @@
+/*!
+ * \defgroup block GNU Radio E3TRADIO C++ Signal Processing Blocks
+ * \brief All C++ blocks that can be used from the E3TRADIO GNU Radio
+ *        module are listed here or in the subcategories below.
+ *
+ */
+

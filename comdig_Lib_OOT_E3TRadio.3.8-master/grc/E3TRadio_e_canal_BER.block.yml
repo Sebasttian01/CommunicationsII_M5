@@ -1,0 +1,40 @@
+
+id: E3TRadio_e_canal_BER
+label: e_canal_BER
+category: '[E3TRadio]'
+
+parameters:
+-   id: N
+    label: N
+    dtype: int
+-   id: EsN0min
+    label: EsN0min
+    dtype: raw
+-   id: EsN0max
+    label: EsN0max
+    dtype: raw
+-   id: B
+    label: B
+    dtype: raw
+-   id: Rs
+    label: Rs
+    dtype: raw
+
+inputs:
+-   label: in0
+    domain: stream
+    dtype: complex
+
+outputs:
+-   label: out0
+    domain: stream
+    dtype: complex
+-   label: out1
+    domain: stream
+    dtype: int
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.e_canal_BER(${N}, ${EsN0min}, ${EsN0max}, ${B}, ${Rs})
+
+file_format: 1

@@ -1,0 +1,6 @@
+top_block.py
+wform.py
+*.py
+*.pyc
+Obsoleta/
+EnPeriodoDePrueba/

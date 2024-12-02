@@ -1,0 +1,25 @@
+
+id: E3TRadio_Zero_Order_Hold
+label: Zeroh_ff
+category: '[E3TRadio]'
+
+parameters:
+-   id: k
+    label: Sample
+    dtype: int
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: stream
+    dtype: float
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.Zero_Order_Hold(${k})
+    callbacks:
+    - set_retardo(${k})
+
+file_format: 1

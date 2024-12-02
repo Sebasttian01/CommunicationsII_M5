@@ -1,0 +1,471 @@
+options:
+  parameters:
+    author: Homero Ortega
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGis Universidad Industrial de Santander
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb_qt_gui
+    hier_block_src_path: '.:'
+    id: b_PSD_VRMS_c
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_PSD_VRMS_c
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: E3TRadio_vector_average_hob_0
+  id: E3TRadio_vector_average_hob
+  parameters:
+    N: N
+    Nensayos: '1000000000'
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [696, 325]
+    rotation: 0
+    state: enabled
+- name: Ensayos
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: N_ensayos
+    short_id: ''
+    type: intx
+    value: '1000000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [448, 6]
+    rotation: 0
+    state: enabled
+- name: Fc
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Fc
+    short_id: ''
+    type: ''
+    value: '10000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [568, 6]
+    rotation: 0
+    state: enabled
+- name: N
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: N_FFT
+    short_id: ''
+    type: intx
+    value: '1024'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [232, 6]
+    rotation: 0
+    state: enabled
+- name: Titulo
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Titulo
+    short_id: ''
+    type: ''
+    value: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [368, 192]
+    rotation: 0
+    state: disabled
+- name: blocks_complex_to_mag_0
+  id: blocks_complex_to_mag
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: N
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [552, 172]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_mag_squared_0
+  id: blocks_complex_to_mag_squared
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: N
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [536, 332]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: numpy.full(N,1./N)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: N
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [872, 165]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_vxx_0_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: numpy.full(N,1./(Ensayos*N))
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: N
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [880, 325]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_to_vector_0
+  id: blocks_stream_to_vector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: N
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [144, 332]
+    rotation: 0
+    state: enabled
+- name: fft_vxx_0
+  id: fft_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    fft_size: N
+    forward: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nthreads: '1'
+    shift: 'True'
+    type: complex
+    window: window.rectangular(N)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [320, 304]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import numpy
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [664, 4]
+    rotation: 0
+    state: enabled
+- name: mainwidget3
+  id: qtgui_tab_widget
+  parameters:
+    alias: ''
+    comment: ''
+    gui_hint: ''
+    label0: PSD (Watts/Hz)
+    label1: Espectro Dinamico en Volts/Hz
+    label10: Tab 10
+    label11: Tab 11
+    label12: Tab 12
+    label13: Tab 13
+    label14: Tab 14
+    label15: Tab 15
+    label16: Tab 16
+    label17: Tab 17
+    label18: Tab 18
+    label19: Tab 19
+    label2: PSD (Watts/Hz)
+    label3: PSD en dB
+    label4: Senal en tiempo
+    label5: Constelacion
+    label6: Tab 6
+    label7: Tab 7
+    label8: Tab 8
+    label9: Tab 9
+    num_tabs: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [832, 6]
+    rotation: 0
+    state: enabled
+- name: pad_source_2
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: Tx
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 332]
+    rotation: 0
+    state: enabled
+- name: qtgui_vector_sink_f_0
+  id: qtgui_vector_sink_f
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '1.0'
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    grid: 'False'
+    gui_hint: mainwidget3@0:0,0,1,1
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: Titulo
+    nconnections: '1'
+    ref_level: '0'
+    showports: 'True'
+    update_time: '0.10'
+    vlen: N
+    width1: '3'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    x_axis_label: '"Frecuencia"'
+    x_start: -samp_rate_audio/2+Fc
+    x_step: (samp_rate_audio-1)/N
+    x_units: '"Hz"'
+    y_axis_label: '"Amplitud (Watt/Hz)"'
+    y_units: '"Watt/Hz"'
+    ymax: 6e-6
+    ymin: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1096, 283]
+    rotation: 0
+    state: enabled
+- name: qtgui_vector_sink_f_0_0
+  id: qtgui_vector_sink_f
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '1.0'
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    grid: 'False'
+    gui_hint: mainwidget3@1:0,0,1,1
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: Titulo
+    nconnections: '1'
+    ref_level: '0'
+    showports: 'True'
+    update_time: '0.10'
+    vlen: N
+    width1: '3'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    x_axis_label: '"Frecuency"'
+    x_start: -samp_rate_audio/2+Fc
+    x_step: (samp_rate_audio-1)/N
+    x_units: '"Hz"'
+    y_axis_label: '"Amplitud (V/Hz)"'
+    y_units: '"V"'
+    ymax: '0.14'
+    ymin: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1088, 123]
+    rotation: 0
+    state: enabled
+- name: samp_rate_audio
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Fmuestreo
+    short_id: ''
+    type: ''
+    value: '22000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 6]
+    rotation: 0
+    state: enabled
+
+connections:
+- [E3TRadio_vector_average_hob_0, '0', blocks_multiply_const_vxx_0_0, '0']
+- [blocks_complex_to_mag_0, '0', blocks_multiply_const_vxx_0, '0']
+- [blocks_complex_to_mag_squared_0, '0', E3TRadio_vector_average_hob_0, '0']
+- [blocks_multiply_const_vxx_0, '0', qtgui_vector_sink_f_0_0, '0']
+- [blocks_multiply_const_vxx_0_0, '0', qtgui_vector_sink_f_0, '0']
+- [blocks_stream_to_vector_0, '0', fft_vxx_0, '0']
+- [fft_vxx_0, '0', blocks_complex_to_mag_0, '0']
+- [fft_vxx_0, '0', blocks_complex_to_mag_squared_0, '0']
+- [pad_source_2, '0', blocks_stream_to_vector_0, '0']
+
+metadata:
+  file_format: 1

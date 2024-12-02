@@ -1,0 +1,580 @@
+options:
+  parameters:
+    author: Homero Ortega Boada. Universidad Industrial de Santander
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGIS Universidad Industrial de Santander
+    description: 'Permite sintonizar manualmente el canal, usando visores y reguladores,
+      al punto de entregar la senal correctamente muestreada. Parametros usados: samp_rate
+      (Hz) la frecuencia de muestreo de la senal entrante; sps (muestras) numero de
+      muestras por simbolo en la senal entrante; Delay Tuning (muestras) el retrazo
+      que se introduce a la senal antes de aplicarle el muestreo; PhiTuning (Rad)
+      angulo usado para corregir la desviacion de angulo producida por el canal; F_Tuning
+      (Hz) correccion de la desviacion de frecuencias; Nscope (muestras) numero de
+      bits a mostrar en el scope; Nscope_spanNscope_span numero de bits a mostrar
+      en el osciloscopio donde se selecciona el muestreo; DelayTuningInicial (muestras)
+      es un valor sugerido de arranque para la sintonizacion del retardo para el muestreo'
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb_qt_gui
+    hier_block_src_path: '.:'
+    id: b_tunner_sampler
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_tunner_sampler
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: DelayTuning
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 2,0,1,1
+    label: 'Retardo antes de muestreo '
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: int
+    start: '0'
+    step: '1'
+    stop: sps-1
+    value: DelayTuningInicial
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1016, 179]
+    rotation: 0
+    state: enabled
+- name: EyeDelay
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 2,1,1,1
+    label: Retardo para Centrado del Ojo
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: int
+    start: '0'
+    step: '1'
+    stop: sps*4
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1184, 179]
+    rotation: 0
+    state: enabled
+- name: F_Tuning
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 0,0,1,1
+    label: Rx Frequency tunining
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: 10./1000.
+    stop: '10.'
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1016, 3]
+    rotation: 0
+    state: enabled
+- name: PhiTuning
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 0,1,1,1
+    label: Rx angle tunining
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: (numpy.pi)*2/200
+    stop: (numpy.pi)*2
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1192, 3]
+    rotation: 0
+    state: enabled
+- name: AlphaLineasOjo
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: AlphaLineasOjo
+    short_id: ''
+    type: ''
+    value: '1.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [824, 91]
+    rotation: 0
+    state: enabled
+- name: DelayTuningInicial
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: DelayTuning inicial
+    short_id: ''
+    type: intx
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [656, 11]
+    rotation: 0
+    state: enabled
+- name: GrosorLineasOjo
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: GrosorLineasOjo
+    short_id: ''
+    type: ''
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [824, 3]
+    rotation: 0
+    state: enabled
+- name: b_Eye_Diagram_0
+  id: b_Eye_Diagram
+  parameters:
+    AlphaLineas: AlphaLineasOjo
+    Delay_i: '0'
+    GrosorLineas: GrosorLineasOjo
+    N_eyes: '2'
+    Samprate: samp_rate
+    Sps: sps
+    Title: '"Eye Diagramm. Parte Real"'
+    Ymax: '0.2'
+    Ymin: '-0.2'
+    affinity: ''
+    alias: ''
+    comment: ''
+    gui_hint: 4,0,1,2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [528, 571]
+    rotation: 0
+    state: enabled
+- name: b_Eye_Diagram_0_0
+  id: b_Eye_Diagram
+  parameters:
+    AlphaLineas: AlphaLineasOjo
+    Delay_i: '0'
+    GrosorLineas: GrosorLineasOjo
+    N_eyes: '2'
+    Samprate: samp_rate
+    Sps: sps
+    Title: '"Eye Diagramm. Parte Imaginaria"'
+    Ymax: '0.2'
+    Ymin: '-0.2'
+    affinity: ''
+    alias: ''
+    comment: ''
+    gui_hint: 5,0,1,2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [528, 755]
+    rotation: 0
+    state: enabled
+- name: b_sampler_cc_0
+  id: b_sampler_cc
+  parameters:
+    DelayDiez: '0'
+    Sps: sps
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [344, 185]
+    rotation: 0
+    state: enabled
+- name: b_tunner_0
+  id: b_tunner
+  parameters:
+    Ganancia_ajuste_dB: '0'
+    NDelay: DelayTuning
+    affinity: ''
+    alias: ''
+    comment: ''
+    fdesv: -F_Tuning
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    phi: PhiTuning
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [176, 171]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_float_0
+  id: blocks_complex_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [481, 416]
+    rotation: 270
+    state: enabled
+- name: blocks_complex_to_float_0_0
+  id: blocks_complex_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [417, 416]
+    rotation: 270
+    state: enabled
+- name: import_0_1_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import numpy
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [552, 11]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [848, 211]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [32, 195]
+    rotation: 0
+    state: enabled
+- name: qtgui_const_sink_x_0_0_0
+  id: qtgui_const_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: '"blue"'
+    color10: '"red"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"red"'
+    color5: '"red"'
+    color6: '"red"'
+    color7: '"red"'
+    color8: '"red"'
+    color9: '"red"'
+    comment: ''
+    grid: 'False'
+    gui_hint: 1,0,1,1
+    label1: Entrante
+    label10: ''
+    label2: Saliente
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    marker1: '0'
+    marker10: '0'
+    marker2: '0'
+    marker3: '0'
+    marker4: '0'
+    marker5: '0'
+    marker6: '0'
+    marker7: '0'
+    marker8: '0'
+    marker9: '0'
+    name: '"Rx tunner"'
+    nconnections: '2'
+    size: '1024'
+    style1: '0'
+    style10: '0'
+    style2: '0'
+    style3: '0'
+    style4: '0'
+    style5: '0'
+    style6: '0'
+    style7: '0'
+    style8: '0'
+    style9: '0'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: complex
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    xmax: '0.2'
+    xmin: '-0.2'
+    ymax: '0.2'
+    ymin: '-0.2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1032, 411]
+    rotation: 0
+    state: enabled
+- name: qtgui_const_sink_x_0_0_0_0
+  id: qtgui_const_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: '"blue"'
+    color10: '"red"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"red"'
+    color5: '"red"'
+    color6: '"red"'
+    color7: '"red"'
+    color8: '"red"'
+    color9: '"red"'
+    comment: ''
+    grid: 'False'
+    gui_hint: 1,1,1,1
+    label1: Rx
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    marker1: '0'
+    marker10: '0'
+    marker2: '0'
+    marker3: '0'
+    marker4: '0'
+    marker5: '0'
+    marker6: '0'
+    marker7: '0'
+    marker8: '0'
+    marker9: '0'
+    name: '"Rx sampled"'
+    nconnections: '1'
+    size: '1024'
+    style1: '0'
+    style10: '0'
+    style2: '0'
+    style3: '0'
+    style4: '0'
+    style5: '0'
+    style6: '0'
+    style7: '0'
+    style8: '0'
+    style9: '0'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: complex
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    xmax: '0.2'
+    xmin: '-0.2'
+    ymax: '0.2'
+    ymin: '-0.2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1032, 523]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: samp_rate
+    short_id: ''
+    type: eng_float
+    value: '1000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [320, 11]
+    rotation: 0
+    state: enabled
+- name: sps
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: sps
+    short_id: ''
+    type: intx
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [240, 11]
+    rotation: 0
+    state: enabled
+
+connections:
+- [b_sampler_cc_0, '0', blocks_complex_to_float_0, '0']
+- [b_sampler_cc_0, '0', qtgui_const_sink_x_0_0_0, '1']
+- [b_sampler_cc_0, '1', pad_sink_0, '0']
+- [b_sampler_cc_0, '1', qtgui_const_sink_x_0_0_0_0, '0']
+- [b_tunner_0, '0', b_sampler_cc_0, '0']
+- [b_tunner_0, '0', blocks_complex_to_float_0_0, '0']
+- [blocks_complex_to_float_0, '0', b_Eye_Diagram_0, '0']
+- [blocks_complex_to_float_0, '1', b_Eye_Diagram_0_0, '0']
+- [blocks_complex_to_float_0_0, '0', b_Eye_Diagram_0, '1']
+- [blocks_complex_to_float_0_0, '1', b_Eye_Diagram_0_0, '1']
+- [pad_source_0, '0', b_tunner_0, '0']
+- [pad_source_0, '0', qtgui_const_sink_x_0_0_0, '0']
+
+metadata:
+  file_format: 1

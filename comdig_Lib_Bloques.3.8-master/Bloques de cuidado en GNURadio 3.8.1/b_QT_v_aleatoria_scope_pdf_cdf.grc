@@ -1,0 +1,580 @@
+options:
+  parameters:
+    author: Homero Ortega
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGIS Universidad Industrial de Santander
+    description: 'Some parameters of a random variable can visualized, like: the mean,
+      the RMS value, the mean power, the PSD,, PDF, CDF the time signal. Parameters
+      used: samp_rate - the sample rate of the signal; N_time - the number of time
+      samples to be shown; N_frec- the number of frequency pointss to be shown '
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb_qt_gui
+    hier_block_src_path: '.:'
+    id: b_v_aleatoria_scope_pdf_cdf_f
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_v_aleatoria_scope_pdf_cdf_f
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [96, 100]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: Mean_reset
+  id: variable_qtgui_push_button
+  parameters:
+    comment: ''
+    gui_hint: 0,3,1,1
+    label: Push here to restart averaging procces
+    pressed: '0'
+    released: '1'
+    type: int
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [624, 100]
+    rotation: 0
+    state: enabled
+- name: E3TRadio_mean_meter_0
+  id: E3TRadio_mean_meter
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    reset: Mean_reset
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 452]
+    rotation: 0
+    state: enabled
+- name: E3TRadio_mean_meter_0_0
+  id: E3TRadio_mean_meter
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    reset: Mean_reset
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [352, 516]
+    rotation: 0
+    state: enabled
+- name: N_frec
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: N_frec
+    short_id: ''
+    type: ''
+    value: '2014'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [528, 100]
+    rotation: 0
+    state: enabled
+- name: N_time
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: N_time
+    short_id: ''
+    type: ''
+    value: '2014'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [432, 100]
+    rotation: 0
+    state: enabled
+- name: V_p
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Valor pico
+    short_id: ''
+    type: eng_float
+    value: '2014'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [680, 212]
+    rotation: 0
+    state: enabled
+- name: b_PSD_0
+  id: b_PSD
+  parameters:
+    Ensayos: '1000000'
+    N: N_frec
+    Titulo: '''PSD ( linear scale)'''
+    Ymax: 1./samp_rate
+    affinity: ''
+    alias: ''
+    comment: ''
+    gui_hint: 2,0,1,2
+    samp_rate: '22000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [456, 300]
+    rotation: 0
+    state: enabled
+- name: b_cdf_ff_0
+  id: b_cdf_ff
+  parameters:
+    EjeX: '''potencia'''
+    Xmax: V_p
+    Xmin: -V_p
+    affinity: ''
+    alias: ''
+    comment: ''
+    gui_hint: 2,2,1,2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [624, 564]
+    rotation: 0
+    state: enabled
+- name: b_pdf_ff_0
+  id: b_pdf_ff
+  parameters:
+    EjeX: '''potencia'''
+    Xmax: V_p
+    Xmin: -V_p
+    affinity: ''
+    alias: ''
+    comment: ''
+    gui_hint: 1,2,1,2
+    pdf_max: '0.4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [612, 405]
+    rotation: 0
+    state: disabled
+- name: blocks_multiply_xx_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [248, 504]
+    rotation: 0
+    state: enabled
+- name: blocks_rms_xx_0
+  id: blocks_rms_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: '0.0001'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 580]
+    rotation: 0
+    state: enabled
+- name: import_1
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import math
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [696, 308]
+    rotation: 0
+    state: enabled
+- name: pad_source_2
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: In
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [44, 104]
+    rotation: 270
+    state: enabled
+- name: qtgui_number_sink_0_0_0_0_0
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("blue", "red")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: 0,0,1,1
+    label1: The mean
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '2'
+    min: '-2'
+    name: ''
+    nconnections: '1'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 436]
+    rotation: 0
+    state: enabled
+- name: qtgui_number_sink_0_0_0_0_0_0
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("blue", "red")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: 0,1,1,1
+    label1: Mean square (Mean Power)
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '2'
+    min: '-2'
+    name: ''
+    nconnections: '1'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [648, 484]
+    rotation: 0
+    state: enabled
+- name: qtgui_number_sink_0_0_0_0_0_0_0
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("blue", "red")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: 0,2,1,1
+    label1: VRMS instantaneous
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '2'
+    min: '-2'
+    name: ''
+    nconnections: '1'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [360, 564]
+    rotation: 0
+    state: enabled
+- name: qtgui_time_sink_x_0_0_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'False'
+    entags: 'True'
+    grid: 'False'
+    gui_hint: 1,0,1,2
+    label1: .
+    label10: ''
+    label2: Im
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: '"signal in time"'
+    nconnections: '1'
+    size: N_time
+    srate: samp_rate
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: float
+    update_time: '0.10'
+    width1: '3'
+    width10: '1'
+    width2: '3'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Amplitude
+    ymax: V_p
+    ymin: -V_p
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [232, 236]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Fmuestreo
+    short_id: ''
+    type: ''
+    value: '22000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [320, 100]
+    rotation: 0
+    state: enabled
+
+connections:
+- [E3TRadio_mean_meter_0, '0', qtgui_number_sink_0_0_0_0_0, '0']
+- [E3TRadio_mean_meter_0_0, '0', qtgui_number_sink_0_0_0_0_0_0, '0']
+- [blocks_multiply_xx_0, '0', E3TRadio_mean_meter_0_0, '0']
+- [blocks_rms_xx_0, '0', qtgui_number_sink_0_0_0_0_0_0_0, '0']
+- [pad_source_2, '0', E3TRadio_mean_meter_0, '0']
+- [pad_source_2, '0', b_PSD_0, '0']
+- [pad_source_2, '0', b_cdf_ff_0, '0']
+- [pad_source_2, '0', b_pdf_ff_0, '0']
+- [pad_source_2, '0', blocks_multiply_xx_0, '0']
+- [pad_source_2, '0', blocks_multiply_xx_0, '1']
+- [pad_source_2, '0', blocks_rms_xx_0, '0']
+- [pad_source_2, '0', qtgui_time_sink_x_0_0_0, '0']
+
+metadata:
+  file_format: 1

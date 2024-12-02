@@ -1,0 +1,23 @@
+
+id: E3TRadio_decisor_fi
+label: decisor_fi
+category: '[E3TRadio]'
+
+parameters:
+-   id: Umbral
+    label: El Umbral
+    dtype: float
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: stream
+    dtype: int
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.decisor_fi(${Umbral})
+
+file_format: 1

@@ -1,0 +1,23 @@
+
+id: E3TRadio_ej_amplificador_ff
+label: ej_amplificador_ff
+category: '[E3TRadio]'
+
+parameters:
+-   id: '...'
+    label: '...'
+    dtype: '...'
+
+inputs:
+-   domain: stream
+    dtype: ''
+
+outputs:
+-   domain: stream
+    dtype: ''
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.ej_amplificador_ff(${coef})
+
+file_format: 1

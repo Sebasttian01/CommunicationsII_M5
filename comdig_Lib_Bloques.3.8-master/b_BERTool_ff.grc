@@ -1,0 +1,479 @@
+options:
+  parameters:
+    author: Homero Ortega Boada
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: "Este Bloque sirve a la vez como canal de Ruido Blanco Gausiano y\
+      \ como herramienta para calcular la curva de BER (Bit error Rate) para una senal\
+      \ binaria real. Pero tambien se puede usar para se\xF1ales M-arias reales como\
+      \ M-PAM. Se pueden usar se\xF1ales que han pasado por un filtroformador de pulsos.\
+      \ En caso de que la entrada sea una se\xF1al binara, siempre que se hable de\
+      \ simbolos es lo mismo que hablar de bits, es decir, los simbolos son bits puros.\
+      \ Parametros usados: Sps - es el n\xFAmero muestras por simbolo, en caso de\
+      \ no usar un filtro formador de pulsos Sps=1, recuerde que Sps=samp_reate/Sps;\
+      \ Rs - es la rata de simbolos; N_snr - numero de puntos que tendra la curva\
+      \ de BER; EsNomin: valor minimo de la relaci\xF3n Es/No; EsNomax: valor m\xE1\
+      ximo de la relacion Es/No. Las se\xF1ales de entrada son: in Tx  para los  simbolos\
+      \ transmitidos; in Rx  para los simbolos recibidos; in es la se\xF1al enviada.\
+      \ La salida son dos senales: out - es la Curva de BER o SER a graficar;  out_env\
+      \ - es la se\xF1al que sale del canal AWGN, que es la misma entrante pero con\
+      \ ruido ; out que son los valores de BER o SER disponibles. IMPORTANTE: que\
+      \ la curva sea BER o sea SER lo define el tipo de senal que se tiene en in Tx\
+      \ y en in Rx, donde se tiene en cada caso una senal M-aria. Asi que si M=2,\
+      \ estamos enviando y recibiendo simbolos, luego obtenemos curva de BER, pero\
+      \ si M>2 estamos hablando de curva de SER."
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_BERTool_ff
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_BERTool_ff
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [0, 1]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: B
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: B
+    short_id: ''
+    type: ''
+    value: '128'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [728, 28]
+    rotation: 0
+    state: disabled
+- name: E3TRadio_e_BERtool_0
+  id: E3TRadio_e_BERtool
+  parameters:
+    N: N_snr
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [640, 496]
+    rotation: 0
+    state: enabled
+- name: E3TRadio_e_canal_BER_0
+  id: E3TRadio_e_canal_BER
+  parameters:
+    B: Rs*Sps
+    EsN0max: EsN0max/2.
+    EsN0min: EsN0min/2.
+    N: N_snr
+    Rs: Rs
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [464, 356]
+    rotation: 0
+    state: enabled
+- name: E3TRadio_zero_order_hold_bb_0
+  id: E3TRadio_zero_order_hold_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: Sps
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [248, 516]
+    rotation: 0
+    state: enabled
+- name: E3TRadio_zero_order_hold_bb_0_0
+  id: E3TRadio_zero_order_hold_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: Sps
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [240, 580]
+    rotation: 0
+    state: enabled
+- name: EsN0max
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: EsN0max
+    short_id: ''
+    type: ''
+    value: '20'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [408, 14]
+    rotation: 0
+    state: enabled
+- name: EsN0min
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: EsN0min
+    short_id: ''
+    type: ''
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 14]
+    rotation: 0
+    state: enabled
+- name: N_snr
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: N_snr
+    short_id: ''
+    type: ''
+    value: '128'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [224, 14]
+    rotation: 0
+    state: enabled
+- name: Rs
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Rs
+    short_id: ''
+    type: ''
+    value: '125'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [512, 12]
+    rotation: 0
+    state: enabled
+- name: Sps
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Sps
+    short_id: ''
+    type: eng_float
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [608, 12]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_float_0
+  id: blocks_complex_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [640, 344]
+    rotation: 0
+    state: enabled
+- name: blocks_float_to_complex_0
+  id: blocks_float_to_complex
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [296, 376]
+    rotation: 0
+    state: enabled
+- name: blocks_nlog10_ff_0
+  id: blocks_nlog10_ff
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [760, 524]
+    rotation: 0
+    state: enabled
+- name: blocks_null_sink_0
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [840, 400]
+    rotation: 0
+    state: enabled
+- name: blocks_null_source_0
+  id: blocks_null_source
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_source: '[[0,],]'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_outputs: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [144, 408]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_to_vector_0
+  id: blocks_stream_to_vector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: N_snr
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [840, 524]
+    rotation: 0
+    state: enabled
+- name: note_0
+  id: note
+  parameters:
+    alias: ''
+    comment: ''
+    note: "NOTA PARA MEJORAR ESTE BLOQUE. Se proponen las siguientes modificaciones;\
+      \ 1) mejorar el canal para que tenga dos entradas, una para la se\xF1al modulada,\
+      \ otra para recibir el monto de ruido requerido (No o Pn o Es/No o SNR) 2) complementar\
+      \  el e_BERToll  para que asuma el roll de ordenar la SNR requerida. 3) optimizar\
+      \ e_BERToll para que haga promediados m\xE1s largos y enfatice en los valors\
+      \ SNR que sean m\xE1s relevantes, evitando con ello recalcular parte de las\
+      \ curvas que van quedando bien definidas y concentrandose donde no est\xE1n\
+      \ tan definidas."
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 172]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0_0_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out_env
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1024, 340]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0_0_0_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: N_snr
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1008, 516]
+    rotation: 0
+    state: enabled
+- name: pad_source_0_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 372]
+    rotation: 0
+    state: enabled
+- name: pad_source_0_0_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in_Tx
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 524]
+    rotation: 0
+    state: enabled
+- name: pad_source_0_0_0_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in_Rx
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 572]
+    rotation: 0
+    state: enabled
+- name: tipo_mod
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: tipo_mod
+    short_id: ''
+    type: ''
+    value: '"QPSK"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1120, 44]
+    rotation: 0
+    state: disabled
+
+connections:
+- [E3TRadio_e_BERtool_0, '0', blocks_nlog10_ff_0, '0']
+- [E3TRadio_e_canal_BER_0, '0', blocks_complex_to_float_0, '0']
+- [E3TRadio_e_canal_BER_0, '1', E3TRadio_e_BERtool_0, '0']
+- [E3TRadio_zero_order_hold_bb_0, '0', E3TRadio_e_BERtool_0, '1']
+- [E3TRadio_zero_order_hold_bb_0_0, '0', E3TRadio_e_BERtool_0, '2']
+- [blocks_complex_to_float_0, '0', pad_sink_0_0_0, '0']
+- [blocks_complex_to_float_0, '1', blocks_null_sink_0, '0']
+- [blocks_float_to_complex_0, '0', E3TRadio_e_canal_BER_0, '0']
+- [blocks_nlog10_ff_0, '0', blocks_stream_to_vector_0, '0']
+- [blocks_null_source_0, '0', blocks_float_to_complex_0, '1']
+- [blocks_stream_to_vector_0, '0', pad_sink_0_0_0_0, '0']
+- [pad_source_0_0, '0', blocks_float_to_complex_0, '0']
+- [pad_source_0_0_0, '0', E3TRadio_zero_order_hold_bb_0, '0']
+- [pad_source_0_0_0_0, '0', E3TRadio_zero_order_hold_bb_0_0, '0']
+
+metadata:
+  file_format: 1

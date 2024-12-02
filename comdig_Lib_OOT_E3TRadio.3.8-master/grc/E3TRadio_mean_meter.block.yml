@@ -1,0 +1,25 @@
+
+id: E3TRadio_mean_meter
+label: mean_meter_ff
+category: '[E3TRadio]'
+
+parameters:
+-   id: reset
+    label: reset
+    dtype: int
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: stream
+    dtype: float
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.mean_meter(${reset})
+    callbacks:
+    - set_reset(${reset})
+
+file_format: 1

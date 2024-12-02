@@ -1,0 +1,175 @@
+options:
+  parameters:
+    author: Homero Ortega Boada. Universidad Industrial de Santander
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGIS Universidad Industrial de Santander
+    description: Por una salida entrega la senal diezmada y por la otra muestreada.
+      El diezmado se realiza  de la manera en que se explica el diezmado en el libro
+      de Tratamiento de Senales y Sistemas de Oppenheim. En ese diezmado se igualan
+      a cero periodicamente un grupo de muestras. El muestreo, que se entrega en la
+      otra salida de este bloque es similar al diezmado, pero las muestras que se
+      igualan a cero son anuladas, es decir, desaparecen de la senal. Por esa razon,
+      la rata de muestreo de la senal diezmada es la misma de la que entra al bloque,
+      pero la rata de muestreo de la senal muestreada es Sps veces menor.
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_sampler
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_sampler
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 3]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: DelayDiez
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Retrazo
+    short_id: ''
+    type: intx
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [320, 3]
+    rotation: 0
+    state: enabled
+- name: E3TRadio_diezma_ff_0
+  id: E3TRadio_diezma_ff
+  parameters:
+    M: DelayDiez
+    N: Sps
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [176, 163]
+    rotation: 180
+    state: enabled
+- name: E3TRadio_diezmoppenh3_ff_0
+  id: E3TRadio_diezmoppenh3_ff
+  parameters:
+    M: DelayDiez
+    N: Sps
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [272, 163]
+    rotation: 180
+    state: enabled
+- name: Sps
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Samp per symb
+    short_id: ''
+    type: intx
+    value: '64'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 3]
+    rotation: 0
+    state: enabled
+- name: pad_sink_1
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'True'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 171]
+    rotation: 180
+    state: enabled
+- name: pad_sink_2
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: Diezmado
+    num_streams: '1'
+    optional: 'True'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 244]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [400, 171]
+    rotation: 180
+    state: enabled
+
+connections:
+- [E3TRadio_diezma_ff_0, '0', pad_sink_1, '0']
+- [E3TRadio_diezmoppenh3_ff_0, '0', E3TRadio_diezma_ff_0, '0']
+- [E3TRadio_diezmoppenh3_ff_0, '0', pad_sink_2, '0']
+- [pad_source_0, '0', E3TRadio_diezmoppenh3_ff_0, '0']
+
+metadata:
+  file_format: 1

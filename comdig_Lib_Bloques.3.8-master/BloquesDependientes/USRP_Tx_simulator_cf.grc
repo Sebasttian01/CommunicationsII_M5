@@ -1,0 +1,173 @@
+options:
+  parameters:
+    author: Homero Ortega Boada
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: RadioGis UIS
+    description: "recibe una senal Envolvente Compleja con frec de muestreo samp_rate,\
+      \ realiza una operacion similar a DAC elevando DAC_resamp_factor veces la frec\
+      \ de muestreo y luego convierte la senal a pasobandas con una portadores de\
+      \ Fc Hertz. Si ve que la portadora no est\xE1 bien definida, eleve DAC_resamp_factor\
+      \ (para senales digitales, se aconseja DAC_resamp_factor=Sps)"
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: USRP_Tx_simulator_cf
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: USRP_Tx_simulator_cf
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [-7, 23]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: Fc
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: frec de portadora
+    short_id: ''
+    type: ''
+    value: '64000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [463, 17]
+    rotation: 0
+    state: true
+- name: K
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: DAC_resamp_factor
+    short_id: ''
+    type: intx
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [340, 16]
+    rotation: 0
+    state: true
+- name: b_upconverter_cf_0
+  id: b_upconverter_cf
+  parameters:
+    Fc: Fc
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate*K
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [454, 162]
+    rotation: 0
+    state: true
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [636, 169]
+    rotation: 0
+    state: true
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [175, 167]
+    rotation: 0
+    state: true
+- name: rational_resampler_xxx_0
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: '1'
+    fbw: '0'
+    interp: K
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: '[]'
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [297, 145]
+    rotation: 0
+    state: true
+- name: samp_rate
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: samp_rate
+    short_id: ''
+    type: ''
+    value: '32000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [213, 15]
+    rotation: 0
+    state: true
+
+connections:
+- [b_upconverter_cf_0, '0', pad_sink_0, '0']
+- [pad_source_0, '0', rational_resampler_xxx_0, '0']
+- [rational_resampler_xxx_0, '0', b_upconverter_cf_0, '0']
+
+metadata:
+  file_format: 1

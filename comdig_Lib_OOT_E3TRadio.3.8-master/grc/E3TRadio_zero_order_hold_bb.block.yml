@@ -1,0 +1,25 @@
+
+id: E3TRadio_zero_order_hold_bb
+label: zeroh_bb
+category: '[E3TRadio]'
+
+parameters:
+-   id: k
+    label: Time hold
+    dtype: int
+
+inputs:
+-   domain: stream
+    dtype: byte
+
+outputs:
+-   domain: stream
+    dtype: byte
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.zero_order_hold_bb(${k})
+    callbacks:
+    - set_retardo(${k})
+
+file_format: 1

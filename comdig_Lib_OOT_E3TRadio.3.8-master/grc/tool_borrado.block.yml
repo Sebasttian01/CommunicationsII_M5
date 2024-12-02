@@ -1,0 +1,23 @@
+
+id: E3TRadio_decisor_ff_old
+label: borrar_mult
+category: '[borrar]'
+
+parameters:
+-   id: Umbral
+    label: El Umbral
+    dtype: float
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: stream
+    dtype: float
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.decisor_ff_old(${Umbral})
+
+file_format: 1

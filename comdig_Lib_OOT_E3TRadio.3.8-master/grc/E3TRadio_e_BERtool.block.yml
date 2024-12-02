@@ -1,0 +1,31 @@
+
+id: E3TRadio_e_BERtool
+label: e_BERtool
+category: '[E3TRadio]'
+
+parameters:
+-   id: N
+    label: N
+    dtype: int
+
+inputs:
+-   label: in0
+    domain: stream
+    dtype: int
+-   label: in1
+    domain: stream
+    dtype: byte
+-   label: in2
+    domain: stream
+    dtype: byte
+
+outputs:
+-   label: out0
+    domain: stream
+    dtype: float
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.e_BERtool(${N})
+
+file_format: 1

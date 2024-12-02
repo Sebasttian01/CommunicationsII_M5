@@ -1,0 +1,229 @@
+options:
+  parameters:
+    author: Homero Ortega Boada. Universidad Industrial de Santander
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGIS Universidad Industrial de Santander
+    description: Hace lo mismo que el b_sampler, pero con senales complejas. Por una
+      salida entrega la senal diezmada y por la otra muestreada. El diezmado se realiza  de
+      la manera en que se explica el diezmado en el libro de Tratamiento de Senales
+      y Sistemas de Oppenheim. En ese diezmado se igualan a cero periodicamente un
+      grupo de muestras. El muestreo, que se entrega en la otra salida de este bloque
+      es similar al diezmado, pero las muestras que se igualan a cero son anuladas,
+      es decir, desaparecen de la senal. Por esa razon, la rata de muestreo de la
+      senal diezmada es la misma de la que entra al bloque, pero la rata de muestreo
+      de la senal muestreada es Sps veces menor.
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_sampler_cc
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_sampler_cc
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: DelayDiez
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: ''
+    short_id: ''
+    type: ''
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 11]
+    rotation: 0
+    state: enabled
+- name: Sps
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: ''
+    short_id: ''
+    type: ''
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [296, 11]
+    rotation: 0
+    state: enabled
+- name: b_sampler_0_0
+  id: b_sampler
+  parameters:
+    DelayDiez: DelayDiez
+    Sps: Sps
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [384, 409]
+    rotation: 0
+    state: enabled
+- name: b_sampler_0_0_0
+  id: b_sampler
+  parameters:
+    DelayDiez: DelayDiez
+    Sps: Sps
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [384, 249]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_float_0
+  id: blocks_complex_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [192, 289]
+    rotation: 0
+    state: enabled
+- name: blocks_float_to_complex_0
+  id: blocks_float_to_complex
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [624, 257]
+    rotation: 0
+    state: enabled
+- name: blocks_float_to_complex_0_0
+  id: blocks_float_to_complex
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [640, 409]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: diezmado
+    num_streams: '1'
+    optional: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [800, 419]
+    rotation: 0
+    state: enabled
+- name: pad_sink_1
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [800, 267]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [32, 299]
+    rotation: 0
+    state: enabled
+
+connections:
+- [b_sampler_0_0, '0', blocks_float_to_complex_0, '1']
+- [b_sampler_0_0, '1', blocks_float_to_complex_0_0, '1']
+- [b_sampler_0_0_0, '0', blocks_float_to_complex_0, '0']
+- [b_sampler_0_0_0, '1', blocks_float_to_complex_0_0, '0']
+- [blocks_complex_to_float_0, '0', b_sampler_0_0_0, '0']
+- [blocks_complex_to_float_0, '1', b_sampler_0_0, '0']
+- [blocks_float_to_complex_0, '0', pad_sink_1, '0']
+- [blocks_float_to_complex_0_0, '0', pad_sink_0, '0']
+- [pad_source_0, '0', blocks_complex_to_float_0, '0']
+
+metadata:
+  file_format: 1

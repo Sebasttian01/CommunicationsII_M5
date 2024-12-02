@@ -1,0 +1,295 @@
+options:
+  parameters:
+    author: Homero Ortega Boada. Universidad Industrial de Santander
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGis Universidad Industrial de Santander
+    description: Permite demodular una senal BPSK de manera pedagogica para qeue los
+      estudiantes comprendan el proceso interno
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_DeMod_BPSK
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_DeMod_BPSK
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [0, 3]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: DelayAcc
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Delay of Accum.
+    short_id: ''
+    type: intx
+    value: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [320, 3]
+    rotation: 0
+    state: enabled
+- name: DelayDiez
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Delay in Decimater
+    short_id: ''
+    type: intx
+    value: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [456, 3]
+    rotation: 0
+    state: enabled
+- name: E3TRadio_acumulador_truncado_ff_0
+  id: E3TRadio_acumulador_truncado_ff
+  parameters:
+    M: DelayAcc
+    N: Sps
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [520, 227]
+    rotation: 180
+    state: enabled
+- name: E3TRadio_decisor_ff_0
+  id: E3TRadio_decisor_ff
+  parameters:
+    Umbral: '0.'
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 251]
+    rotation: 180
+    state: enabled
+- name: Sps
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Samp per symb
+    short_id: ''
+    type: intx
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 3]
+    rotation: 0
+    state: enabled
+- name: b_sampler_0
+  id: b_sampler
+  parameters:
+    DelayDiez: DelayDiez
+    Sps: Sps
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [352, 225]
+    rotation: 180
+    state: enabled
+- name: blocks_complex_to_float_0
+  id: blocks_complex_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [640, 209]
+    rotation: 180
+    state: enabled
+- name: blocks_null_sink_0
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [656, 169]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [32, 251]
+    rotation: 180
+    state: enabled
+- name: pad_sink_1
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: sampler
+    num_streams: '1'
+    optional: 'True'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [272, 323]
+    rotation: 180
+    state: enabled
+- name: pad_sink_3
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: Oppenh
+    num_streams: '1'
+    optional: 'True'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [344, 155]
+    rotation: 0
+    state: enabled
+- name: pad_sink_4
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: Acum
+    num_streams: '1'
+    optional: 'True'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [512, 155]
+    rotation: 0
+    state: enabled
+- name: pad_sink_6
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: ReInput
+    num_streams: '1'
+    optional: 'True'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [672, 331]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [808, 219]
+    rotation: 180
+    state: enabled
+
+connections:
+- [E3TRadio_acumulador_truncado_ff_0, '0', b_sampler_0, '0']
+- [E3TRadio_acumulador_truncado_ff_0, '0', pad_sink_4, '0']
+- [E3TRadio_decisor_ff_0, '0', pad_sink_0, '0']
+- [b_sampler_0, '0', E3TRadio_decisor_ff_0, '0']
+- [b_sampler_0, '0', pad_sink_1, '0']
+- [b_sampler_0, '1', pad_sink_3, '0']
+- [blocks_complex_to_float_0, '0', E3TRadio_acumulador_truncado_ff_0, '0']
+- [blocks_complex_to_float_0, '0', pad_sink_6, '0']
+- [blocks_complex_to_float_0, '1', blocks_null_sink_0, '0']
+- [pad_source_0, '0', blocks_complex_to_float_0, '0']
+
+metadata:
+  file_format: 1

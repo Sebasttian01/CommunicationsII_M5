@@ -1,0 +1,457 @@
+options:
+  parameters:
+    author: 'Mancipe Andres, Padilla Astrid, Castillo Jeyson '
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: "Este Bloque sirve a la vez como canal de Ruido Blanco Gausiano y\
+      \ como herramienta para calcular y grafica la curva de BER (Bit error Rate)\
+      \ o SER (simbol error ratio) para una senal con modulacion digital. Parametros\
+      \ usados: N_snr - numero de puntos que tendra la curva de BER; EsNomin: valor\
+      \ minimo de la relaci\xF3n Es/No; EsNomax: valor m\xE1ximo de la relacion Es/No.\
+      \ Las se\xF1ales de entrada son: in Tx  para los  simbolos transmitidos; in\
+      \ Rx  para los simbolos recibidos; in es la entrante envolvente compleja de\
+      \ la se\xF1al modulada. Las salidas del bloque son: out env que es la saliente\
+      \ envolvente compleja con la adicion de ruido AWGN; out ser que son los valores\
+      \ de BER o SER disponibles. IMPORTANTE: que la curva sea BER o sea SER lo define\
+      \ el tipo de senal que se tiene en in Tx y en in Rx, donde se tiene en cada\
+      \ caso una senal M-aria. Asi que si M=2, estamos enviando y recibiendo bits,\
+      \ luego obtenemos curva de BER, pero si M>2 estamos hablando de curva de SER. "
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb_qt_gui
+    hier_block_src_path: '.:'
+    id: b_BERTool_Channel_ff
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_BERTool_Channel_ff
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [0, 1]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: B
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: B
+    short_id: ''
+    type: ''
+    value: '128'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [512, 14]
+    rotation: 0
+    state: disabled
+- name: E3TRadio_e_BERtool_0_0
+  id: E3TRadio_e_BERtool
+  parameters:
+    N: N_snr
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [656, 560]
+    rotation: 0
+    state: enabled
+- name: E3TRadio_e_canal_BER_0_0
+  id: E3TRadio_e_canal_BER
+  parameters:
+    B: Rs
+    EsN0max: EsN0max
+    EsN0min: EsN0min
+    N: N_snr
+    Rs: Rs
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [488, 476]
+    rotation: 0
+    state: enabled
+- name: EsN0max
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: EsN0max
+    short_id: ''
+    type: ''
+    value: '20'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [408, 14]
+    rotation: 0
+    state: enabled
+- name: EsN0min
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: EsN0min
+    short_id: ''
+    type: ''
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 14]
+    rotation: 0
+    state: enabled
+- name: N_snr
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: N_snr
+    short_id: ''
+    type: ''
+    value: '128'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [224, 14]
+    rotation: 0
+    state: enabled
+- name: Rs
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Rs
+    short_id: ''
+    type: ''
+    value: '125'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 14]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_float_0
+  id: blocks_complex_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [656, 464]
+    rotation: 0
+    state: enabled
+- name: blocks_float_to_complex_0
+  id: blocks_float_to_complex
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 496]
+    rotation: 0
+    state: enabled
+- name: blocks_nlog10_ff_0_0
+  id: blocks_nlog10_ff
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [776, 580]
+    rotation: 0
+    state: enabled
+- name: blocks_null_sink_0
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [856, 520]
+    rotation: 0
+    state: enabled
+- name: blocks_null_source_0
+  id: blocks_null_source
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_source: '[[0,],]'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_outputs: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [160, 528]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_to_vector_0_0
+  id: blocks_stream_to_vector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: N_snr
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [856, 580]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0_0_0_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out_env
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [936, 460]
+    rotation: 0
+    state: enabled
+- name: pad_source_0_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [40, 484]
+    rotation: 0
+    state: enabled
+- name: pad_source_0_0_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in_Tx
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [40, 580]
+    rotation: 0
+    state: enabled
+- name: pad_source_0_0_0_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in_Rx
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [40, 628]
+    rotation: 0
+    state: enabled
+- name: qtgui_vector_sink_f_0_0
+  id: qtgui_vector_sink_f
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '1.0'
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    grid: 'False'
+    gui_hint: ''
+    label1: tipo_mod
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"Curva de BER"'
+    nconnections: '1'
+    ref_level: '0'
+    showports: 'True'
+    update_time: '0.10'
+    vlen: N_snr
+    width1: '6'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    x_axis_label: '"Es/N0 [dB]"'
+    x_start: EsN0min
+    x_step: (EsN0max-EsN0min)/float(N_snr)
+    x_units: '"dB"'
+    y_axis_label: '"10logPe"'
+    y_units: '""'
+    ymax: '0'
+    ymin: '-4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1056, 516]
+    rotation: 0
+    state: enabled
+- name: tipo_mod
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: tipo_mod
+    short_id: ''
+    type: ''
+    value: '"QPSK"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [696, 12]
+    rotation: 0
+    state: enabled
+
+connections:
+- [E3TRadio_e_BERtool_0_0, '0', blocks_nlog10_ff_0_0, '0']
+- [E3TRadio_e_canal_BER_0_0, '0', blocks_complex_to_float_0, '0']
+- [E3TRadio_e_canal_BER_0_0, '1', E3TRadio_e_BERtool_0_0, '0']
+- [blocks_complex_to_float_0, '0', pad_sink_0_0_0_0, '0']
+- [blocks_complex_to_float_0, '1', blocks_null_sink_0, '0']
+- [blocks_float_to_complex_0, '0', E3TRadio_e_canal_BER_0_0, '0']
+- [blocks_nlog10_ff_0_0, '0', blocks_stream_to_vector_0_0, '0']
+- [blocks_null_source_0, '0', blocks_float_to_complex_0, '1']
+- [blocks_stream_to_vector_0_0, '0', qtgui_vector_sink_f_0_0, '0']
+- [pad_source_0_0, '0', blocks_float_to_complex_0, '0']
+- [pad_source_0_0_0, '0', E3TRadio_e_BERtool_0_0, '1']
+- [pad_source_0_0_0_0, '0', E3TRadio_e_BERtool_0_0, '2']
+
+metadata:
+  file_format: 1

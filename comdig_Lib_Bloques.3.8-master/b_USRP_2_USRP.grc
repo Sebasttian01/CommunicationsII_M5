@@ -1,0 +1,461 @@
+options:
+  parameters:
+    author: Homero Ortega Boada. Universidad Industrial de Santander
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGis Universidad Industrial de Santander
+    description: "Este bloque es el simulador de un canal inalambrico que incluye\
+      \ 2 USRPs, uno en la parte transmisora y otro en la receptora. Se puede usar\
+      \ cuando no se tengan USRP fisicos a la mano. Parametros usados: samp_rate (Hz)\
+      \ es la frecuencia de muestreo de la se\xF1al que entra y la que sale de este\
+      \ bloque; Center freq (Hz) frecuencia central del canal inalambrico; Bandwidth\
+      \  (Hz) ancho de banda pasobandas del canal inalambrico; ; Toffset (numero de\
+      \ muestras de offset) permtite programar un tiempo de retardo de la senal en\
+      \ propagacion; Foffset (Hz) permite programar una desviacion entre la frecuencia\
+      \ central usada en la transmision y la usada en la recepcion; Phoffset (Rad)\
+      \ permite programar una desviacion entre el angulo de la portadora usada en\
+      \ transmision y la usada en recepcion; Vruido (volt) nivel del ruido blanco;\
+      \ Katt (lineal) nivel de atenuacion que la senal transmitida sufre en el proceso\
+      \ de propagacion."
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_USRP_2_USRP
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_USRP_2_USRP
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [840, 51]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: B
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Bandwidth (Hz)
+    short_id: ''
+    type: eng_float
+    value: '130000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [248, 3]
+    rotation: 0
+    state: enabled
+- name: Fc
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Center Freq (Hz)
+    short_id: ''
+    type: eng_float
+    value: '200000000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [112, 3]
+    rotation: 0
+    state: enabled
+- name: Foffset
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Foffset
+    short_id: ''
+    type: eng_float
+    value: '0.'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [376, 3]
+    rotation: 0
+    state: enabled
+- name: Katt
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Katt
+    short_id: ''
+    type: eng_float
+    value: '10.'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [640, 3]
+    rotation: 0
+    state: enabled
+- name: Phoffset
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Phoffset
+    short_id: ''
+    type: eng_float
+    value: (numpy.pi)*2*random.random()
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [720, 3]
+    rotation: 0
+    state: enabled
+- name: Toffset
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Toffset
+    short_id: ''
+    type: intx
+    value: '5'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [464, 3]
+    rotation: 0
+    state: enabled
+- name: Vruido
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Vruido
+    short_id: ''
+    type: eng_float
+    value: '0.'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [552, 3]
+    rotation: 0
+    state: enabled
+- name: analog_const_source_x_1_0
+  id: analog_const_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: cmath.exp(1j * Phoffset)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [448, 347]
+    rotation: 0
+    state: enabled
+- name: analog_noise_source_x_0
+  id: analog_noise_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: Vruido
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    noise_type: analog.GR_GAUSSIAN
+    seed: '42'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [144, 547]
+    rotation: 0
+    state: enabled
+- name: analog_sig_source_x_0
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '1'
+    comment: ''
+    freq: Foffset
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: samp_rate
+    type: complex
+    waveform: analog.GR_COS_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 555]
+    rotation: 0
+    state: enabled
+- name: blocks_add_xx_0
+  id: blocks_add_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 433]
+    rotation: 180
+    state: enabled
+- name: blocks_delay_0
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: Toffset
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [248, 203]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: 1./Katt+0j
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [368, 203]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_xx_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [544, 401]
+    rotation: 180
+    state: enabled
+- name: blocks_multiply_xx_0_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 417]
+    rotation: 180
+    state: enabled
+- name: import_0_1
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import cmath
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [920, 3]
+    rotation: 0
+    state: enabled
+- name: import_0_1_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import numpy
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1024, 3]
+    rotation: 0
+    state: enabled
+- name: import_0_1_0_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import random
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1120, 3]
+    rotation: 0
+    state: enabled
+- name: import_0_1_1
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import math
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [824, 3]
+    rotation: 0
+    state: enabled
+- name: low_pass_filter_0
+  id: low_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: B/2.
+    decim: '1'
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    type: fir_filter_ccf
+    width: B/8.
+    win: window.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [536, 155]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [64, 443]
+    rotation: 180
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [96, 203]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: samp_rate
+    short_id: ''
+    type: eng_float
+    value: 100e6/512
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 3]
+    rotation: 0
+    state: enabled
+
+connections:
+- [analog_const_source_x_1_0, '0', blocks_multiply_xx_0, '1']
+- [analog_noise_source_x_0, '0', blocks_add_xx_0, '0']
+- [analog_sig_source_x_0, '0', blocks_multiply_xx_0_0, '0']
+- [blocks_add_xx_0, '0', pad_sink_0, '0']
+- [blocks_delay_0, '0', blocks_multiply_const_vxx_0, '0']
+- [blocks_multiply_const_vxx_0, '0', low_pass_filter_0, '0']
+- [blocks_multiply_xx_0, '0', blocks_multiply_xx_0_0, '1']
+- [blocks_multiply_xx_0_0, '0', blocks_add_xx_0, '1']
+- [low_pass_filter_0, '0', blocks_multiply_xx_0, '0']
+- [pad_source_0, '0', blocks_delay_0, '0']
+
+metadata:
+  file_format: 1

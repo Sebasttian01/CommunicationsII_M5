@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<block>
+  <name>diezmador_cc</name>
+  <key>E3TRadio_diezmador_cc</key>
+  <category>E3TRadio</category>
+  <import>import E3TRadio</import>
+  <make>E3TRadio.diezmador_cc($paso)</make>
+
+
+  <param>
+    <name>paso</name>
+    <key>paso</key>
+    <value>8</value>
+    <type>int</type>
+  </param>
+
+  <check>$paso &gt; 0 </check>  
+
+  <sink>
+    <name>in</name>
+    <type>complex</type>
+  </sink>
+
+
+  <source>
+    <name>out</name>
+    <type>complex</type>
+  </source>
+</block>

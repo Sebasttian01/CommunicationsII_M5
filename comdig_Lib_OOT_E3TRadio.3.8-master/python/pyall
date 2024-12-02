@@ -1,0 +1,69 @@
+#!/usr/bin/env python2
+"""
+License and Copyright:
+	Copyright Miguel Noriega 2019
+	
+Usage: pyall [list of .py files to compile]
+Options:
+  --version	 Show program's version number and exit
+  -h, --help	 Show this help message and exit
+  -v, --verbose  Verbose output during compile [default=False]
+  -a, --all      Compile all files GRC in folder
+
+Examples: 
+  pyall -a -v 
+  pyall -v b_1tubes_2tubes.py
+  pyall -v b_binary_gen_vec.py b_1tubes_2tubes.py
+"""
+
+import sys
+import os
+from optparse import OptionParser
+
+def delete_comment(filename):
+	f = open(filename,"r")
+	lines = f.readlines()
+	f.close()
+	f = open(filename,"w")
+	for line in lines:
+		if line[0]!="#":
+			f.write(line)
+	f.close()
+if __name__ == "__main__":
+	usage = 'usage: %prog [options] [list of .py files to compile]'
+	version = """0.0.1"""
+
+	parser = OptionParser(usage=usage, version=version)
+	parser.add_option("-v", "--verbose", action="store_true", default=False,
+		help="verbose output during compile [default=%default]")
+	parser.add_option("-a","--all",action="store_true", default=False,
+		help="Compile all files .py in folder")
+	parser.add_option("-d","--delcom",action="store_true", default=False,
+		help="delete all comment files in yml in folder")
+	parser.add_option("-p","--pylist",action="store_true", default=False,
+		help="delete all comment files in yml in folder")
+	(options, args) = parser.parse_args()
+
+	if options.all:
+		import glob
+		for file in glob.glob("*.py"):
+			if options.verbose: print("compiling "+file)
+			defile
+			os.system(coma)
+	elif options.delcom:
+		import glob
+		for file in glob.glob("*.yml"):
+			if options.verbose: print("Delete on "+file)
+			delete_comment(file)
+			#os.system(coma)
+	elif options.pylist:
+		import glob
+		for file in glob.glob("*.py"):
+			#if options.verbose: print("Delete on "+file)
+			print(file)
+			#os.system(coma)
+	else:
+		for x in args:
+			if options.verbose: print("compiling "+file)
+			coma="python3 "+ x
+			os.system(coma)

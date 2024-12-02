@@ -336,7 +336,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2432, 20.0]
+    coordinate: [2472, 24.0]
     rotation: 0
     state: disabled
 - name: h
@@ -360,7 +360,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2512, 12.0]
+    coordinate: [2632, 24.0]
     rotation: 0
     state: disabled
 - name: ntaps
@@ -466,7 +466,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [22, 126]
+    coordinate: [16, 296.0]
     rotation: 0
     state: enabled
 - name: analog_sig_source_x_0
@@ -482,6 +482,7 @@ blocks:
     offset: '0'
     phase: '0'
     samp_rate: samp_rate
+    showports: 'False'
     type: complex
     waveform: analog.GR_COS_WAVE
   states:
@@ -717,6 +718,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     num_ports: '2'
+    showports: 'False'
     type: complex
     vlen: '1'
   states:
@@ -736,6 +738,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     num_ports: '1'
+    showports: 'False'
     type: complex
     vlen: '1'
   states:
@@ -755,6 +758,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     num_ports: '1'
+    showports: 'False'
     type: complex
     vlen: '1'
   states:
@@ -774,6 +778,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     num_ports: '1'
+    showports: 'False'
     type: byte
     vlen: '1'
   states:
@@ -793,6 +798,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     num_ports: '1'
+    showports: 'False'
     type: byte
     vlen: '1'
   states:
@@ -944,6 +950,27 @@ blocks:
     coordinate: [295, 142]
     rotation: 0
     state: true
+- name: blocks_throttle2_0
+  id: blocks_throttle2
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    limit: auto
+    maximum: '0.1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1552, 32.0]
+    rotation: 0
+    state: enabled
 - name: blocks_throttle_0
   id: blocks_throttle
   parameters:
@@ -960,9 +987,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1664, 164.0]
+    coordinate: [1544, 104.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: blocks_unpack_k_bits_bb_0
   id: blocks_unpack_k_bits_bb
   parameters:
@@ -1015,7 +1042,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [0, 164.0]
+    coordinate: [0, 112.0]
     rotation: 0
     state: disabled
 - name: digital_chunks_to_symbols_xx_0
@@ -2041,7 +2068,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1520, 1564.0]
+    coordinate: [1504, 1560.0]
     rotation: 0
     state: true
 - name: qtgui_time_sink_x_0
@@ -2235,7 +2262,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [456, 1228.0]
+    coordinate: [448, 1240.0]
     rotation: 0
     state: true
 - name: qtgui_time_sink_x_0_0_0
@@ -2623,7 +2650,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1416, 1452.0]
+    coordinate: [1448, 1424.0]
     rotation: 0
     state: true
 - name: qtgui_time_sink_x_3
@@ -3077,6 +3104,7 @@ connections:
 - [blocks_pack_k_bits_bb_0, '0', blocks_packed_to_unpacked_xx_0, '0']
 - [blocks_packed_to_unpacked_xx_0, '0', digital_diff_encoder_bb_0, '0']
 - [blocks_packed_to_unpacked_xx_0, '0', virtual_sink_0_0_0_1, '0']
+- [blocks_throttle2_0, '0', blocks_multiply_const_vxx_1_0, '0']
 - [blocks_throttle_0, '0', blocks_multiply_const_vxx_1_0, '0']
 - [blocks_unpack_k_bits_bb_0, '0', virtual_sink_0_0_0_0_0_0, '0']
 - [blocks_unpacked_to_packed_xx_0, '0', blocks_unpack_k_bits_bb_0, '0']
@@ -3089,6 +3117,7 @@ connections:
 - [digital_diff_encoder_bb_0, '0', digital_chunks_to_symbols_xx_0, '0']
 - [epy_block_0, '0', qtgui_number_sink_0, '0']
 - [fec_ber_bf_0, '0', epy_block_0, '0']
+- [interp_fir_filter_xxx_0, '0', blocks_throttle2_0, '0']
 - [interp_fir_filter_xxx_0, '0', blocks_throttle_0, '0']
 - [interp_fir_filter_xxx_0, '0', virtual_sink_0_2, '0']
 - [interp_fir_filter_xxx_0_0, '0', blocks_multiply_const_vxx_0, '0']
@@ -3118,3 +3147,4 @@ connections:
 
 metadata:
   file_format: 1
+  grc_version: v3.11.0.0git-810-g1ecb8565

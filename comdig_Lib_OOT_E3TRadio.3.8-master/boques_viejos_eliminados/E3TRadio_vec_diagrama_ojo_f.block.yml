@@ -1,0 +1,26 @@
+
+id: E3TRadio_vec_diagrama_ojo_f
+label: vec_diagrama_ojo_f
+category: '[E3TRadio]'
+
+parameters:
+-   id: Sps
+    label: Sps
+    dtype: int
+-   id: N
+    label: N
+    dtype: int
+-   id: samp_rate
+    label: samp_rate
+    dtype: float
+
+inputs:
+-   domain: stream
+    dtype: float
+    vlen: ${ N }
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.vec_diagrama_ojo_f(${Sps}, ${samp_rate}, ${N})
+
+file_format: 1

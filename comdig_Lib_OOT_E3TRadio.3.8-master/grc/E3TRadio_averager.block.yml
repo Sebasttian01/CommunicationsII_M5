@@ -1,0 +1,30 @@
+
+id: E3TRadio_averager
+label: averager
+category: '[E3TRadio]'
+
+parameters:
+-   id: N
+    label: Vector size
+    dtype: int
+    hide: ${ 'part' if vlen == 1 else 'none' }
+-   id: n
+    label: Averager size
+    dtype: int
+    hide: ${ 'part' if vlen == 1 else 'none' }
+
+inputs:
+-   domain: stream
+    dtype: float
+    vlen: ${ N * n }
+
+outputs:
+-   domain: stream
+    dtype: float
+    vlen: ${ N }
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.averager(${N}, ${n})
+
+file_format: 1

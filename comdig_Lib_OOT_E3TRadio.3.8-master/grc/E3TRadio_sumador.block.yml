@@ -1,0 +1,22 @@
+
+id: E3TRadio_sumador
+label: sumador
+category: '[E3TRadio]'
+
+inputs:
+-   label: in1
+    domain: stream
+    dtype: float
+-   label: in2
+    domain: stream
+    dtype: float
+
+outputs:
+-   domain: stream
+    dtype: float
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.sumador()
+
+file_format: 1

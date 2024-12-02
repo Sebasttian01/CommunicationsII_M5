@@ -1,0 +1,631 @@
+options:
+  parameters:
+    author: Homero Ortega Boada. Universidad Industrial de Santander
+    catch_exceptions: 'True'
+    category: '''[en_prueba]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGis Universidad Industrial de Santander
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_cdma_cc
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_cdma
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [0, 3]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: N
+  id: variable
+  parameters:
+    comment: ''
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [248, 3]
+    rotation: 0
+    state: enabled
+- name: SF
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: SF
+    short_id: ''
+    type: ''
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [320, 3]
+    rotation: 0
+    state: enabled
+- name: b_ds_spreadspect_cc_0
+  id: b_ds_spreadspect_cc
+  parameters:
+    SF: '8'
+    affinity: ''
+    alias: ''
+    codigo: c0
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 113]
+    rotation: 0
+    state: enabled
+- name: b_ds_spreadspect_cc_0_0
+  id: b_ds_spreadspect_cc
+  parameters:
+    SF: '8'
+    affinity: ''
+    alias: ''
+    codigo: c1
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 209]
+    rotation: 0
+    state: enabled
+- name: b_ds_spreadspect_cc_0_0_0
+  id: b_ds_spreadspect_cc
+  parameters:
+    SF: '8'
+    affinity: ''
+    alias: ''
+    codigo: c2
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 305]
+    rotation: 0
+    state: enabled
+- name: b_ds_spreadspect_cc_0_0_1
+  id: b_ds_spreadspect_cc
+  parameters:
+    SF: '8'
+    affinity: ''
+    alias: ''
+    codigo: c3
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 401]
+    rotation: 0
+    state: enabled
+- name: b_ds_spreadspect_cc_0_0_2
+  id: b_ds_spreadspect_cc
+  parameters:
+    SF: '8'
+    affinity: ''
+    alias: ''
+    codigo: c4
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 497]
+    rotation: 0
+    state: enabled
+- name: b_ds_spreadspect_cc_0_0_3
+  id: b_ds_spreadspect_cc
+  parameters:
+    SF: '8'
+    affinity: ''
+    alias: ''
+    codigo: c5
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 593]
+    rotation: 0
+    state: enabled
+- name: b_ds_spreadspect_cc_0_0_4
+  id: b_ds_spreadspect_cc
+  parameters:
+    SF: '8'
+    affinity: ''
+    alias: ''
+    codigo: c6
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 689]
+    rotation: 0
+    state: enabled
+- name: b_ds_spreadspect_cc_0_0_5
+  id: b_ds_spreadspect_cc
+  parameters:
+    SF: '8'
+    affinity: ''
+    alias: ''
+    codigo: c7
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 785]
+    rotation: 0
+    state: enabled
+- name: blocks_add_xx_0
+  id: blocks_add_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '8'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [640, 345]
+    rotation: 0
+    state: enabled
+- name: c0
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: c0
+    short_id: ''
+    type: ''
+    value: (0+0j,0+0j,0+0j)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 147]
+    rotation: 0
+    state: enabled
+- name: c1
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: c1
+    short_id: ''
+    type: ''
+    value: (0+0j,0+0j,0+0j)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 227]
+    rotation: 0
+    state: enabled
+- name: c2
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: c2
+    short_id: ''
+    type: ''
+    value: (0+0j,0+0j,0+0j)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 307]
+    rotation: 0
+    state: enabled
+- name: c3
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: c3
+    short_id: ''
+    type: ''
+    value: (0+0j,0+0j,0+0j)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 387]
+    rotation: 0
+    state: enabled
+- name: c4
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: c4
+    short_id: ''
+    type: ''
+    value: (0+0j,0+0j,0+0j)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 467]
+    rotation: 0
+    state: enabled
+- name: c5
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: c5
+    short_id: ''
+    type: ''
+    value: (0+0j,0+0j,0+0j)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 547]
+    rotation: 0
+    state: enabled
+- name: c6
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: c6
+    short_id: ''
+    type: ''
+    value: (0+0j,0+0j,0+0j)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 627]
+    rotation: 0
+    state: enabled
+- name: c7
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: c7
+    short_id: ''
+    type: ''
+    value: (0+0j,0+0j,0+0j)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 707]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import math
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [552, 3]
+    rotation: 0
+    state: enabled
+- name: import_0_1
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import cmath
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [648, 3]
+    rotation: 0
+    state: enabled
+- name: import_0_1_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import numpy
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [744, 3]
+    rotation: 0
+    state: enabled
+- name: info
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: infode us1
+    num_streams: '1'
+    optional: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [808, 259]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [768, 451]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: cod de us1
+    num_streams: '1'
+    optional: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [800, 139]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in0
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [144, 139]
+    rotation: 0
+    state: enabled
+- name: pad_source_1
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in1
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [144, 235]
+    rotation: 0
+    state: enabled
+- name: pad_source_2
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in2
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [136, 331]
+    rotation: 0
+    state: enabled
+- name: pad_source_3
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in3
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [136, 427]
+    rotation: 0
+    state: enabled
+- name: pad_source_4
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in4
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [136, 523]
+    rotation: 0
+    state: enabled
+- name: pad_source_5
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in5
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [136, 619]
+    rotation: 0
+    state: enabled
+- name: pad_source_6
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in6
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [128, 715]
+    rotation: 0
+    state: enabled
+- name: pad_source_7
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in7
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [136, 811]
+    rotation: 0
+    state: enabled
+
+connections:
+- [b_ds_spreadspect_cc_0, '0', blocks_add_xx_0, '0']
+- [b_ds_spreadspect_cc_0_0, '0', blocks_add_xx_0, '1']
+- [b_ds_spreadspect_cc_0_0, '1', pad_sink_0_0, '0']
+- [b_ds_spreadspect_cc_0_0, '2', info, '0']
+- [b_ds_spreadspect_cc_0_0_0, '0', blocks_add_xx_0, '2']
+- [b_ds_spreadspect_cc_0_0_1, '0', blocks_add_xx_0, '3']
+- [b_ds_spreadspect_cc_0_0_2, '0', blocks_add_xx_0, '4']
+- [b_ds_spreadspect_cc_0_0_3, '0', blocks_add_xx_0, '5']
+- [b_ds_spreadspect_cc_0_0_4, '0', blocks_add_xx_0, '6']
+- [b_ds_spreadspect_cc_0_0_5, '0', blocks_add_xx_0, '7']
+- [blocks_add_xx_0, '0', pad_sink_0, '0']
+- [pad_source_0, '0', b_ds_spreadspect_cc_0, '0']
+- [pad_source_1, '0', b_ds_spreadspect_cc_0_0, '0']
+- [pad_source_2, '0', b_ds_spreadspect_cc_0_0_0, '0']
+- [pad_source_3, '0', b_ds_spreadspect_cc_0_0_1, '0']
+- [pad_source_4, '0', b_ds_spreadspect_cc_0_0_2, '0']
+- [pad_source_5, '0', b_ds_spreadspect_cc_0_0_3, '0']
+- [pad_source_6, '0', b_ds_spreadspect_cc_0_0_4, '0']
+- [pad_source_7, '0', b_ds_spreadspect_cc_0_0_5, '0']
+
+metadata:
+  file_format: 1

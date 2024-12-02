@@ -1,0 +1,436 @@
+options:
+  parameters:
+    author: ''
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_FFT_p
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_FFT_p
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: Nu
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: ''
+    short_id: ''
+    type: ''
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 5]
+    rotation: 0
+    state: enabled
+- name: blocks_streams_to_vector_0
+  id: blocks_streams_to_vector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: Nu
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [272, 185]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_to_streams_0
+  id: blocks_vector_to_streams
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: Nu
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [632, 185]
+    rotation: 0
+    state: enabled
+- name: fft_vxx_1_0
+  id: fft_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    fft_size: Nu
+    forward: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nthreads: '1'
+    shift: 'False'
+    type: complex
+    window: window.rectangular(Nu)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [432, 264]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out0
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [824, 180]
+    rotation: 0
+    state: enabled
+- name: pad_sink_1
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out1
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [928, 212]
+    rotation: 0
+    state: enabled
+- name: pad_sink_2
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out2
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [824, 244]
+    rotation: 0
+    state: enabled
+- name: pad_sink_3
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out3
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [944, 276]
+    rotation: 0
+    state: enabled
+- name: pad_sink_4
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out4
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [824, 308]
+    rotation: 0
+    state: enabled
+- name: pad_sink_5
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out5
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [928, 340]
+    rotation: 0
+    state: enabled
+- name: pad_sink_6
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out6
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [824, 372]
+    rotation: 0
+    state: enabled
+- name: pad_sink_7
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out7
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [944, 404]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in0
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [40, 132]
+    rotation: 0
+    state: enabled
+- name: pad_source_1
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in1
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [40, 180]
+    rotation: 0
+    state: enabled
+- name: pad_source_2
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in2
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [40, 228]
+    rotation: 0
+    state: enabled
+- name: pad_source_3
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in3
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [128, 276]
+    rotation: 0
+    state: enabled
+- name: pad_source_4
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in4
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 308]
+    rotation: 0
+    state: enabled
+- name: pad_source_5
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in5
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [128, 340]
+    rotation: 0
+    state: enabled
+- name: pad_source_6
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in6
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 372]
+    rotation: 0
+    state: enabled
+- name: pad_source_7
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in7
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [128, 404]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_streams_to_vector_0, '0', fft_vxx_1_0, '0']
+- [blocks_vector_to_streams_0, '0', pad_sink_0, '0']
+- [blocks_vector_to_streams_0, '1', pad_sink_1, '0']
+- [blocks_vector_to_streams_0, '2', pad_sink_2, '0']
+- [blocks_vector_to_streams_0, '3', pad_sink_3, '0']
+- [blocks_vector_to_streams_0, '4', pad_sink_4, '0']
+- [blocks_vector_to_streams_0, '5', pad_sink_5, '0']
+- [blocks_vector_to_streams_0, '6', pad_sink_6, '0']
+- [blocks_vector_to_streams_0, '7', pad_sink_7, '0']
+- [fft_vxx_1_0, '0', blocks_vector_to_streams_0, '0']
+- [pad_source_0, '0', blocks_streams_to_vector_0, '0']
+- [pad_source_1, '0', blocks_streams_to_vector_0, '1']
+- [pad_source_2, '0', blocks_streams_to_vector_0, '2']
+- [pad_source_3, '0', blocks_streams_to_vector_0, '3']
+- [pad_source_4, '0', blocks_streams_to_vector_0, '4']
+- [pad_source_5, '0', blocks_streams_to_vector_0, '5']
+- [pad_source_6, '0', blocks_streams_to_vector_0, '6']
+- [pad_source_7, '0', blocks_streams_to_vector_0, '7']
+
+metadata:
+  file_format: 1

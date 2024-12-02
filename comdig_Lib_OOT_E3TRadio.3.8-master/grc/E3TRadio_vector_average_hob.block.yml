@@ -1,0 +1,28 @@
+
+id: E3TRadio_vector_average_hob
+label: vector_average_hob
+category: '[E3TRadio]'
+
+parameters:
+-   id: N
+    label: vector length
+    dtype: int
+-   id: Nensayos
+    label: Number of trials
+    dtype: int
+
+inputs:
+-   domain: stream
+    dtype: float
+    vlen: ${ N }
+
+outputs:
+-   domain: stream
+    dtype: float
+    vlen: ${ N }
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.vector_average_hob(${N}, ${Nensayos})
+
+file_format: 1

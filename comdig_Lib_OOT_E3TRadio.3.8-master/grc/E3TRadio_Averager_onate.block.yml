@@ -1,0 +1,26 @@
+
+id: E3TRadio_Averager_onate
+label: Averager_onate
+category: '[E3TRadio]'
+
+parameters:
+-   id: N
+    label: vector length
+    dtype: int
+    hide: ${ 'part' if vlen == 1 else 'none' }
+
+inputs:
+-   domain: stream
+    dtype: float
+    vlen: ${ N }
+
+outputs:
+-   domain: stream
+    dtype: float
+    vlen: ${ N }
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.Averager_onate(${N})
+
+file_format: 1

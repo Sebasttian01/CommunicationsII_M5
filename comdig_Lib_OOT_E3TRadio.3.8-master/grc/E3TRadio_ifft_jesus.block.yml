@@ -1,0 +1,34 @@
+
+id: E3TRadio_ifft_jesus
+label: ifft_jesus
+category: '[E3TRadio]'
+
+parameters:
+-   id: N
+    label: FFT size
+    dtype: int
+    hide: ${ 'part' if vlen == 1 else 'none' }
+-   id: window
+    label: Window
+    dtype: real_vector
+-   id: W
+    label: Weight
+    dtype: string
+
+inputs:
+-   domain: stream
+    dtype: complex
+    vlen: ${ N }
+
+outputs:
+-   domain: stream
+    dtype: complex
+    vlen: ${ N }
+
+templates:
+    imports: |-
+        import E3TRadio
+        from gnuradio.fft import window
+    make: E3TRadio.ifft_jesus(${N}, ${W}, ${window})
+
+file_format: 1

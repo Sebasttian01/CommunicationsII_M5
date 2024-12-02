@@ -1,0 +1,212 @@
+options:
+  parameters:
+    author: Homero Ortega Boada. Universidad Industrial de Santander
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGis Universidad Industrial de Santander
+    description: 'multiplica la entrada por codigo para producir una senal en Direc
+      Sequence Spread Spectrum (DSSS). El cuidado que hay que tener es que el Spreading
+      Factor (SF) se cuadra desde afuera, para la cual la senal de la informacion
+      debe entrar con un sobremuestreo SF. Los parametros usados son: codigo - es
+      el codigo que se usara para producir la senal DSSS'
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_ds_spreadspect_cc
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_ds_spreadspect_cc
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: E3TRadio_zero_order_hold2_cc_0
+  id: E3TRadio_zero_order_hold2_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: SF
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [136, 211]
+    rotation: 0
+    state: enabled
+- name: SF
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: SF
+    short_id: ''
+    type: ''
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [192, 11]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_xx_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 217]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_source_x_0
+  id: blocks_vector_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    repeat: 'True'
+    tags: '[]'
+    type: complex
+    vector: codigo
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [64, 275]
+    rotation: 0
+    state: enabled
+- name: codigo
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: codigo
+    short_id: ''
+    type: ''
+    value: (1,1,1,1,1,1,1,1)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [288, 11]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [496, 227]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: cod
+    num_streams: '1'
+    optional: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [472, 299]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0_0_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: info
+    num_streams: '1'
+    optional: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [320, 123]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [0, 211]
+    rotation: 0
+    state: enabled
+
+connections:
+- [E3TRadio_zero_order_hold2_cc_0, '0', blocks_multiply_xx_0, '0']
+- [E3TRadio_zero_order_hold2_cc_0, '0', pad_sink_0_0_0, '0']
+- [blocks_multiply_xx_0, '0', pad_sink_0, '0']
+- [blocks_vector_source_x_0, '0', blocks_multiply_xx_0, '1']
+- [blocks_vector_source_x_0, '0', pad_sink_0_0, '0']
+- [pad_source_0, '0', E3TRadio_zero_order_hold2_cc_0, '0']
+
+metadata:
+  file_format: 1

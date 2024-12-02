@@ -1,0 +1,23 @@
+
+id: E3TRadio_unipolar_to_bipolar_ff
+label: unipolar_to_bipolar_ff
+category: '[E3TRadio]'
+
+parameters:
+-   id: Amp
+    label: Amplitud
+    dtype: float
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: stream
+    dtype: float
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.unipolar_to_bipolar_ff(${Amp})
+
+file_format: 1

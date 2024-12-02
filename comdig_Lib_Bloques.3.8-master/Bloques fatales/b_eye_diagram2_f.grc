@@ -1,0 +1,276 @@
+options:
+  parameters:
+    author: Homero Ortega
+    catch_exceptions: 'True'
+    category: '''[version_vieja]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGIS Universidad Industrial de Santander
+    description: 'permite visualizar el diagrama de ojo. Parametros usados: N es el
+      numero de muestras en el intervalo de tiempo a graficar, se recomienda que N=2*Sps,
+      donde Sps es el numero de muestras por simbolo; samp_rate es la frecuencia de
+      muestreo; Delay es el retraso que se le puede aplicar a la senal para centrar
+      mejor el ojo'
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_eye_diagram2_f
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_eye_diagram2_f
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: N
+  id: variable
+  parameters:
+    comment: ''
+    value: '64'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [688, 20]
+    rotation: 0
+    state: enabled
+- name: Spsi
+  id: variable
+  parameters:
+    comment: ''
+    value: '32'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [616, 20]
+    rotation: 0
+    state: enabled
+- name: Delay
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Delay
+    short_id: ''
+    type: intx
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [512, 12]
+    rotation: 0
+    state: enabled
+- name: E3TRadio_vec_diagrama_ojo2_f_0
+  id: E3TRadio_vec_diagrama_ojo2_f
+  parameters:
+    N: Spsi*2
+    affinity: ''
+    alias: ''
+    comment: ''
+    samp_rate: samp_rate*Spsi/Sps
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [648, 156]
+    rotation: 0
+    state: disabled
+- name: Nvol
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: N curvas
+    short_id: ''
+    type: intx
+    value: '100'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [408, 12]
+    rotation: 0
+    state: enabled
+- name: Sps
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Sps
+    short_id: ''
+    type: intx
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 12]
+    rotation: 0
+    state: enabled
+- name: blocks_delay_0
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: Delay
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [160, 260]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_to_vector_0_0
+  id: blocks_stream_to_vector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: N
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [432, 260]
+    rotation: 0
+    state: enabled
+- name: epy_block_0
+  id: epy_block
+  parameters:
+    N: '64'
+    Ncurvas: Nvol
+    _source_code: "import numpy as np\nfrom gnuradio import gr\nimport matplotlib.pyplot\
+      \ as plt\n\nclass vec_diagrama_ojo2_f(gr.sync_block):\n    \"\"\"\n    Diagrama\
+      \ de ojo. Hecho por Homero Ortega Boada. Universida Industrial de Santander.\n\
+      N: es el numero de muestras que ocupara el ojo, se recomienda que N=Sps*2, donde\
+      \ Sps es el numero de muestras por simbolo.\nsamp_rate: es la frecuencia de\
+      \ muestreo de la senal.\n    \"\"\"\n    def __init__(self, N=64, samp_rate=32000,\
+      \ Ncurvas=100):\n        gr.sync_block.__init__(self,\n            name=\"e_vec_diagrama_ojo2_f\"\
+      ,\n            in_sig=[(np.float32, N)],\n            out_sig=None)\n      \
+      \  #########################################\n        ##        Parametros \
+      \                  ##\n        #########################################\n \
+      \       self.Sps = int(N/2)\n        self.Tsamp=1./samp_rate\n        Tb=self.Sps*self.Tsamp\n\
+      \        self.t = np.linspace(-Tb,Tb, 2*self.Sps)\n        self.Ncurvas=Ncurvas\n\
+      \        self.contador=0\n\n    def work(self, input_items, output_items):\n\
+      \        in0 = input_items[0] # in0 es un 2D array (como una matrix)\n     \
+      \   s=in0[0]    # Esto traduce el 2D array a 1D array (a un vector)\n      \
+      \  #plt.plot(self.t,s)             \n        #plt.pause(self.Tsamp)\n      \
+      \  if self.contador < self.Ncurvas:\n            plt.plot(self.t,s)\n      \
+      \      plt.pause(self.Tsamp)\n            self.contador += 1\n        else:\n\
+      \            self.contador=0\n            plt.clf()\n        return len(input_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+  states:
+    _io_cache: '(''e_vec_diagrama_ojo2_f'', ''vec_diagrama_ojo2_f'', [(''N'', ''64''),
+      (''samp_rate'', ''32000''), (''Ncurvas'', ''100'')], [(''0'', ''float'', 64)],
+      [], ''\n    Diagrama de ojo. Hecho por Homero Ortega Boada. Universida Industrial
+      de Santander.\nN: es el numero de muestras que ocupara el ojo, se recomienda
+      que N=Sps*2, donde Sps es el numero de muestras por simbolo.\nsamp_rate: es
+      la frecuencia de muestreo de la senal.\n    '', [''Ncurvas''])'
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [632, 244]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 260]
+    rotation: 0
+    state: enabled
+- name: rational_resampler_xxx_0
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: Sps
+    fbw: '0'
+    interp: Spsi
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: ''
+    type: fff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 236]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: samp_rate
+    short_id: ''
+    type: eng_float
+    value: '32000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [296, 12]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_delay_0, '0', rational_resampler_xxx_0, '0']
+- [blocks_stream_to_vector_0_0, '0', E3TRadio_vec_diagrama_ojo2_f_0, '0']
+- [blocks_stream_to_vector_0_0, '0', epy_block_0, '0']
+- [pad_source_0, '0', blocks_delay_0, '0']
+- [rational_resampler_xxx_0, '0', blocks_stream_to_vector_0_0, '0']
+
+metadata:
+  file_format: 1

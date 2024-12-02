@@ -1,0 +1,26 @@
+
+id: E3TRadio_diezmador_cc
+label: diezmador_cc
+category: '[E3TRadio]'
+
+parameters:
+-   id: paso
+    label: paso
+    dtype: int
+    default: '8'
+
+inputs:
+-   domain: stream
+    dtype: complex
+
+outputs:
+-   domain: stream
+    dtype: complex
+asserts:
+- ${ paso > 0 }
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.diezmador_cc(${paso})
+
+file_format: 1

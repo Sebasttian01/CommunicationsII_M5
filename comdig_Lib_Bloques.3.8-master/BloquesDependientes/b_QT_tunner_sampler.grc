@@ -1,0 +1,676 @@
+options:
+  parameters:
+    author: Homero Ortega Boada. Universidad Industrial de Santander
+    catch_exceptions: 'True'
+    category: '''[en_prueba]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: 'Permite sintonizar manualmente el canal al punto de entregar la
+      senal correctamente muestreada. Parametros usados: samp_rate (Hz) la frecuencia
+      de muestreo de la senal entrante; sps (muestras) numero de muestras por simbolo
+      en la senal entrante; Delay Tuning (muestras) el retrazo que se introduce a
+      la senal antes de aplicarle el muestreo; PhiTuning (Rad) angulo usado para corregir
+      la desviacion de angulo producida por el canal; F_Tuning (Hz) correccion de
+      la desviacion de frecuencias; Nscope (muestras) numero de bits a mostrar en
+      el scope'
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb_qt_gui
+    hier_block_src_path: '.:'
+    id: b_QT_tunner_sampler
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: run_stop
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_QT_tunner_sampler
+    window_size: 2048,1200
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: DelayTuning
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: pestana@3:0,0,1,1
+    label: 'Retardo antes de muestreo '
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: int
+    start: '0'
+    step: '1'
+    stop: sps-1
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1016, 179]
+    rotation: 0
+    state: enabled
+- name: F_Tuning
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: pestana@3:1,0,1,1
+    label: Rx Frequency tunining
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: 10./1000.
+    stop: '10.'
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1168, 315]
+    rotation: 0
+    state: enabled
+- name: Foffset
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 0,2,1,1
+    label: Offset de frec.
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '0.01'
+    stop: '5'
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1680, 67]
+    rotation: 0
+    state: enabled
+- name: Kruido
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 0,1,1,1
+    label: Nivel del Ruido
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '0.005'
+    stop: '1'
+    value: '0.01'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1552, 67]
+    rotation: 0
+    state: enabled
+- name: Nscope_span
+  id: variable
+  parameters:
+    comment: ''
+    value: '24'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1232, 211]
+    rotation: 0
+    state: enabled
+- name: PhiTuning
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: pestana@3:0,1,1,1
+    label: Rx angle tunining
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: (numpy.pi)*2/200
+    stop: (numpy.pi)*2
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1016, 315]
+    rotation: 0
+    state: enabled
+- name: phi
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 0,3,1,1
+    label: Angulo
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: -numpy.pi
+    step: numpy.pi/100.
+    stop: numpy.pi
+    value: '0.'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1704, 195]
+    rotation: 0
+    state: enabled
+- name: run_stop
+  id: variable_qtgui_check_box
+  parameters:
+    comment: ''
+    'false': 'False'
+    gui_hint: 0,0,1,1
+    label: Inicial/Parar
+    'true': 'True'
+    type: int
+    value: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1552, 195]
+    rotation: 180
+    state: enabled
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '2000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [400, 3]
+    rotation: 0
+    state: enabled
+- name: sps
+  id: variable
+  parameters:
+    comment: ''
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [336, 3]
+    rotation: 0
+    state: enabled
+- name: b_sampler_cc_0
+  id: b_sampler_cc
+  parameters:
+    DelayDiez: '0'
+    Sps: sps
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [344, 185]
+    rotation: 0
+    state: enabled
+- name: b_tunner_0
+  id: b_tunner
+  parameters:
+    Ganancia_ajuste_dB: '0'
+    NDelay: DelayTuning
+    affinity: ''
+    alias: ''
+    comment: ''
+    fdesv: -F_Tuning
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    phi: PhiTuning
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [176, 171]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import math
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1800, 11]
+    rotation: 0
+    state: enabled
+- name: import_0_1
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import cmath
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1888, 11]
+    rotation: 0
+    state: enabled
+- name: import_0_1_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import numpy
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1696, 11]
+    rotation: 0
+    state: enabled
+- name: import_0_1_1
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import random
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1600, 11]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [848, 211]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [32, 195]
+    rotation: 0
+    state: enabled
+- name: pestana
+  id: qtgui_tab_widget
+  parameters:
+    alias: ''
+    comment: ''
+    gui_hint: 3,0,1,4
+    label0: Tiempo
+    label1: Constelacion
+    label10: Tab 10
+    label11: Tab 11
+    label12: Tab 12
+    label13: Tab 13
+    label14: Tab 14
+    label15: Tab 15
+    label16: Tab 16
+    label17: Tab 17
+    label18: Tab 18
+    label19: Tab 19
+    label2: Espectro
+    label3: Tunner
+    label4: Tab 4
+    label5: Tab 5
+    label6: Tab 6
+    label7: Tab 7
+    label8: Tab 8
+    label9: Tab 9
+    num_tabs: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1552, 315]
+    rotation: 0
+    state: enabled
+- name: qtgui_const_sink_x_0_0_0
+  id: qtgui_const_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: '"blue"'
+    color10: '"red"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"red"'
+    color5: '"red"'
+    color6: '"red"'
+    color7: '"red"'
+    color8: '"red"'
+    color9: '"red"'
+    comment: ''
+    grid: 'False'
+    gui_hint: pestana@3:2,0,1,1
+    label1: Rx
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    marker1: '0'
+    marker10: '0'
+    marker2: '0'
+    marker3: '0'
+    marker4: '0'
+    marker5: '0'
+    marker6: '0'
+    marker7: '0'
+    marker8: '0'
+    marker9: '0'
+    name: '"Rx canal"'
+    nconnections: '2'
+    size: '1024'
+    style1: '0'
+    style10: '0'
+    style2: '0'
+    style3: '0'
+    style4: '0'
+    style5: '0'
+    style6: '0'
+    style7: '0'
+    style8: '0'
+    style9: '0'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: complex
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    xmax: '0.2'
+    xmin: '-0.2'
+    ymax: '0.2'
+    ymin: '-0.2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1032, 451]
+    rotation: 0
+    state: enabled
+- name: qtgui_const_sink_x_0_0_0_0
+  id: qtgui_const_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: '"blue"'
+    color10: '"red"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"red"'
+    color5: '"red"'
+    color6: '"red"'
+    color7: '"red"'
+    color8: '"red"'
+    color9: '"red"'
+    comment: ''
+    grid: 'False'
+    gui_hint: pestana@3:2,1,1,1
+    label1: Rx
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    marker1: '0'
+    marker10: '0'
+    marker2: '0'
+    marker3: '0'
+    marker4: '0'
+    marker5: '0'
+    marker6: '0'
+    marker7: '0'
+    marker8: '0'
+    marker9: '0'
+    name: '"Rx sampled"'
+    nconnections: '1'
+    size: '1024'
+    style1: '0'
+    style10: '0'
+    style2: '0'
+    style3: '0'
+    style4: '0'
+    style5: '0'
+    style6: '0'
+    style7: '0'
+    style8: '0'
+    style9: '0'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: complex
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    xmax: '0.2'
+    xmin: '-0.2'
+    ymax: '0.2'
+    ymin: '-0.2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1032, 523]
+    rotation: 0
+    state: enabled
+- name: qtgui_time_sink_x_1_1_0_0_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'False'
+    entags: 'True'
+    grid: 'False'
+    gui_hint: pestana@3:3,0,1,2
+    label1: Rx I
+    label10: ''
+    label2: Rx Q
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: '"Rx Sample Tunning"'
+    nconnections: '2'
+    size: Nscope_span*sps
+    srate: samp_rate
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: complex
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Amplitude
+    ymax: '0.5'
+    ymin: '-0.5'
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1040, 595]
+    rotation: 0
+    state: enabled
+
+connections:
+- [b_sampler_cc_0, '0', qtgui_const_sink_x_0_0_0, '1']
+- [b_sampler_cc_0, '0', qtgui_time_sink_x_1_1_0_0_0, '1']
+- [b_sampler_cc_0, '1', pad_sink_0, '0']
+- [b_sampler_cc_0, '1', qtgui_const_sink_x_0_0_0_0, '0']
+- [b_tunner_0, '0', b_sampler_cc_0, '0']
+- [b_tunner_0, '0', qtgui_time_sink_x_1_1_0_0_0, '0']
+- [pad_source_0, '0', b_tunner_0, '0']
+- [pad_source_0, '0', qtgui_const_sink_x_0_0_0, '0']
+
+metadata:
+  file_format: 1

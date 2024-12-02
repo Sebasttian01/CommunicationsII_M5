@@ -1,0 +1,546 @@
+options:
+  parameters:
+    author: ''
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGis Universidad Industrial de Santander
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_fdm_cc
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_fdm_cc
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: AnchoCanales
+  id: variable
+  parameters:
+    comment: ''
+    value: samp_rate/(2*N)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [608, 11]
+    rotation: 0
+    state: enabled
+- name: Bps
+  id: variable
+  parameters:
+    comment: ''
+    value: int(math.log(len(Constelacion),2))
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [288, 11]
+    rotation: 0
+    state: enabled
+- name: Constelacion
+  id: variable
+  parameters:
+    comment: ''
+    value: '[1+.0j,-1+.0j, .0+1j,0 -1j ]'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [176, 11]
+    rotation: 0
+    state: enabled
+- name: Fguarda
+  id: variable
+  parameters:
+    comment: ''
+    value: AnchoCanales
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [528, 11]
+    rotation: 0
+    state: enabled
+- name: N
+  id: variable
+  parameters:
+    comment: ''
+    value: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [456, 11]
+    rotation: 0
+    state: enabled
+- name: NLobulos
+  id: variable
+  parameters:
+    comment: ''
+    value: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [720, 11]
+    rotation: 0
+    state: enabled
+- name: Rb
+  id: variable
+  parameters:
+    comment: ''
+    value: Rs_user*Bps
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [976, 11]
+    rotation: 0
+    state: enabled
+- name: Rs
+  id: variable
+  parameters:
+    comment: ''
+    value: AnchoCanales/NLobulos
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [808, 11]
+    rotation: 0
+    state: enabled
+- name: Rs_user
+  id: variable
+  parameters:
+    comment: ''
+    value: Rs*N
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [896, 11]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: 200e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [360, 11]
+    rotation: 0
+    state: enabled
+- name: sobremuestreo
+  id: variable
+  parameters:
+    comment: ''
+    value: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1056, 11]
+    rotation: 0
+    state: enabled
+- name: E3TRadio_zero_order_hold2_cc_0_0
+  id: E3TRadio_zero_order_hold2_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: int(samp_rate/Rs)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [240, 243]
+    rotation: 0
+    state: enabled
+- name: E3TRadio_zero_order_hold2_cc_0_0_0
+  id: E3TRadio_zero_order_hold2_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: int(samp_rate/Rs)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [232, 387]
+    rotation: 0
+    state: enabled
+- name: E3TRadio_zero_order_hold2_cc_0_0_0_0
+  id: E3TRadio_zero_order_hold2_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: int(samp_rate/Rs)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [240, 531]
+    rotation: 0
+    state: enabled
+- name: E3TRadio_zero_order_hold2_cc_0_0_0_1
+  id: E3TRadio_zero_order_hold2_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: int(samp_rate/Rs)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [240, 683]
+    rotation: 0
+    state: enabled
+- name: b_signal_mult_0
+  id: b_signal_mult
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    f: 1*AnchoCanales
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 363]
+    rotation: 0
+    state: enabled
+- name: b_signal_mult_0_0
+  id: b_signal_mult
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    f: 3*AnchoCanales
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 427]
+    rotation: 0
+    state: enabled
+- name: b_signal_mult_0_0_0
+  id: b_signal_mult
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    f: 7*AnchoCanales
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 555]
+    rotation: 0
+    state: enabled
+- name: b_signal_mult_0_1
+  id: b_signal_mult
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    f: 5*AnchoCanales
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 491]
+    rotation: 0
+    state: enabled
+- name: blocks_add_xx_0
+  id: blocks_add_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '4'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [776, 425]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import math
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1176, 19]
+    rotation: 0
+    state: enabled
+- name: low_pass_filter_0
+  id: low_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: AnchoCanales/2.
+    decim: '1'
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    type: fir_filter_ccf
+    width: AnchoCanales/8.
+    win: window.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [352, 195]
+    rotation: 0
+    state: enabled
+- name: low_pass_filter_0_0
+  id: low_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: AnchoCanales/2.
+    decim: '1'
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    type: fir_filter_ccf
+    width: AnchoCanales/8.
+    win: window.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [352, 339]
+    rotation: 0
+    state: enabled
+- name: low_pass_filter_0_0_0
+  id: low_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: AnchoCanales/2.
+    decim: '1'
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    type: fir_filter_ccf
+    width: AnchoCanales/8.
+    win: window.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [352, 635]
+    rotation: 0
+    state: enabled
+- name: low_pass_filter_0_1
+  id: low_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: AnchoCanales/2.
+    decim: '1'
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    type: fir_filter_ccf
+    width: AnchoCanales/8.
+    win: window.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [352, 483]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [872, 467]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [112, 243]
+    rotation: 0
+    state: enabled
+- name: pad_source_0_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [112, 387]
+    rotation: 0
+    state: enabled
+- name: pad_source_0_0_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [112, 683]
+    rotation: 0
+    state: enabled
+- name: pad_source_0_1
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [112, 531]
+    rotation: 0
+    state: enabled
+
+connections:
+- [E3TRadio_zero_order_hold2_cc_0_0, '0', low_pass_filter_0, '0']
+- [E3TRadio_zero_order_hold2_cc_0_0_0, '0', low_pass_filter_0_0, '0']
+- [E3TRadio_zero_order_hold2_cc_0_0_0_0, '0', low_pass_filter_0_1, '0']
+- [E3TRadio_zero_order_hold2_cc_0_0_0_1, '0', low_pass_filter_0_0_0, '0']
+- [b_signal_mult_0, '0', blocks_add_xx_0, '0']
+- [b_signal_mult_0_0, '0', blocks_add_xx_0, '1']
+- [b_signal_mult_0_0_0, '0', blocks_add_xx_0, '3']
+- [b_signal_mult_0_1, '0', blocks_add_xx_0, '2']
+- [blocks_add_xx_0, '0', pad_sink_0, '0']
+- [low_pass_filter_0, '0', b_signal_mult_0, '0']
+- [low_pass_filter_0_0, '0', b_signal_mult_0_0, '0']
+- [low_pass_filter_0_0_0, '0', b_signal_mult_0_0_0, '0']
+- [low_pass_filter_0_1, '0', b_signal_mult_0_1, '0']
+- [pad_source_0, '0', E3TRadio_zero_order_hold2_cc_0_0, '0']
+- [pad_source_0_0, '0', E3TRadio_zero_order_hold2_cc_0_0_0, '0']
+- [pad_source_0_0_0, '0', E3TRadio_zero_order_hold2_cc_0_0_0_1, '0']
+- [pad_source_0_1, '0', E3TRadio_zero_order_hold2_cc_0_0_0_0, '0']
+
+metadata:
+  file_format: 1

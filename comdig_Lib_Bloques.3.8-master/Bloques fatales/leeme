@@ -1,0 +1,1 @@
+Los bloque de esta carpeta no se pueden instalar en GNURadio 3.8.1 ya que usan un elememto que ya no existe. Pero la idea es que más adelante, crearemos una solucion que reemplace ese elemento para solucionar el problema.

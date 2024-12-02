@@ -1,0 +1,51 @@
+########################################################
+##  Esta parte se deja tal y como la entrega Modtool  ##
+########################################################
+id: E3TRadio_v_autocorr_ff
+label: v_autocorr_ff
+category: '[E3TRadio]'
+
+templates:
+  imports: import E3TRadio
+  make: E3TRadio.v_autocorr_ff(${N})
+
+#######################################################################################
+##  En esta parte se indican los detalles de las variables de config-con del bloque  ##
+##  id: es el nombre de la variable que el bloque usara                              ##
+##  label: es el texto que le indica al usuario de que se trata el valor solicitado  ##
+##  dtype: es el tipo de la variable (int, float, complex, byte, short, xxx_vector, )##
+##  value: al parecer es lo que quieres que aparezca por defecto, por ej samp_rate   ##
+#######################################################################################
+parameters:
+- id: N
+  label: N
+  dtype: int
+#  value: 256
+
+#######################################################################################
+##  En esta parte se indican los detalles de las senales del bloque                  ##
+##  label: unas letras que dan idea del nombre de la senal                           ##
+##  domain: es opcional, indica si se trata de mensajeria (message) o si es una      ##
+##          cadena de datos (stream). Por defecto es stream                          ##
+##  dtype: (float, complex, byte, short, xxx_vector, ...)                            ##
+##  vlen: Si la señal es vectorial de N muestras se escribe ${ N } en otros casos se ##
+##        vlen se puede omitir                                                       ##
+#######################################################################################
+inputs:
+- label: x
+  domain: stream
+  dtype: float
+  vlen: ${ N } 
+
+outputs:
+- label: y
+  domain: stream
+  dtype: float
+  vlen: ${ N }
+
+#######################################################################################
+## Lo de abajo no debe ser modificado, se refiere a la version de yml sobre la cual  ##
+## hemos trabajado. Gracias a ello, cuando surjan varias otras versiones, el sistema ##
+## sabra darle a la nuestra el trato adecuado                                        ##
+#######################################################################################
+file_format: 1

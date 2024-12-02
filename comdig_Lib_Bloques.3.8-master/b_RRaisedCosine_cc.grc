@@ -1,0 +1,287 @@
+options:
+  parameters:
+    author: 'Done by: Homero Ortega Boada. Universidad Industrial de Santander'
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: 'It is the Root Raised Cosine Filter. Usually gnuradio comes with
+      the square root variant, but this is the right one. Parameters: rolloff - is
+      the rolloff factor or Exccess Bandwidth;  sps - the number of samples per simbol
+      the filter will produce; ntaps- the number of components in the impulse response.
+      Note that if you use two such blocks one in the transmiter (Tx) and one in the
+      receiver (Rx) to obtain a matched filter, equivalent to a RC Filter that satisfies
+      the Nyquist ISI Criterion, the configuration have to be this way: At the Tx
+      give: interpolation=samples per symbol, ntaps= samples per symbol * number of
+      taps; at the receiver give:  intepolation=1; ntaps=number of taps'
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_RRaised_cosine_cc
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_RRaised_cosine_cc
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, -5]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: Amp
+  id: variable
+  parameters:
+    comment: ''
+    value: numpy.amax(rrc_taps)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [632, 3]
+    rotation: 0
+    state: enabled
+- name: rrc_taps
+  id: variable
+  parameters:
+    comment: ''
+    value: firdes.root_raised_cosine(1, sps, 1, rolloff, ntaps)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [456, -5]
+    rotation: 0
+    state: enabled
+- name: Ganancia
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Ganancia
+    short_id: ''
+    type: eng_float
+    value: '1.'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1008, 187]
+    rotation: 0
+    state: enabled
+- name: Interpolation
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Interpolation
+    short_id: ''
+    type: intx
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1008, 91]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: Ganancia
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [216, 187]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_source_x_0_0
+  id: blocks_vector_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    repeat: 'True'
+    tags: '[]'
+    type: complex
+    vector: rrc_taps
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [448, 259]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import numpy
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1104, 3]
+    rotation: 0
+    state: enabled
+- name: interp_fir_filter_xxx_0_0
+  id: interp_fir_filter_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    interp: Interpolation
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_delay: '0'
+    taps: rrc_taps/Amp
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [384, 179]
+    rotation: 0
+    state: enabled
+- name: ntaps
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: ''
+    short_id: ''
+    type: intx
+    value: '16'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [368, -5]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [776, 187]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0_0_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: h[n]
+    num_streams: '1'
+    optional: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [608, 275]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [80, 187]
+    rotation: 0
+    state: enabled
+- name: rolloff
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: ''
+    short_id: ''
+    type: eng_float
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [288, -5]
+    rotation: 0
+    state: enabled
+- name: sps
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: ''
+    short_id: ''
+    type: intx
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [192, -5]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_multiply_const_vxx_0, '0', interp_fir_filter_xxx_0_0, '0']
+- [blocks_vector_source_x_0_0, '0', pad_sink_0_0_0, '0']
+- [interp_fir_filter_xxx_0_0, '0', pad_sink_0, '0']
+- [pad_source_0, '0', blocks_multiply_const_vxx_0, '0']
+
+metadata:
+  file_format: 1

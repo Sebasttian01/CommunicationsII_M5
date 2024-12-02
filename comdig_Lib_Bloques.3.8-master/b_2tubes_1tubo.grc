@@ -1,0 +1,199 @@
+options:
+  parameters:
+    author: Homero Ortega Boada
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: Usado para acomodar dos chorros de datos de diferentes velocidades
+      (dos tubos) en un solo gran tubo. N1 es el numero de espacios que ocupa en el
+      gran tubo, el primer tubo. N2 es para el segunto tubo
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_2tubes_1tube
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_2tubes_1tube
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [0, -2]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: N1
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: ''
+    short_id: ''
+    type: ''
+    value: '5'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [288, 5]
+    rotation: 0
+    state: enabled
+- name: N2
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: ''
+    short_id: ''
+    type: ''
+    value: '3'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [376, 5]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_to_streams_0
+  id: blocks_stream_to_streams
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: N1
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [344, 121]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_to_streams_1
+  id: blocks_stream_to_streams
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: N2
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [344, 281]
+    rotation: 0
+    state: enabled
+- name: blocks_streams_to_stream_0
+  id: blocks_streams_to_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: N1+N2
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [528, 121]
+    rotation: 0
+    state: enabled
+- name: pad_sink_1
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [712, 228]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in0
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 180]
+    rotation: 0
+    state: enabled
+- name: pad_source_0_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in1
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 308]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_stream_to_streams_0, '0', blocks_streams_to_stream_0, '0']
+- [blocks_stream_to_streams_0, '1', blocks_streams_to_stream_0, '1']
+- [blocks_stream_to_streams_0, '2', blocks_streams_to_stream_0, '2']
+- [blocks_stream_to_streams_0, '3', blocks_streams_to_stream_0, '3']
+- [blocks_stream_to_streams_0, '4', blocks_streams_to_stream_0, '4']
+- [blocks_stream_to_streams_1, '0', blocks_streams_to_stream_0, '5']
+- [blocks_stream_to_streams_1, '1', blocks_streams_to_stream_0, '6']
+- [blocks_stream_to_streams_1, '2', blocks_streams_to_stream_0, '7']
+- [blocks_streams_to_stream_0, '0', pad_sink_1, '0']
+- [pad_source_0, '0', blocks_stream_to_streams_0, '0']
+- [pad_source_0_0, '0', blocks_stream_to_streams_1, '0']
+
+metadata:
+  file_format: 1

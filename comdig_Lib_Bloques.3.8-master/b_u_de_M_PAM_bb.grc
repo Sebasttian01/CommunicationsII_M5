@@ -1,0 +1,189 @@
+options:
+  parameters:
+    author: Homero Ortega Boada. Universidad Industrial de Santander
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGIS Universidad Industrial de Santander
+    description: 'Es el demodulador que hace juego con el b_u_M_PAM_bb. La salida
+      es una senal binaria (PCM) pero de tipo Byte (osea, unos y ceros en formato
+      Byte). Parametros usados: M- es el orden de la modulacion M-PAM.'
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_u_de_M_PAM_bb
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_u_de_M_PAM_bb
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: Bps
+  id: variable
+  parameters:
+    comment: ''
+    value: int(math.log(M,2))
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [272, 3]
+    rotation: 0
+    state: enabled
+- name: Nbps
+  id: variable
+  parameters:
+    comment: ''
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [552, 11]
+    rotation: 0
+    state: enabled
+- name: M
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: M
+    short_id: ''
+    type: intx
+    value: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [192, 3]
+    rotation: 0
+    state: enabled
+- name: SymbTune
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: SymbTune
+    short_id: ''
+    type: intx
+    value: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [440, 3]
+    rotation: 0
+    state: disabled
+- name: blocks_unpack_k_bits_bb_0
+  id: blocks_unpack_k_bits_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: Nbps
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [344, 220]
+    rotation: 0
+    state: enabled
+- name: blocks_unpacked_to_packed_xx_0_1
+  id: blocks_unpacked_to_packed_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    bits_per_chunk: Bps
+    comment: ''
+    endianness: gr.GR_MSB_FIRST
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [144, 212]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import math
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [344, 3]
+    rotation: 0
+    state: enabled
+- name: pad_sink_1
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [688, 220]
+    rotation: 0
+    state: enabled
+- name: pad_source_0_1
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 220]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_unpack_k_bits_bb_0, '0', pad_sink_1, '0']
+- [blocks_unpacked_to_packed_xx_0_1, '0', blocks_unpack_k_bits_bb_0, '0']
+- [pad_source_0_1, '0', blocks_unpacked_to_packed_xx_0_1, '0']
+
+metadata:
+  file_format: 1

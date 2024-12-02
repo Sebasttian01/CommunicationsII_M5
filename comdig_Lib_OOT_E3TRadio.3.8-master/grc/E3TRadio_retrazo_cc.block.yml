@@ -1,0 +1,28 @@
+
+id: E3TRadio_retrazo_cc
+label: retrazo_cc
+category: '[E3TRadio]'
+
+parameters:
+-   id: Rmax
+    label: Retardo_max
+    dtype: int
+-   id: R
+    label: El_retardo
+    dtype: int
+
+inputs:
+-   domain: stream
+    dtype: complex
+
+outputs:
+-   domain: stream
+    dtype: complex
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.retrazo_cc(${Rmax}, ${R})
+    callbacks:
+    - set_retardo(${R})
+
+file_format: 1

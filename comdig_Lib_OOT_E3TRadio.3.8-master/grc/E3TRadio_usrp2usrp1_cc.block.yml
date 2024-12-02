@@ -1,0 +1,52 @@
+
+id: E3TRadio_usrp2usrp1_cc
+label: usrp2usrp1_cc
+category: '[E3TRadio]'
+
+parameters:
+-   id: Katt
+    label: Atenuacion
+    dtype: float
+-   id: BW
+    label: Ancho de banda (Hz)
+    dtype: float
+-   id: Vruido
+    label: Nivel de ruido (V)
+    dtype: float
+-   id: Phoffset
+    label: Offset Fase (Radian)
+    dtype: float
+-   id: Foffset
+    label: Offset Frec. (Hz)
+    dtype: float
+-   id: Toffset
+    label: Offset tiempo (muestras)
+    dtype: float
+-   id: Am
+    label: Amplitud de entrada
+    dtype: float
+-   id: samp_rate
+    label: Frec. muestreo (Hz)
+    dtype: float
+
+inputs:
+-   domain: stream
+    dtype: complex
+
+outputs:
+-   domain: stream
+    dtype: complex
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.usrp2usrp1_cc(${samp_rate}, ${Am}, ${Toffset}, ${Foffset}, ${Vruido},
+        ${Katt}, ${Phoffset}, ${BW})
+    callbacks:
+    - set_Vruido(${Vruido})
+    - set_Toffset(${Toffset})
+    - set_Phoffset(${Phoffset})
+    - set_Foffset(${Foffset})
+    - set_Katt(${Katt})
+    - set_BW(${BW})
+
+file_format: 1

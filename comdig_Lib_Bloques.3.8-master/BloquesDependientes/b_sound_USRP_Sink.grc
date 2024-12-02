@@ -1,0 +1,324 @@
+options:
+  parameters:
+    author: Homero Ortega Boada. Universidad Industrial de Santander
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGIS Universidad Industrial de Santander
+    description: 'Es algo parecido a un USRP Source pero en vez de usar una antena,
+      usa la bocina de sonido del computador, en un rango de frecuencias entre 0 Hz
+      y  22500 Hz para explotar al maximo las capacidades de audio que usualmente
+      tienen los computadores. Las salidas que este bloque tiene son opcionales, para
+      pruebas, pues la verdadera salida es el sonido que sale por la bocina. Parametros
+      usados: samp_rate (Hz) - es la frecuencia de muestreo de la senal que recibe
+      nuestro bloque; Fc (Hz) - es la frecuencia de la portadora; Gain Value - es
+      la ganancia en dB del amplificador interno; B (Hz) ancho de banda del canal
+      pasobandas.'
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_sound_USRP_Sink
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_sound_USRP_Sink
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [0, 3]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: BW
+  id: variable
+  parameters:
+    comment: ''
+    value: B/2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [864, 11]
+    rotation: 0
+    state: enabled
+- name: Gain_volts
+  id: variable
+  parameters:
+    comment: ''
+    value: math.pow(10,Gain_dB/20.)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [936, 11]
+    rotation: 0
+    state: enabled
+- name: samp_rate_passband
+  id: variable
+  parameters:
+    comment: ''
+    value: '44100'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 11]
+    rotation: 0
+    state: enabled
+- name: B
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Bandwidth (Hz)
+    short_id: ''
+    type: ''
+    value: '2000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [728, 3]
+    rotation: 0
+    state: enabled
+- name: Fc
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Center Freq (Hz)
+    short_id: ''
+    type: ''
+    value: '4000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [456, 3]
+    rotation: 0
+    state: enabled
+- name: Gain_dB
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Gain Value (dB)
+    short_id: ''
+    type: ''
+    value: '0.'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 3]
+    rotation: 0
+    state: enabled
+- name: audio_sink_0
+  id: audio_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    device_name: ''
+    num_inputs: '1'
+    ok_to_block: 'True'
+    samp_rate: samp_rate_passband
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [928, 155]
+    rotation: 0
+    state: enabled
+- name: b_upconverter_cf_0
+  id: b_upconverter_cf
+  parameters:
+    Fc: Fc
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate_passband
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 147]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: Gain_volts
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [752, 155]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import math
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1032, 3]
+    rotation: 0
+    state: enabled
+- name: low_pass_filter_0
+  id: low_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: BW
+    decim: '1'
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate_passband
+    type: fir_filter_ccf
+    width: BW/16.
+    win: window.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [352, 107]
+    rotation: 0
+    state: enabled
+- name: pad_sink_1
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: pasobandas
+    num_streams: '1'
+    optional: 'True'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [928, 227]
+    rotation: 0
+    state: enabled
+- name: pad_sink_1_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: bandabase a 44100 muestras por simbolo
+    num_streams: '1'
+    optional: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [632, 259]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [0, 155]
+    rotation: 0
+    state: enabled
+- name: rational_resampler_xxx_0
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: samp_rate
+    fbw: '0'
+    interp: samp_rate_passband
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: ''
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [136, 131]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: samp_rate (Hz)
+    short_id: ''
+    type: ''
+    value: '2000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [176, 3]
+    rotation: 0
+    state: enabled
+
+connections:
+- [b_upconverter_cf_0, '0', blocks_multiply_const_vxx_0, '0']
+- [blocks_multiply_const_vxx_0, '0', audio_sink_0, '0']
+- [blocks_multiply_const_vxx_0, '0', pad_sink_1, '0']
+- [low_pass_filter_0, '0', b_upconverter_cf_0, '0']
+- [low_pass_filter_0, '0', pad_sink_1_0, '0']
+- [pad_source_0, '0', rational_resampler_xxx_0, '0']
+- [rational_resampler_xxx_0, '0', low_pass_filter_0, '0']
+
+metadata:
+  file_format: 1

@@ -1,0 +1,25 @@
+
+id: E3TRadio_amplificador_ff
+label: amplificador_ff
+category: '[E3TRadio]'
+
+parameters:
+-   id: Kamp
+    label: Coefiente de amplificacion
+    dtype: float
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: stream
+    dtype: float
+
+templates:
+    imports: import E3TRadio
+    make: E3TRadio.amplificador_ff(${Kamp})
+    callbacks:
+    - set_ka(${Kamp})
+
+file_format: 1

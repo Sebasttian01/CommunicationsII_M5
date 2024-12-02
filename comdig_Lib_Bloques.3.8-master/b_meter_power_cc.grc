@@ -1,0 +1,194 @@
+options:
+  parameters:
+    author: Homero Ortega
+    catch_exceptions: 'True'
+    category: '''[comdiguis]'''
+    cmake_opt: ''
+    comment: ''
+    copyright: Grupo RadioGIS Universidad Industrial de Santander
+    description: 'Mide potencia promedio en watts y en dB a senales complejas. Tambien
+      el Valor RMS. G_prom: es la ganancia para el filtro promediador, entre mas pequeno
+      sea este valor, el promediado es de mas largo plazo y por tanto, el valor es
+      mas estable'
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: b_meter_power_cc
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: b_meter_power_cc
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: G_prom
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: G_prom
+    short_id: ''
+    type: ''
+    value: '0.0001'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [208, 21]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_xx_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [496, 305]
+    rotation: 0
+    state: enabled
+- name: blocks_nlog10_ff_0
+  id: blocks_nlog10_ff
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: '20'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [560, 229]
+    rotation: 0
+    state: enabled
+- name: blocks_rms_xx_0
+  id: blocks_rms_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: G_prom
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 236]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: Potencia
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [672, 316]
+    rotation: 0
+    state: enabled
+- name: pad_sink_2
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: Potencia_dB
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [664, 236]
+    rotation: 0
+    state: enabled
+- name: pad_sink_3
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: Valor_RMS
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [664, 172]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [160, 236]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_multiply_xx_0, '0', pad_sink_0, '0']
+- [blocks_nlog10_ff_0, '0', pad_sink_2, '0']
+- [blocks_rms_xx_0, '0', blocks_multiply_xx_0, '0']
+- [blocks_rms_xx_0, '0', blocks_multiply_xx_0, '1']
+- [blocks_rms_xx_0, '0', blocks_nlog10_ff_0, '0']
+- [blocks_rms_xx_0, '0', pad_sink_3, '0']
+- [pad_source_0, '0', blocks_rms_xx_0, '0']
+
+metadata:
+  file_format: 1
