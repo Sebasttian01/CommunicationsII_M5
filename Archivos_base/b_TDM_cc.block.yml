@@ -1,0 +1,56 @@
+id: b_TDM_cc
+label: b_TDM_cc
+category: '[comdiguis]'
+
+parameters:
+-   id: Nspcell
+    label: simb per t-s
+    dtype: raw
+    default: '8'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+-   label: in
+    dtype: complex
+    vlen: 1
+-   label: in
+    dtype: complex
+    vlen: 1
+-   label: in
+    dtype: complex
+    vlen: 1
+-   label: in
+    dtype: complex
+    vlen: 1
+-   label: in
+    dtype: complex
+    vlen: 1
+-   label: in
+    dtype: complex
+    vlen: 1
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_TDM_cc import b_TDM_cc  # grc-generated hier_block'
+    make: "b_TDM_cc(\n    Nspcell=${ Nspcell },\n)"
+    callbacks:
+    - set_Nspcell(${ Nspcell })
+
+documentation: 'Homero Ortega
+
+    multiplexa hasta N=8 usuarios/n con Nspcell muestras por usuario
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_TDM_cc.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_tdm_cc.grc
+
+file_format: 1

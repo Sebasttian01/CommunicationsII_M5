@@ -1,0 +1,87 @@
+id: b_USRP_2_USRP
+label: b_USRP_2_USRP
+category: '[comdiguis]'
+
+parameters:
+-   id: B
+    label: Bandwidth (Hz)
+    dtype: real
+    default: '130000'
+    hide: none
+-   id: Fc
+    label: Center Freq (Hz)
+    dtype: real
+    default: '200000000'
+    hide: none
+-   id: Foffset
+    label: Foffset
+    dtype: real
+    default: '0.'
+    hide: none
+-   id: Katt
+    label: Katt
+    dtype: real
+    default: '10.'
+    hide: none
+-   id: Phoffset
+    label: Phoffset
+    dtype: real
+    default: (numpy.pi)*2*random.random()
+    hide: none
+-   id: Toffset
+    label: Toffset
+    dtype: int
+    default: '5'
+    hide: none
+-   id: Vruido
+    label: Vruido
+    dtype: real
+    default: '0.'
+    hide: none
+-   id: samp_rate
+    label: samp_rate
+    dtype: real
+    default: 100e6/512
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_USRP_2_USRP import b_USRP_2_USRP  # grc-generated hier_block'
+    make: "b_USRP_2_USRP(\n    B=${ B },\n    Fc=${ Fc },\n    Foffset=${ Foffset\
+        \ },\n    Katt=${ Katt },\n    Phoffset=${ Phoffset },\n    Toffset=${ Toffset\
+        \ },\n    Vruido=${ Vruido },\n    samp_rate=${ samp_rate },\n)"
+    callbacks:
+    - set_B(${ B })
+    - set_Fc(${ Fc })
+    - set_Foffset(${ Foffset })
+    - set_Katt(${ Katt })
+    - set_Phoffset(${ Phoffset })
+    - set_Toffset(${ Toffset })
+    - set_Vruido(${ Vruido })
+    - set_samp_rate(${ samp_rate })
+
+documentation: "Homero Ortega Boada. Universidad Industrial de Santander\nEste bloque\
+    \ es el simulador de un canal inalambrico que incluye 2 USRPs, uno en la parte\
+    \ transmisora y otro en la receptora. Se puede usar cuando no se tengan USRP fisicos\
+    \ a la mano. Parametros usados: samp_rate (Hz) es la frecuencia de muestreo de\
+    \ la se\xF1al que entra y la que sale de este bloque; Center freq (Hz) frecuencia\
+    \ central del canal inalambrico; Bandwidth  (Hz) ancho de banda pasobandas del\
+    \ canal inalambrico; ; Toffset (numero de muestras de offset) permtite programar\
+    \ un tiempo de retardo de la senal en propagacion; Foffset (Hz) permite programar\
+    \ una desviacion entre la frecuencia central usada en la transmision y la usada\
+    \ en la recepcion; Phoffset (Rad) permite programar una desviacion entre el angulo\
+    \ de la portadora usada en transmision y la usada en recepcion; Vruido (volt)\
+    \ nivel del ruido blanco; Katt (lineal) nivel de atenuacion que la senal transmitida\
+    \ sufre en el proceso de propagacion.\n/home/comu2_grupoc1/.local/state/gnuradio/b_USRP_2_USRP.py"
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_USRP_2_USRP.grc
+
+file_format: 1

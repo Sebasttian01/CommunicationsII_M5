@@ -1,0 +1,35 @@
+id: b_scrambling_bf
+label: b_scrambling_bf
+category: '[comdiguis]'
+
+parameters:
+-   id: semilla
+    label: semilla
+    dtype: int
+    default: '42'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: byte
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: float
+    vlen: 1
+
+templates:
+    imports: 'from b_scrambling_bf import b_scrambling_bf  # grc-generated hier_block'
+    make: "b_scrambling_bf(\n    semilla=${ semilla },\n)"
+    callbacks:
+    - set_semilla(${ semilla })
+
+documentation: 'Homero Ortega Boada
+
+    Realiza el scrambling
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_scrambling_bf.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_scrambling_bf.grc
+
+file_format: 1

@@ -1,0 +1,54 @@
+id: b_Nyquis_Filter_cc
+label: b_Nyquist_Filter_cc
+category: '[comdiguis]'
+
+parameters:
+-   id: Ganancia
+    label: Ganancia
+    dtype: real
+    default: '1.'
+    hide: none
+-   id: Sps
+    label: Sps
+    dtype: int
+    default: '8'
+    hide: none
+-   id: ntaps
+    label: ntaps
+    dtype: int
+    default: '16'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+-   label: h[n]
+    dtype: complex
+    vlen: 1
+    optional: true
+
+templates:
+    imports: 'from b_Nyquis_Filter_cc import b_Nyquis_Filter_cc  # grc-generated hier_block'
+    make: "b_Nyquis_Filter_cc(\n    Ganancia=${ Ganancia },\n    Sps=${ Sps },\n \
+        \   ntaps=${ ntaps },\n)"
+    callbacks:
+    - set_Ganancia(${ Ganancia })
+    - set_Sps(${ Sps })
+    - set_ntaps(${ ntaps })
+
+documentation: 'Done by: Homero Ortega Boada. Universidad Industrial de Santander
+
+    It is the Nyquist Filter in a proof period. Parameters: Sps - the number of samples
+    per simbol the filter will produce; ntaps- the number of components in the impulse
+    response
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_Nyquis_Filter_cc.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_Nyquist_Filter_cc.grc
+
+file_format: 1

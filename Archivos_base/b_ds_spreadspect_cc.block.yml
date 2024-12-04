@@ -1,0 +1,54 @@
+id: b_ds_spreadspect_cc
+label: b_ds_spreadspect_cc
+category: '[comdiguis]'
+
+parameters:
+-   id: SF
+    label: SF
+    dtype: raw
+    default: '8'
+    hide: none
+-   id: codigo
+    label: codigo
+    dtype: raw
+    default: (1,1,1,1,1,1,1,1)
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+-   label: cod
+    dtype: complex
+    vlen: 1
+    optional: true
+-   label: info
+    dtype: complex
+    vlen: 1
+    optional: true
+
+templates:
+    imports: 'from b_ds_spreadspect_cc import b_ds_spreadspect_cc  # grc-generated
+        hier_block'
+    make: "b_ds_spreadspect_cc(\n    SF=${ SF },\n    codigo=${ codigo },\n)"
+    callbacks:
+    - set_SF(${ SF })
+    - set_codigo(${ codigo })
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santander
+
+    multiplica la entrada por codigo para producir una senal en Direc Sequence Spread
+    Spectrum (DSSS). El cuidado que hay que tener es que el Spreading Factor (SF)
+    se cuadra desde afuera, para la cual la senal de la informacion debe entrar con
+    un sobremuestreo SF. Los parametros usados son: codigo - es el codigo que se usara
+    para producir la senal DSSS
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_ds_spreadspect_cc.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_ds_spreadspect_cc.grc
+
+file_format: 1

@@ -1,0 +1,30 @@
+id: b_symb_source
+label: b_symb_source
+category: '[comdiguis]'
+
+parameters:
+-   id: Constelacion
+    label: Tabla de Verdad
+    dtype: raw
+    default: '[1+.0j,-1+.0j, .0+1j,0 -1j ]'
+    hide: none
+
+inputs: []
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_symb_source import b_symb_source  # grc-generated hier_block'
+    make: "b_symb_source(\n    Constelacion=${ Constelacion },\n)"
+    callbacks:
+    - set_Constelacion(${ Constelacion })
+
+documentation: 'Homero Ortega Boada
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_symb_source.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_symb_source.grc
+
+file_format: 1

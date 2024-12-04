@@ -1,0 +1,59 @@
+id: b_sound_USRP_Source
+label: b_sound_USRP_Source
+category: '[comdiguis]'
+
+parameters:
+-   id: B
+    label: Bandwidth (Hz)
+    dtype: raw
+    default: '2000'
+    hide: none
+-   id: Fc
+    label: Center Freq (Hz)
+    dtype: raw
+    default: '4000'
+    hide: none
+-   id: Gain_dB
+    label: Gain Value (dB)
+    dtype: raw
+    default: '0.'
+    hide: none
+-   id: samp_rate
+    label: samp_rate (Hz)
+    dtype: raw
+    default: '2000'
+    hide: none
+
+inputs: []
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+-   label: passband
+    dtype: float
+    vlen: 1
+
+templates:
+    imports: 'from b_sound_USRP_Source import b_sound_USRP_Source  # grc-generated
+        hier_block'
+    make: "b_sound_USRP_Source(\n    B=${ B },\n    Fc=${ Fc },\n    Gain_dB=${ Gain_dB\
+        \ },\n    samp_rate=${ samp_rate },\n)"
+    callbacks:
+    - set_B(${ B })
+    - set_Fc(${ Fc })
+    - set_Gain_dB(${ Gain_dB })
+    - set_samp_rate(${ samp_rate })
+
+documentation: "Homero Ortega Boada. Universidad Industrial de Santander\nEs algo\
+    \ parecido a un USRP Sink pero en vez de usar una antena receptora, usa el microfono\
+    \ del computador, en un rango de frecuencias que esta entre 0 Hz y  22500 Hz para\
+    \ explotar al maximo las capacidades de audio que usualmente tienen los computadores.\
+    \ Tiene dos salida, una es la senala bandabase, la otra es opci\xF3n, para pruebaas\
+    \ y corresponde a la senal pasobandas. Parametros usados: samp_rate (Hz) - es\
+    \ la frecuencia de muestreo de la senal que entrega nuestro bloque; Fc (Hz) -\
+    \ es la frecuencia de la portadora; Gain Value - es la ganancia en dB del amplificador\
+    \ interno; B (Hz) ancho de banda del canal pasobandas.\n/home/comu2_grupoc1/.local/state/gnuradio/b_sound_USRP_Source.py"
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/BloquesDependientes/b_sound_USRP_Source.grc
+
+file_format: 1

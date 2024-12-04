@@ -1,0 +1,58 @@
+id: b_v_aleatoria_scope_f
+label: QT GUI b_v_aleatoria_scope_f
+category: '[comdiguis]'
+flags: need_qt_gui
+
+parameters:
+-   id: N_frec
+    label: N_frec
+    dtype: raw
+    default: '2014'
+    hide: none
+-   id: N_time
+    label: N_time
+    dtype: raw
+    default: '2014'
+    hide: none
+-   id: V_p
+    label: Valor pico
+    dtype: raw
+    default: '2014'
+    hide: none
+-   id: samp_rate
+    label: Fmuestreo
+    dtype: raw
+    default: '22000'
+    hide: none
+-   id: gui_hint
+    label: GUI Hint
+    dtype: gui_hint
+    hide: part
+
+inputs:
+-   label: In
+    dtype: float
+    vlen: 1
+
+outputs: []
+
+templates:
+    imports: 'from b_v_aleatoria_scope_f import b_v_aleatoria_scope_f  # grc-generated
+        hier_block'
+    make: "b_v_aleatoria_scope_f(\n    N_frec=${ N_frec },\n    N_time=${ N_time },\n\
+        \    V_p=${ V_p },\n    samp_rate=${ samp_rate },\n)\n<% win = 'self.%s'%id\
+        \ %>\n${ gui_hint() % win }"
+    callbacks:
+    - set_N_frec(${ N_frec })
+    - set_N_time(${ N_time })
+    - set_V_p(${ V_p })
+    - set_samp_rate(${ samp_rate })
+
+documentation: "Homero Ortega\nSome parameters of a random variable can visualized,\
+    \ like: the mean, the RMS value, the mean power, the PSD, the time signal. Parameters\
+    \ used: samp_rate - the sample rate of the signal; N_time - the number of time\
+    \ samples to be shown; N_frec- the number of frequency pointss to be shown \n\
+    /home/comu2_grupoc1/.local/state/gnuradio/b_v_aleatoria_scope_f.py"
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/BloquesDependientes/b_QT_v_aleatoria_scope.grc
+
+file_format: 1

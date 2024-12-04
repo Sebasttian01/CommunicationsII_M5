@@ -1,0 +1,60 @@
+id: b_USRP_Sourc_simul_f
+label: b_USRP_Sourc_simul_f
+category: '[comdiguis]'
+
+parameters:
+-   id: Bandwidth
+    label: Bandwidth (Hz)
+    dtype: raw
+    default: '0'
+    hide: none
+-   id: Center_Freq
+    label: Center_Freq
+    dtype: raw
+    default: '50000000'
+    hide: none
+-   id: Gain_Value_dB
+    label: Gain_Value (dB)
+    dtype: raw
+    default: '0'
+    hide: none
+-   id: samp_rate
+    label: samp_rate
+    dtype: raw
+    default: '200000'
+    hide: none
+-   id: samp_rate_rf
+    label: samp_rate_rf
+    dtype: int
+    default: 50000000+200000
+    hide: none
+
+inputs:
+-   label: in
+    dtype: float
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_USRP_Sourc_simul_f import b_USRP_Sourc_simul_f  # grc-generated
+        hier_block'
+    make: "b_USRP_Sourc_simul_f(\n    Bandwidth=${ Bandwidth },\n    Center_Freq=${\
+        \ Center_Freq },\n    Gain_Value_dB=${ Gain_Value_dB },\n    samp_rate=${\
+        \ samp_rate },\n    samp_rate_rf=${ samp_rate_rf },\n)"
+    callbacks:
+    - set_Bandwidth(${ Bandwidth })
+    - set_Center_Freq(${ Center_Freq })
+    - set_Gain_Value_dB(${ Gain_Value_dB })
+    - set_samp_rate(${ samp_rate })
+    - set_samp_rate_rf(${ samp_rate_rf })
+
+documentation: 'Homoero Ortega Boada
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_USRP_Sourc_simul_f.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/BloquesDependientes/b_USRP_Sourc_Simul.grc
+
+file_format: 1

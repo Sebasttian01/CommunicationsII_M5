@@ -1,0 +1,32 @@
+id: b_Manual_Equalizer_cc
+label: b_Manual_Equalizer_cc
+category: '[comdiguis]'
+
+parameters:
+-   id: taps
+    label: taps
+    dtype: raw
+    default: '[1,1,1,1,1,1,1,1]'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_Manual_Equalizer_cc import b_Manual_Equalizer_cc  # grc-generated
+        hier_block'
+    make: "b_Manual_Equalizer_cc(\n    taps=${ taps },\n)"
+    callbacks:
+    - set_taps(${ taps })
+
+documentation: /home/comu2_grupoc1/.local/state/gnuradio/b_Manual_Equalizer_cc.py
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_manual_equalizer_cc.grc
+
+file_format: 1

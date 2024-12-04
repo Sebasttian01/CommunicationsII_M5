@@ -1,0 +1,33 @@
+id: b_diezmador_ff
+label: b_diezmador_ff
+category: '[comdiguis]'
+
+parameters:
+-   id: Paso
+    label: Paso
+    dtype: raw
+    default: '2'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: float
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: float
+    vlen: 1
+
+templates:
+    imports: 'from b_diezmador_ff import b_diezmador_ff  # grc-generated hier_block'
+    make: "b_diezmador_ff(\n    Paso=${ Paso },\n)"
+    callbacks:
+    - set_Paso(${ Paso })
+
+documentation: 'Homero Ortega
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_diezmador_ff.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_diezmador_ff.grc
+
+file_format: 1

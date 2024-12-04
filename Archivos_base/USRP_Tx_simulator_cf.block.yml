@@ -1,0 +1,49 @@
+id: USRP_Tx_simulator_cf
+label: USRP_Tx_simulator_cf
+category: '[comdiguis]'
+
+parameters:
+-   id: Fc
+    label: frec de portadora
+    dtype: raw
+    default: '64000'
+    hide: none
+-   id: K
+    label: DAC_resamp_factor
+    dtype: int
+    default: '8'
+    hide: none
+-   id: samp_rate
+    label: samp_rate
+    dtype: raw
+    default: '32000'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: float
+    vlen: 1
+
+templates:
+    imports: 'from USRP_Tx_simulator_cf import USRP_Tx_simulator_cf  # grc-generated
+        hier_block'
+    make: "USRP_Tx_simulator_cf(\n    Fc=${ Fc },\n    K=${ K },\n    samp_rate=${\
+        \ samp_rate },\n)"
+    callbacks:
+    - set_Fc(${ Fc })
+    - set_K(${ K })
+    - set_samp_rate(${ samp_rate })
+
+documentation: "Homero Ortega Boada\nrecibe una senal Envolvente Compleja con frec\
+    \ de muestreo samp_rate, realiza una operacion similar a DAC elevando DAC_resamp_factor\
+    \ veces la frec de muestreo y luego convierte la senal a pasobandas con una portadores\
+    \ de Fc Hertz. Si ve que la portadora no est\xE1 bien definida, eleve DAC_resamp_factor\
+    \ (para senales digitales, se aconseja DAC_resamp_factor=Sps)\n/home/comu2_grupoc1/.local/state/gnuradio/USRP_Tx_simulator_cf.py"
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/BloquesDependientes/USRP_Tx_simulator_cf.grc
+
+file_format: 1

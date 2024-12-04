@@ -1,0 +1,32 @@
+id: s
+label: s
+category: '[en_prueba]'
+
+parameters:
+-   id: I
+    label: Id
+    dtype: raw
+    default: '0'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: ''
+    vlen: 1
+
+outputs: []
+
+templates:
+    imports: 'from s import s  # grc-generated hier_block'
+    make: "s(\n    I=${ I },\n)"
+    callbacks:
+    - set_I(${ I })
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santander
+
+    Etiqueta de salida. Para no tener que hacer tantas interconexiones
+
+    /home/comu2_grupoc1/.local/state/gnuradio/s.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_s.grc
+
+file_format: 1

@@ -1,0 +1,41 @@
+id: b_noise_dB_f
+label: b_noise_dB_f
+category: '[comdiguis]'
+
+parameters:
+-   id: NodB
+    label: NodB
+    dtype: raw
+    default: '0'
+    hide: none
+-   id: samp_rate
+    label: samp_rate
+    dtype: raw
+    default: '10000'
+    hide: none
+
+inputs: []
+
+outputs:
+-   label: out
+    dtype: float
+    vlen: 1
+
+templates:
+    imports: 'from b_noise_dB_f import b_noise_dB_f  # grc-generated hier_block'
+    make: "b_noise_dB_f(\n    NodB=${ NodB },\n    samp_rate=${ samp_rate },\n)"
+    callbacks:
+    - set_NodB(${ NodB })
+    - set_samp_rate(${ samp_rate })
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santander
+
+    Genera ruido blanco gaussiano, pidiendo como entrada el valor de la PSD, osea,
+    No en dB. Parametros usados: samp_rate (Hz) es la frecuencia de muestreo de la
+    senal que genera este bloque, NoDB (dB) es la altura de la PSD que como se sabe,
+    para el ruido blanco es una constante
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_noise_dB_f.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_noise_dB_f.grc
+
+file_format: 1

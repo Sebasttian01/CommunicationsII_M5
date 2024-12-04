@@ -1,0 +1,55 @@
+id: b_QT_autocorrel
+label: QT GUI b_QT_autocorrel
+category: '[comdiguis]'
+flags: need_qt_gui
+
+parameters:
+-   id: Ensayos
+    label: N_ensayos
+    dtype: raw
+    default: '1000000'
+    hide: none
+-   id: N
+    label: N_FFT
+    dtype: raw
+    default: '1024'
+    hide: none
+-   id: Ymax
+    label: Ymax
+    dtype: raw
+    default: '1.'
+    hide: none
+-   id: samp_rate_audio
+    label: Fmuestreo
+    dtype: raw
+    default: '22000'
+    hide: none
+-   id: gui_hint
+    label: GUI Hint
+    dtype: gui_hint
+    hide: part
+
+inputs:
+-   label: in
+    dtype: float
+    vlen: 1
+
+outputs: []
+
+templates:
+    imports: 'from b_QT_autocorrel import b_QT_autocorrel  # grc-generated hier_block'
+    make: "b_QT_autocorrel(\n    Ensayos=${ Ensayos },\n    N=${ N },\n    Ymax=${\
+        \ Ymax },\n    samp_rate_audio=${ samp_rate_audio },\n)\n<% win = 'self.%s'%id\
+        \ %>\n${ gui_hint() % win }"
+    callbacks:
+    - set_Ensayos(${ Ensayos })
+    - set_N(${ N })
+    - set_Ymax(${ Ymax })
+    - set_samp_rate_audio(${ samp_rate_audio })
+
+documentation: 'Homero Ortega
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_QT_autocorrel.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_QT_autocorrel.grc
+
+file_format: 1

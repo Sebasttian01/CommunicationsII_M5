@@ -1,0 +1,34 @@
+id: b_fdm_cc
+label: b_fdm_cc
+category: '[comdiguis]'
+
+parameters: []
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+-   label: in
+    dtype: complex
+    vlen: 1
+-   label: in
+    dtype: complex
+    vlen: 1
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_fdm_cc import b_fdm_cc  # grc-generated hier_block'
+    make: b_fdm_cc()
+    callbacks: []
+
+documentation: /home/comu2_grupoc1/.local/state/gnuradio/b_fdm_cc.py
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/BloquesDependientes/b_fdm_cc.grc
+
+file_format: 1

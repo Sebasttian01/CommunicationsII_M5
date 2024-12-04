@@ -1,0 +1,120 @@
+id: b_USRP_2_USRP_v2
+label: b_USRP_2_USRP_v2
+category: '[comdiguis]'
+
+parameters:
+-   id: Ch_Loss_dB
+    label: Channel Attenuation (dB)
+    dtype: real
+    default: '10.'
+    hide: none
+-   id: Ch_NodB
+    label: Channel White Noise (No in dB)
+    dtype: int
+    default: '1000'
+    hide: none
+-   id: Ch_Phoffset
+    label: Channel Angle Offset
+    dtype: real
+    default: (numpy.pi)*2*random.random()
+    hide: none
+-   id: Ch_Toffset
+    label: Channel Toffset
+    dtype: int
+    default: '5'
+    hide: none
+-   id: Rx_B
+    label: Rx Bandwidth (Hz)
+    dtype: real
+    default: '1000'
+    hide: none
+-   id: Rx_Fc
+    label: Rx Center Freq (Hz)
+    dtype: real
+    default: '200000000'
+    hide: none
+-   id: Rx_Gain_dB
+    label: Rx_Gain_dB
+    dtype: real
+    default: '10.'
+    hide: none
+-   id: Rx__samp_rate
+    label: Rx_samp_rate (int)
+    dtype: int
+    default: '1000'
+    hide: none
+-   id: Tx_B
+    label: Tx_Bandwidth (Hz)
+    dtype: real
+    default: '1000'
+    hide: none
+-   id: Tx_Fc
+    label: Tx Center Freq(Hz)
+    dtype: real
+    default: '200000000'
+    hide: none
+-   id: Tx_Gain_dB
+    label: Tx_Gain_dB
+    dtype: real
+    default: '10.'
+    hide: none
+-   id: Tx__samp_rate
+    label: Tx_samp_rate (int)
+    dtype: int
+    default: '1000'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+-   label: Noise
+    dtype: complex
+    vlen: 1
+    optional: true
+
+templates:
+    imports: 'from b_USRP_2_USRP_v2 import b_USRP_2_USRP_v2  # grc-generated hier_block'
+    make: "b_USRP_2_USRP_v2(\n    Ch_Loss_dB=${ Ch_Loss_dB },\n    Ch_NodB=${ Ch_NodB\
+        \ },\n    Ch_Phoffset=${ Ch_Phoffset },\n    Ch_Toffset=${ Ch_Toffset },\n\
+        \    Rx_B=${ Rx_B },\n    Rx_Fc=${ Rx_Fc },\n    Rx_Gain_dB=${ Rx_Gain_dB\
+        \ },\n    Rx__samp_rate=${ Rx__samp_rate },\n    Tx_B=${ Tx_B },\n    Tx_Fc=${\
+        \ Tx_Fc },\n    Tx_Gain_dB=${ Tx_Gain_dB },\n    Tx__samp_rate=${ Tx__samp_rate\
+        \ },\n)"
+    callbacks:
+    - set_Ch_Loss_dB(${ Ch_Loss_dB })
+    - set_Ch_NodB(${ Ch_NodB })
+    - set_Ch_Phoffset(${ Ch_Phoffset })
+    - set_Ch_Toffset(${ Ch_Toffset })
+    - set_Rx_B(${ Rx_B })
+    - set_Rx_Fc(${ Rx_Fc })
+    - set_Rx_Gain_dB(${ Rx_Gain_dB })
+    - set_Rx__samp_rate(${ Rx__samp_rate })
+    - set_Tx_B(${ Tx_B })
+    - set_Tx_Fc(${ Tx_Fc })
+    - set_Tx_Gain_dB(${ Tx_Gain_dB })
+    - set_Tx__samp_rate(${ Tx__samp_rate })
+
+documentation: "Homero Ortega Boada. Universidad Industrial de Santander\nEste bloque\
+    \ es el simulador de un canal inalambrico que incluye 2 USRPs, uno en la parte\
+    \ transmisora y otro en la receptora. Se puede usar cuando no se tengan USRP fisicos\
+    \ a la mano. Parametros usados: samp_rate_Tx (Hz) es la frecuencia de muestreo\
+    \ del USRP transmisor; Bandwidth_Tx  (Hz) ancho de banda programado en el USRP\
+    \ transmisor; Center freq Tx (Hz) frecuencia central del USRP Transmisor; samp_rate_Rx,\
+    \ Bandwidth_Rx, Center freq Rx  son equivalentes a los anteriores pero para el\
+    \ USRP receptor;  Toffset (numero de muestras de offset. como la rata de muestras\
+    \ de la senal entrante puede ser diferente a la saliente, en este caso se toman\
+    \ de la senal entrante) permtite programar un tiempo de retardo de la senal en\
+    \ propagacion;  Phoffset (Rad) permite programar una desviacion entre el angulo\
+    \ de la portadora usada en transmision y la usada en recepcion; No (dB) es el\
+    \ valor No (o PSD) dado en decibeles del ruido blanco del canal; Katt (en dB de\
+    \ potencia) nivel de atenuacion que la senal transmitida sufre en el proceso de\
+    \ propagacion. \n/home/comu2_grupoc1/.local/state/gnuradio/b_USRP_2_USRP_v2.py"
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/BloquesDependientes/b_USRP_2_USRP_v2.grc
+
+file_format: 1

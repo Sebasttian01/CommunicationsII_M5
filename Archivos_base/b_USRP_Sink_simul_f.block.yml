@@ -1,0 +1,63 @@
+id: b_USRP_Sink_simul_f
+label: b_USRP_Sink_simul_f
+category: '[comdiguis]'
+
+parameters:
+-   id: Bandwidth
+    label: 'Ch0: Bandwidth (Hz)'
+    dtype: raw
+    default: '0'
+    hide: none
+-   id: Center_Freq
+    label: 'Ch0: Center_Freq'
+    dtype: raw
+    default: '50000000'
+    hide: none
+-   id: Gain_Value_dB
+    label: 'Ch0: Gain_Value (dB)'
+    dtype: raw
+    default: '0'
+    hide: none
+-   id: Samp_Rate
+    label: Samp Rate (Sps)
+    dtype: raw
+    default: '200000'
+    hide: none
+-   id: tag_name
+    label: TSB tag name
+    dtype: raw
+    default: '"    "'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: float
+    vlen: 1
+
+templates:
+    imports: 'from b_USRP_Sink_simul_f import b_USRP_Sink_simul_f  # grc-generated
+        hier_block'
+    make: "b_USRP_Sink_simul_f(\n    Bandwidth=${ Bandwidth },\n    Center_Freq=${\
+        \ Center_Freq },\n    Gain_Value_dB=${ Gain_Value_dB },\n    Samp_Rate=${\
+        \ Samp_Rate },\n    tag_name=${ tag_name },\n)"
+    callbacks:
+    - set_Bandwidth(${ Bandwidth })
+    - set_Center_Freq(${ Center_Freq })
+    - set_Gain_Value_dB(${ Gain_Value_dB })
+    - set_Samp_Rate(${ Samp_Rate })
+    - set_tag_name(${ tag_name })
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santander
+
+    Es un simulador del bloque USRP_Sink con el hardware tipo USRP 2920. Entrega una
+    senal pasobandas, con una frecuencia de muestreo que se calcula asi: samp_rate_o=(Center_Freq+samp_rate/2)*8
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_USRP_Sink_simul_f.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/BloquesDependientes/b_USRP_Sink_Simul.grc
+
+file_format: 1

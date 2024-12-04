@@ -1,0 +1,34 @@
+id: b_demod_constelacion_cb
+label: b_demod_constelacion_cb
+category: '[comdiguis]'
+
+parameters:
+-   id: Constelacion
+    label: Constelacion
+    dtype: raw
+    default: '[(1.41 + 1.41*1j),  (-1.41 + 1.41*1j), (-1.41 - 1.41*1j), (1.41 - 1.41*1j)]'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: byte
+    vlen: 1
+
+templates:
+    imports: 'from b_demod_constelacion_cb import b_demod_constelacion_cb  # grc-generated
+        hier_block'
+    make: "b_demod_constelacion_cb(\n    Constelacion=${ Constelacion },\n)"
+    callbacks:
+    - set_Constelacion(${ Constelacion })
+
+documentation: 'Grupo RadioGis Universidad Industrial de Santander
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_demod_constelacion_cb.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_demod_constelacion_cb.grc
+
+file_format: 1

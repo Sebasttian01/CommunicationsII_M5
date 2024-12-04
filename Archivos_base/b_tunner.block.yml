@@ -1,0 +1,61 @@
+id: b_tunner
+label: b_tunner
+category: '[comdiguis]'
+
+parameters:
+-   id: Ganancia_ajuste_dB
+    label: Ganancia (dB)
+    dtype: int
+    default: '0'
+    hide: none
+-   id: NDelay
+    label: NDelay
+    dtype: int
+    default: '0'
+    hide: none
+-   id: fdesv
+    label: Frec. Deviation
+    dtype: real
+    default: '0'
+    hide: none
+-   id: phi
+    label: Phase (Rad)
+    dtype: real
+    default: '0'
+    hide: none
+-   id: samp_rate
+    label: samp_rate
+    dtype: real
+    default: '1000'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_tunner import b_tunner  # grc-generated hier_block'
+    make: "b_tunner(\n    Ganancia_ajuste_dB=${ Ganancia_ajuste_dB },\n    NDelay=${\
+        \ NDelay },\n    fdesv=${ fdesv },\n    phi=${ phi },\n    samp_rate=${ samp_rate\
+        \ },\n)"
+    callbacks:
+    - set_Ganancia_ajuste_dB(${ Ganancia_ajuste_dB })
+    - set_NDelay(${ NDelay })
+    - set_fdesv(${ fdesv })
+    - set_phi(${ phi })
+    - set_samp_rate(${ samp_rate })
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santander
+
+    Permite sintonizar la fase y la frecuencia de una senal que llega por un USRP
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_tunner.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_tunner.grc
+
+file_format: 1

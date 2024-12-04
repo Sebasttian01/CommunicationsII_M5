@@ -1,0 +1,73 @@
+id: b_FFT_p
+label: b_FFT_p
+category: '[comdiguis]'
+
+parameters:
+-   id: Nu
+    label: Nu
+    dtype: raw
+    default: '8'
+    hide: none
+
+inputs:
+-   label: in0
+    dtype: complex
+    vlen: 1
+-   label: in1
+    dtype: complex
+    vlen: 1
+-   label: in2
+    dtype: complex
+    vlen: 1
+-   label: in3
+    dtype: complex
+    vlen: 1
+-   label: in4
+    dtype: complex
+    vlen: 1
+-   label: in5
+    dtype: complex
+    vlen: 1
+-   label: in6
+    dtype: complex
+    vlen: 1
+-   label: in7
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out0
+    dtype: complex
+    vlen: 1
+-   label: out1
+    dtype: complex
+    vlen: 1
+-   label: out2
+    dtype: complex
+    vlen: 1
+-   label: out3
+    dtype: complex
+    vlen: 1
+-   label: out4
+    dtype: complex
+    vlen: 1
+-   label: out5
+    dtype: complex
+    vlen: 1
+-   label: out6
+    dtype: complex
+    vlen: 1
+-   label: out7
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_FFT_p import b_FFT_p  # grc-generated hier_block'
+    make: "b_FFT_p(\n    Nu=${ Nu },\n)"
+    callbacks:
+    - set_Nu(${ Nu })
+
+documentation: /home/comu2_grupoc1/.local/state/gnuradio/b_FFT_p.py
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_FFT_p.grc
+
+file_format: 1

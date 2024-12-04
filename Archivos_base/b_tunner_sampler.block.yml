@@ -1,0 +1,76 @@
+id: b_tunner_sampler
+label: QT GUI b_tunner_sampler
+category: '[comdiguis]'
+flags: need_qt_gui
+
+parameters:
+-   id: AlphaLineasOjo
+    label: AlphaLineasOjo
+    dtype: raw
+    default: '1.0'
+    hide: none
+-   id: DelayTuningInicial
+    label: DelayTuning inicial
+    dtype: int
+    default: '0'
+    hide: none
+-   id: GrosorLineasOjo
+    label: GrosorLineasOjo
+    dtype: raw
+    default: '1'
+    hide: none
+-   id: samp_rate
+    label: samp_rate
+    dtype: real
+    default: '1000'
+    hide: none
+-   id: sps
+    label: sps
+    dtype: int
+    default: '8'
+    hide: none
+-   id: gui_hint
+    label: GUI Hint
+    dtype: gui_hint
+    hide: part
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_tunner_sampler import b_tunner_sampler  # grc-generated hier_block'
+    make: "b_tunner_sampler(\n    AlphaLineasOjo=${ AlphaLineasOjo },\n    DelayTuningInicial=${\
+        \ DelayTuningInicial },\n    GrosorLineasOjo=${ GrosorLineasOjo },\n    samp_rate=${\
+        \ samp_rate },\n    sps=${ sps },\n)\n<% win = 'self.%s'%id %>\n${ gui_hint()\
+        \ % win }"
+    callbacks:
+    - set_AlphaLineasOjo(${ AlphaLineasOjo })
+    - set_DelayTuningInicial(${ DelayTuningInicial })
+    - set_GrosorLineasOjo(${ GrosorLineasOjo })
+    - set_samp_rate(${ samp_rate })
+    - set_sps(${ sps })
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santander
+
+    Permite sintonizar manualmente el canal, usando visores y reguladores, al punto
+    de entregar la senal correctamente muestreada. Parametros usados: samp_rate (Hz)
+    la frecuencia de muestreo de la senal entrante; sps (muestras) numero de muestras
+    por simbolo en la senal entrante; Delay Tuning (muestras) el retrazo que se introduce
+    a la senal antes de aplicarle el muestreo; PhiTuning (Rad) angulo usado para corregir
+    la desviacion de angulo producida por el canal; F_Tuning (Hz) correccion de la
+    desviacion de frecuencias; Nscope (muestras) numero de bits a mostrar en el scope;
+    Nscope_spanNscope_span numero de bits a mostrar en el osciloscopio donde se selecciona
+    el muestreo; DelayTuningInicial (muestras) es un valor sugerido de arranque para
+    la sintonizacion del retardo para el muestreo
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_tunner_sampler.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/BloquesDependientes/b_tunner_sampler.grc
+
+file_format: 1

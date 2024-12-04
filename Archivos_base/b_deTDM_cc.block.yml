@@ -1,0 +1,56 @@
+id: b_deTDM_cc
+label: b_deTDM_cc
+category: '[comdiguis]'
+
+parameters:
+-   id: Nspcell
+    label: simb per t-s
+    dtype: raw
+    default: '16'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+-   label: out
+    dtype: complex
+    vlen: 1
+-   label: out
+    dtype: complex
+    vlen: 1
+-   label: out
+    dtype: complex
+    vlen: 1
+-   label: out
+    dtype: complex
+    vlen: 1
+-   label: out
+    dtype: complex
+    vlen: 1
+-   label: out
+    dtype: complex
+    vlen: 1
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_deTDM_cc import b_deTDM_cc  # grc-generated hier_block'
+    make: "b_deTDM_cc(\n    Nspcell=${ Nspcell },\n)"
+    callbacks:
+    - set_Nspcell(${ Nspcell })
+
+documentation: 'Homero Ortega
+
+    Demultiplexa una senal que ha sido multiplexada con el bloque b_TDM
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_deTDM_cc.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_detdm_cc.grc
+
+file_format: 1

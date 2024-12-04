@@ -1,0 +1,58 @@
+id: b_Raised_cosine_ff
+label: b_Raised_cosine_ff
+category: '[comdiguis]'
+
+parameters:
+-   id: ntaps
+    label: ntaps
+    dtype: int
+    default: '16'
+    hide: none
+-   id: rolloff
+    label: rolloff
+    dtype: real
+    default: '1'
+    hide: none
+-   id: samp_rate
+    label: samp_rate
+    dtype: real
+    default: '1000'
+    hide: none
+-   id: sps
+    label: sps
+    dtype: int
+    default: '8'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: float
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: float
+    vlen: 1
+
+templates:
+    imports: 'from b_Raised_cosine_ff import b_Raised_cosine_ff  # grc-generated hier_block'
+    make: "b_Raised_cosine_ff(\n    ntaps=${ ntaps },\n    rolloff=${ rolloff },\n\
+        \    samp_rate=${ samp_rate },\n    sps=${ sps },\n)"
+    callbacks:
+    - set_ntaps(${ ntaps })
+    - set_rolloff(${ rolloff })
+    - set_samp_rate(${ samp_rate })
+    - set_sps(${ sps })
+
+documentation: 'Done by: Homero Ortega Boada. Universidad Industrial de Santander.
+
+    It is the float type version of the Raised Cosine Filter. Usually gnuradio comes
+    with the square root variant, but this is the right one . You can introduce the
+    rolloff factor (rolloff), the number of samples you want the filter produce at
+    the output per each input symbol (sps) and of course, the number of components
+    to take into account in the impulse response of the filter (ntaps)
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_Raised_cosine_ff.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_RaisedCosine_ff.grc
+
+file_format: 1

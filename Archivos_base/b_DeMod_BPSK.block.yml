@@ -1,0 +1,65 @@
+id: b_DeMod_BPSK
+label: b_DeMod_BPSK
+category: '[comdiguis]'
+
+parameters:
+-   id: DelayAcc
+    label: Delay of Accum.
+    dtype: int
+    default: '2'
+    hide: none
+-   id: DelayDiez
+    label: Delay in Decimater
+    dtype: int
+    default: '4'
+    hide: none
+-   id: Sps
+    label: Samp per symb
+    dtype: int
+    default: '8'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: float
+    vlen: 1
+-   label: sampler
+    dtype: float
+    vlen: 1
+    optional: true
+-   label: Oppenh
+    dtype: float
+    vlen: 1
+    optional: true
+-   label: Acum
+    dtype: float
+    vlen: 1
+    optional: true
+-   label: ReInput
+    dtype: float
+    vlen: 1
+    optional: true
+
+templates:
+    imports: 'from b_DeMod_BPSK import b_DeMod_BPSK  # grc-generated hier_block'
+    make: "b_DeMod_BPSK(\n    DelayAcc=${ DelayAcc },\n    DelayDiez=${ DelayDiez\
+        \ },\n    Sps=${ Sps },\n)"
+    callbacks:
+    - set_DelayAcc(${ DelayAcc })
+    - set_DelayDiez(${ DelayDiez })
+    - set_Sps(${ Sps })
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santander
+
+    Permite demodular una senal BPSK de manera pedagogica para qeue los estudiantes
+    comprendan el proceso interno
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_DeMod_BPSK.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/BloquesDependientes/b_demod_BPSK.grc
+
+file_format: 1

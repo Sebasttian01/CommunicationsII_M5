@@ -1,0 +1,101 @@
+id: b_Canal_simple_cc
+label: b_Canal_simple_cc
+category: '[comdiguis]'
+
+parameters:
+-   id: Ch_Loss_dB
+    label: Ch_Loss_dB
+    dtype: real
+    default: '10.'
+    hide: none
+-   id: Ch_NodB
+    label: Ch. W.Noise (No in dB)
+    dtype: int
+    default: '1000'
+    hide: none
+-   id: Ch_Phoffset
+    label: Ch_Phoffset
+    dtype: real
+    default: '0.'
+    hide: none
+-   id: Ch_Toffset
+    label: Channel Toffset
+    dtype: int
+    default: '0'
+    hide: none
+-   id: Fluctuacion
+    label: Fluctuacion (0-100)
+    dtype: real
+    default: '10.0'
+    hide: none
+-   id: Foffset
+    label: Freq offset (Hz)
+    dtype: real
+    default: '0.'
+    hide: none
+-   id: N_fluct
+    label: T_fluct (muestras)
+    dtype: int
+    default: '1'
+    hide: none
+-   id: samp_rate
+    label: samp_rate
+    dtype: int
+    default: '1000'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+-   label: Noise
+    dtype: complex
+    vlen: 1
+    optional: true
+-   label: Fluctuacion
+    dtype: float
+    vlen: 1
+    optional: true
+
+templates:
+    imports: 'from b_Canal_simple_cc import b_Canal_simple_cc  # grc-generated hier_block'
+    make: "b_Canal_simple_cc(\n    Ch_Loss_dB=${ Ch_Loss_dB },\n    Ch_NodB=${ Ch_NodB\
+        \ },\n    Ch_Phoffset=${ Ch_Phoffset },\n    Ch_Toffset=${ Ch_Toffset },\n\
+        \    Fluctuacion=${ Fluctuacion },\n    Foffset=${ Foffset },\n    N_fluct=${\
+        \ N_fluct },\n    samp_rate=${ samp_rate },\n)"
+    callbacks:
+    - set_Ch_Loss_dB(${ Ch_Loss_dB })
+    - set_Ch_NodB(${ Ch_NodB })
+    - set_Ch_Phoffset(${ Ch_Phoffset })
+    - set_Ch_Toffset(${ Ch_Toffset })
+    - set_Fluctuacion(${ Fluctuacion })
+    - set_Foffset(${ Foffset })
+    - set_N_fluct(${ N_fluct })
+    - set_samp_rate(${ samp_rate })
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santander
+
+    Este bloque es un simulador de un canal discreto, sencillo. La simplicidad de
+    este canal esta en aplicar solo lo siguiente: ruido, desviacion de frecuencia,
+    desviacion de angulo, fluctuaciones de magnitud, perdidas de propagacion. Para
+    las fluctuaciones se supone que el umbral de amplitud de la senal que entra al
+    canal es 1, como es el caso de los USRP. Parametros usados: samp_rate_Tx (Hz)
+    es la frecuencia de muestreo del USRP transmisor;  Ch_Phoffset (Rad) permite programar
+    el angulo de la portadora usada en transmision y la usada en recepcion; Ch_Toffset
+    (muestras)  es el retardo que la senal sufre al pasar por el canal; No (dB) es
+    el valor No (o PSD) dado en decibeles del ruido blanco del canal; Ch_Loss_dB (en
+    dB de potencia) nivel de atenuacion que la senal transmitida sufre en el proceso
+    de propagacion; Fluctuation - es el porcentaje de fluctuaciones en magnitud (un
+    numero entero entre 0 y 100); Tfluct - es el periodo, dado en numero de muestras,
+    en que ocurren las fluctuaciones
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_Canal_simple_cc.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/Bloques
+    de cuidado en GNURadio 3.8.1/b_Canal_simple_cc.grc
+
+file_format: 1

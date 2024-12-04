@@ -1,0 +1,36 @@
+id: b_derivador_cc
+label: b_derivador_cc
+category: '[comdiguis]'
+
+parameters:
+-   id: F_muestreo
+    label: F_muestreo
+    dtype: real
+    default: '1000'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_derivador_cc import b_derivador_cc  # grc-generated hier_block'
+    make: "b_derivador_cc(\n    F_muestreo=${ F_muestreo },\n)"
+    callbacks:
+    - set_F_muestreo(${ F_muestreo })
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santander
+
+    saca la derivada a una senal compleja: parte real e imaginaria por aparte. a cada
+    una le sca una diferencia y la divide entre el tiempo de muestreo
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_derivador_cc.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_derivador_cc.grc
+
+file_format: 1

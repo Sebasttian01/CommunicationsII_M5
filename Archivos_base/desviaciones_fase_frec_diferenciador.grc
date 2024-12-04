@@ -505,9 +505,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [880, 628.0]
+    coordinate: [864, 736.0]
     rotation: 180
-    state: true
+    state: enabled
 - name: b_demod_constelacion_cb_0
   id: b_demod_constelacion_cb
   parameters:
@@ -521,7 +521,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [672, 628.0]
+    coordinate: [616, 736.0]
     rotation: 180
     state: true
 - name: b_diez_cc_0
@@ -1096,7 +1096,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [464, 140.0]
+    coordinate: [464, 88.0]
     rotation: 0
     state: enabled
 - name: epy_block_0
@@ -2005,7 +2005,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1008, 1188.0]
+    coordinate: [1008, 1176.0]
     rotation: 0
     state: true
 - name: qtgui_number_sink_0
@@ -2799,7 +2799,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [868.0, 496]
+    coordinate: [728.0, 480]
     rotation: 90
     state: true
 - name: virtual_sink_0_0_0_0_0

@@ -1,0 +1,56 @@
+id: b_Canal_AWGN_ff
+label: b_Canal_AWGN_ff
+category: '[comdiguis]'
+
+parameters:
+-   id: BW
+    label: BW (Hz)
+    dtype: real
+    default: '1000'
+    hide: none
+-   id: Ch_NodB
+    label: Ch. W.Noise (No in dB)
+    dtype: real
+    default: '1000'
+    hide: none
+-   id: Ch_Toffset
+    label: Channel Toffset
+    dtype: int
+    default: '0'
+    hide: none
+-   id: samp_rate
+    label: samp_rate
+    dtype: real
+    default: '1000'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: float
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: float
+    vlen: 1
+
+templates:
+    imports: 'from b_Canal_AWGN_ff import b_Canal_AWGN_ff  # grc-generated hier_block'
+    make: "b_Canal_AWGN_ff(\n    BW=${ BW },\n    Ch_NodB=${ Ch_NodB },\n    Ch_Toffset=${\
+        \ Ch_Toffset },\n    samp_rate=${ samp_rate },\n)"
+    callbacks:
+    - set_BW(${ BW })
+    - set_Ch_NodB(${ Ch_NodB })
+    - set_Ch_Toffset(${ Ch_Toffset })
+    - set_samp_rate(${ samp_rate })
+
+documentation: "Homero Ortega Boada. Universidad Industrial de Santander\nEste bloque\
+    \ es un simulador de un canal AWGN (Additive White Gaussian Noise). De modo que\
+    \ solo tiene tres caracter\xEDsticas: suma ruido blanco a la se\xF1al,  restringe\
+    \ el ancho de banda e Introduce un retardo a la se\xF1al. Parametros: Ch_NodB\
+    \ - altura de la PSD del ruido blanco bandabase; samp_rate - frecuencia de muestreo\
+    \ de la se\xF1al; BW - ancho de banda bandabase, Ch_Toffset - retardo dado en\
+    \ muestraas que el canal introduce\n/home/comu2_grupoc1/.local/state/gnuradio/b_Canal_AWGN_ff.py"
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/BloquesDependientes/b_Canal_AWGN_ff.grc
+
+file_format: 1

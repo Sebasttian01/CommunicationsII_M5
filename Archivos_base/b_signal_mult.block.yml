@@ -1,0 +1,46 @@
+id: b_signal_mult
+label: b_signal_mult
+category: '[comdiguis]'
+
+parameters:
+-   id: f
+    label: frec (Hz)
+    dtype: real
+    default: '8'
+    hide: none
+-   id: samp_rate
+    label: samp_rate
+    dtype: real
+    default: 32e3
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+-   label: carrier
+    dtype: complex
+    vlen: 1
+    optional: true
+
+templates:
+    imports: 'from b_signal_mult import b_signal_mult  # grc-generated hier_block'
+    make: "b_signal_mult(\n    f=${ f },\n    samp_rate=${ samp_rate },\n)"
+    callbacks:
+    - set_f(${ f })
+    - set_samp_rate(${ samp_rate })
+
+documentation: 'Homero Ortega
+
+    multiplica la entrada por una senoidal compleja, con los siguientes parametros:
+    samp_rate: frecuencia de muesteo en Hz; f: frecuencia de la senoidad en Hz
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_signal_mult.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_Signal_Mult.grc
+
+file_format: 1

@@ -1,0 +1,57 @@
+id: b_ClockRecSamp_m
+label: QT GUI b_ClockRecSamp_m
+category: '[comdiguis]'
+flags: need_qt_gui
+
+parameters:
+-   id: Sps
+    label: Samples per symbol
+    dtype: int
+    default: '64'
+    hide: none
+-   id: samp_rate
+    label: samp_rate
+    dtype: int
+    default: '64'
+    hide: none
+-   id: gui_hint
+    label: GUI Hint
+    dtype: gui_hint
+    hide: part
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_ClockRecSamp_m import b_ClockRecSamp_m  # grc-generated hier_block'
+    make: "b_ClockRecSamp_m(\n    Sps=${ Sps },\n    samp_rate=${ samp_rate },\n)\n\
+        <% win = 'self.%s'%id %>\n${ gui_hint() % win }"
+    callbacks:
+    - set_Sps(${ Sps })
+    - set_samp_rate(${ samp_rate })
+
+documentation: 'Done by: Homero Ortega Boada. Universidad Industrial de Santander
+
+    Es un Clock o Timming Recovery con muestreo pero manual. Recibe una senal con
+    modulacion digital basada en constelaciones, que llega sobremuestreada a la razon
+    de Sps muestras por simbolo, proveniente de un canal, usted selecciona manualmente
+    el mejor instante de muestreo con la ayuda de un diagrama de ojo que este bloque
+    le brinda, selecciona el instante en que el ojo aparece mas abierto, finalmente
+    el bloque produce la senal muestreada en el instante seleccionado por usted. En
+    este sentido, este bloque es un decimador, pues por cada Sps muestras produce
+    solo una. Entrega entonces una senal con una frecuencia de muestreo igual a la
+    rata de simbolos. Parametros usados: samp_rate (Hz) - es la rata de muestreo de
+    la senal recibida; Sps (muestras) - es el numero de muestras por simbolo que trae
+    la senal entrante
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_ClockRecSamp_m.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/BloquesDependientes/b_ClockRecSamp_m_cc.grc
+
+file_format: 1

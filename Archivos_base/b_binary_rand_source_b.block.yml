@@ -1,0 +1,27 @@
+id: b_binary_rand_source_b
+label: b_binary_rand_source_b
+category: '[comdiguis]'
+
+parameters: []
+
+inputs: []
+
+outputs:
+-   label: out
+    dtype: byte
+    vlen: 1
+
+templates:
+    imports: 'from b_binary_rand_source_b import b_binary_rand_source_b  # grc-generated
+        hier_block'
+    make: b_binary_rand_source_b()
+    callbacks: []
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santader
+
+    This is a binary random generator with output of type float
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_binary_rand_source_b.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_binary_rand_source_b.grc
+
+file_format: 1

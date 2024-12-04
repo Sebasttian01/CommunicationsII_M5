@@ -1,0 +1,126 @@
+id: b_de_cdma_cc
+label: b_de_cdma_cc
+category: '[comdiguis]'
+
+parameters:
+-   id: ChipsSysDelay
+    label: ChipsSysDelay
+    dtype: int
+    default: '0'
+    hide: none
+-   id: SF
+    label: SF
+    dtype: raw
+    default: '8'
+    hide: none
+-   id: c0
+    label: c0
+    dtype: raw
+    default: (0+0j,0+0j,0+0j)
+    hide: none
+-   id: c1
+    label: c1
+    dtype: raw
+    default: (0+0j,0+0j,0+0j)
+    hide: none
+-   id: c2
+    label: c2
+    dtype: raw
+    default: (0+0j,0+0j,0+0j)
+    hide: none
+-   id: c3
+    label: c3
+    dtype: raw
+    default: (0+0j,0+0j,0+0j)
+    hide: none
+-   id: c4
+    label: c4
+    dtype: raw
+    default: (0+0j,0+0j,0+0j)
+    hide: none
+-   id: c5
+    label: c5
+    dtype: raw
+    default: (0+0j,0+0j,0+0j)
+    hide: none
+-   id: c6
+    label: c6
+    dtype: raw
+    default: (0+0j,0+0j,0+0j)
+    hide: none
+-   id: c7
+    label: c7
+    dtype: raw
+    default: (0+0j,0+0j,0+0j)
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out0
+    dtype: complex
+    vlen: 1
+-   label: out1
+    dtype: complex
+    vlen: 1
+-   label: out2
+    dtype: complex
+    vlen: 1
+-   label: out3
+    dtype: complex
+    vlen: 1
+-   label: out4
+    dtype: complex
+    vlen: 1
+-   label: out5
+    dtype: complex
+    vlen: 1
+-   label: out6
+    dtype: complex
+    vlen: 1
+-   label: out7
+    dtype: complex
+    vlen: 1
+-   label: diez
+    dtype: complex
+    vlen: 1
+    optional: true
+-   label: acum
+    dtype: complex
+    vlen: 1
+    optional: true
+-   label: mult
+    dtype: complex
+    vlen: 1
+    optional: true
+-   label: cod
+    dtype: complex
+    vlen: 1
+    optional: true
+
+templates:
+    imports: 'from b_de_cdma_cc import b_de_cdma_cc  # grc-generated hier_block'
+    make: "b_de_cdma_cc(\n    ChipsSysDelay=${ ChipsSysDelay },\n    SF=${ SF },\n\
+        \    c0=${ c0 },\n    c1=${ c1 },\n    c2=${ c2 },\n    c3=${ c3 },\n    c4=${\
+        \ c4 },\n    c5=${ c5 },\n    c6=${ c6 },\n    c7=${ c7 },\n)"
+    callbacks:
+    - set_ChipsSysDelay(${ ChipsSysDelay })
+    - set_SF(${ SF })
+    - set_c0(${ c0 })
+    - set_c1(${ c1 })
+    - set_c2(${ c2 })
+    - set_c3(${ c3 })
+    - set_c4(${ c4 })
+    - set_c5(${ c5 })
+    - set_c6(${ c6 })
+    - set_c7(${ c7 })
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santander
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_de_cdma_cc.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/BloquesDependientes/b_de_cdma_cc.grc
+
+file_format: 1

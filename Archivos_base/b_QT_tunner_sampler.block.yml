@@ -1,0 +1,45 @@
+id: b_QT_tunner_sampler
+label: QT GUI b_QT_tunner_sampler
+category: '[en_prueba]'
+flags: need_qt_gui
+
+parameters:
+-   id: gui_hint
+    label: GUI Hint
+    dtype: gui_hint
+    hide: part
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_QT_tunner_sampler import b_QT_tunner_sampler  # grc-generated
+        hier_block'
+    make: 'b_QT_tunner_sampler()
+
+        <% win = ''self.%s''%id %>
+
+        ${ gui_hint() % win }'
+    callbacks: []
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santander
+
+    Permite sintonizar manualmente el canal al punto de entregar la senal correctamente
+    muestreada. Parametros usados: samp_rate (Hz) la frecuencia de muestreo de la
+    senal entrante; sps (muestras) numero de muestras por simbolo en la senal entrante;
+    Delay Tuning (muestras) el retrazo que se introduce a la senal antes de aplicarle
+    el muestreo; PhiTuning (Rad) angulo usado para corregir la desviacion de angulo
+    producida por el canal; F_Tuning (Hz) correccion de la desviacion de frecuencias;
+    Nscope (muestras) numero de bits a mostrar en el scope
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_QT_tunner_sampler.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/BloquesDependientes/b_QT_tunner_sampler.grc
+
+file_format: 1

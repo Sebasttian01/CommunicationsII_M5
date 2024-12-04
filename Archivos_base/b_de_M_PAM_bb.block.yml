@@ -1,0 +1,38 @@
+id: b_de_M_PAM_bb
+label: b_de_M_PAM_bb
+category: '[comdiguis]'
+
+parameters:
+-   id: M
+    label: M
+    dtype: int
+    default: '4'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: byte
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: byte
+    vlen: 1
+
+templates:
+    imports: 'from b_de_M_PAM_bb import b_de_M_PAM_bb  # grc-generated hier_block'
+    make: "b_de_M_PAM_bb(\n    M=${ M },\n)"
+    callbacks:
+    - set_M(${ M })
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santander
+
+    Es el demodulador que hace juego con el b_M_PAM_bb. La salida es una senal binaria
+    (PCM) pero de tipo Byte (osea, unos y ceros en formato Byte). Parametros usados:
+    M- es el orden de la modulacion M-PAM.
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_de_M_PAM_bb.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/Bloques
+    de cuidado en GNURadio 3.8.1/b_de_M_PAM_bb.grc
+
+file_format: 1

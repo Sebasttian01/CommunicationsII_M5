@@ -1,0 +1,90 @@
+id: b_Eye_Timing_d_c
+label: QT GUI b_Eye_Timing_d_c
+category: '[version_vieja]'
+flags: need_qt_gui
+
+parameters:
+-   id: AlphaLineas
+    label: AlphaLineas
+    dtype: raw
+    default: '0.5'
+    hide: none
+-   id: GrosorLineas
+    label: GrosorLineas
+    dtype: raw
+    default: '10'
+    hide: none
+-   id: N_eyes
+    label: Number of eyes
+    dtype: int
+    default: '2'
+    hide: none
+-   id: Retardo_Timing
+    label: Retardo_Timing
+    dtype: int
+    default: '0'
+    hide: none
+-   id: Samprate
+    label: Sample Rate
+    dtype: real
+    default: '1000'
+    hide: none
+-   id: Sps
+    label: Samples per symbol
+    dtype: int
+    default: '64'
+    hide: none
+-   id: Title
+    label: Titulo de la grafica
+    dtype: raw
+    default: '"Eye Diagramm"'
+    hide: none
+-   id: Ymax
+    label: Ymax
+    dtype: real
+    default: '2'
+    hide: none
+-   id: Ymin
+    label: Ymin
+    dtype: real
+    default: '-2'
+    hide: none
+-   id: gui_hint
+    label: GUI Hint
+    dtype: gui_hint
+    hide: part
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs: []
+
+templates:
+    imports: 'from b_Eye_Timing_d_c import b_Eye_Timing_d_c  # grc-generated hier_block'
+    make: "b_Eye_Timing_d_c(\n    AlphaLineas=${ AlphaLineas },\n    GrosorLineas=${\
+        \ GrosorLineas },\n    N_eyes=${ N_eyes },\n    Retardo_Timing=${ Retardo_Timing\
+        \ },\n    Samprate=${ Samprate },\n    Sps=${ Sps },\n    Title=${ Title },\n\
+        \    Ymax=${ Ymax },\n    Ymin=${ Ymin },\n)\n<% win = 'self.%s'%id %>\n${\
+        \ gui_hint() % win }"
+    callbacks:
+    - set_AlphaLineas(${ AlphaLineas })
+    - set_GrosorLineas(${ GrosorLineas })
+    - set_N_eyes(${ N_eyes })
+    - set_Retardo_Timing(${ Retardo_Timing })
+    - set_Samprate(${ Samprate })
+    - set_Sps(${ Sps })
+    - set_Title(${ Title })
+    - set_Ymax(${ Ymax })
+    - set_Ymin(${ Ymin })
+
+documentation: 'Done by: Homero Ortega Boada. Universidad Industrial de Santander
+
+    Let you to see the eye diagram of complex signals in comparison with a patron.
+    Este bloque fue un experimento que ya no se usa. Ahora a usar: b_EYE_Timing_c
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_Eye_Timing_d_c.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/versiones_viejas/b_EYE_Timing_d_c.grc
+
+file_format: 1

@@ -1,0 +1,43 @@
+id: b_meter_power_cc
+label: b_meter_power_cc
+category: '[comdiguis]'
+
+parameters:
+-   id: G_prom
+    label: G_prom
+    dtype: raw
+    default: '0.0001'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: Potencia
+    dtype: float
+    vlen: 1
+-   label: Potencia_dB
+    dtype: float
+    vlen: 1
+-   label: Valor_RMS
+    dtype: float
+    vlen: 1
+
+templates:
+    imports: 'from b_meter_power_cc import b_meter_power_cc  # grc-generated hier_block'
+    make: "b_meter_power_cc(\n    G_prom=${ G_prom },\n)"
+    callbacks:
+    - set_G_prom(${ G_prom })
+
+documentation: 'Homero Ortega
+
+    Mide potencia promedio en watts y en dB a senales complejas. Tambien el Valor
+    RMS. G_prom: es la ganancia para el filtro promediador, entre mas pequeno sea
+    este valor, el promediado es de mas largo plazo y por tanto, el valor es mas estable
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_meter_power_cc.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_meter_power_cc.grc
+
+file_format: 1

@@ -1,0 +1,49 @@
+id: b_MS_vector
+label: b_MS_vector
+category: '[comdiguis]'
+
+parameters:
+-   id: Constelacion
+    label: Tabla Verdad
+    dtype: raw
+    default: '[1+.0j,-1+.0j, .0+1j,0 -1j ]'
+    hide: none
+-   id: N
+    label: sps
+    dtype: int
+    default: '1'
+    hide: none
+-   id: senal
+    label: ' vector'
+    dtype: raw
+    default: (134,7)
+    hide: none
+
+inputs: []
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_MS_vector import b_MS_vector  # grc-generated hier_block'
+    make: "b_MS_vector(\n    Constelacion=${ Constelacion },\n    N=${ N },\n    senal=${\
+        \ senal },\n)"
+    callbacks:
+    - set_Constelacion(${ Constelacion })
+    - set_N(${ N })
+    - set_senal(${ senal })
+
+documentation: 'Homero Ortega Boada
+
+    genera la senal modulada en bandabase de una estacion movil. A diferencia del
+    b_MS, la senal que se genera no es aleatoria, sino que esta dada por un vector
+    que representa la senal binaria del usuario. Es util cuando se realizan pruebas
+    para conocer si lo que se recibe es lo mismo que se envia, gracias a que los datos
+    se repiten periodicamente
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_MS_vector.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_MS_vector.grc
+
+file_format: 1

@@ -1,0 +1,37 @@
+id: b_discriminador_frec_cf
+label: b_discriminador_frec_cf
+category: '[comdiguis]'
+
+parameters:
+-   id: BW
+    label: Ancho de banda
+    dtype: real
+    default: '1000'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: float
+    vlen: 1
+
+templates:
+    imports: 'from b_discriminador_frec_cf import b_discriminador_frec_cf  # grc-generated
+        hier_block'
+    make: "b_discriminador_frec_cf(\n    BW=${ BW },\n)"
+    callbacks:
+    - set_BW(${ BW })
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santander
+
+    Se refierea al Discriminador de frecuencias que en el libro de Haykin, capitulo
+    2.7 esta representado como H1(f). BW es el ancho de banda de la senal entrante.
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_discriminador_frec_cf.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/BloquesDependientes/b_discriminador_frec_cf.grc
+
+file_format: 1

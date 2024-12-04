@@ -1,0 +1,60 @@
+id: b_pdf_cdf_ff
+label: QT GUI b_pdf_cdf_ff
+category: '[comdiguis]'
+flags: need_qt_gui
+
+parameters:
+-   id: EjeX
+    label: Nombre Eje Horiz
+    dtype: raw
+    default: '''potencia'''
+    hide: none
+-   id: Xmax
+    label: Xmax
+    dtype: real
+    default: '4.'
+    hide: none
+-   id: Xmin
+    label: Xmin
+    dtype: real
+    default: '-4.'
+    hide: none
+-   id: pdf_max
+    label: pdf_max
+    dtype: real
+    default: '0.025'
+    hide: none
+-   id: gui_hint
+    label: GUI Hint
+    dtype: gui_hint
+    hide: part
+
+inputs:
+-   label: in
+    dtype: float
+    vlen: 1
+
+outputs: []
+
+templates:
+    imports: 'from b_pdf_cdf_ff import b_pdf_cdf_ff  # grc-generated hier_block'
+    make: "b_pdf_cdf_ff(\n    EjeX=${ EjeX },\n    Xmax=${ Xmax },\n    Xmin=${ Xmin\
+        \ },\n    pdf_max=${ pdf_max },\n)\n<% win = 'self.%s'%id %>\n${ gui_hint()\
+        \ % win }"
+    callbacks:
+    - set_EjeX(${ EjeX })
+    - set_Xmax(${ Xmax })
+    - set_Xmin(${ Xmin })
+    - set_pdf_max(${ pdf_max })
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santander
+
+    Hecho por Homero Ortega. Recibe an input with values between Xmin and Xmax and
+    calculate the Probaility Density Function (PDF), as well as Cumulative Distribution
+    Function (CDF) dinamically.
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_pdf_cdf_ff.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/Bloques
+    de cuidado en GNURadio 3.8.1/b_QT_pdf_cdf_ff.grc
+
+file_format: 1

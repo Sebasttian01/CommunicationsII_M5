@@ -1,0 +1,29 @@
+id: b_Mod_BPSK_bc
+label: b_Mod_BPSK_bc
+category: '[comdiguis]'
+
+parameters: []
+
+inputs:
+-   label: in
+    dtype: byte
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_Mod_BPSK_bc import b_Mod_BPSK_bc  # grc-generated hier_block'
+    make: b_Mod_BPSK_bc()
+    callbacks: []
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santander
+
+    Por cada bit que recibe, produce un simbolo en BPSK bandabase
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_Mod_BPSK_bc.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_Mod_BPSK_bc.grc
+
+file_format: 1

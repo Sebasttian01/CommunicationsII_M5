@@ -1,0 +1,82 @@
+id: b_BERTool_Channel_ff
+label: QT GUI b_BERTool_Channel_ff
+category: '[comdiguis]'
+flags: need_qt_gui
+
+parameters:
+-   id: EsN0max
+    label: EsN0max
+    dtype: raw
+    default: '20'
+    hide: none
+-   id: EsN0min
+    label: EsN0min
+    dtype: raw
+    default: '0'
+    hide: none
+-   id: N_snr
+    label: N_snr
+    dtype: raw
+    default: '128'
+    hide: none
+-   id: Rs
+    label: Rs
+    dtype: raw
+    default: '125'
+    hide: none
+-   id: tipo_mod
+    label: tipo_mod
+    dtype: raw
+    default: '"QPSK"'
+    hide: none
+-   id: gui_hint
+    label: GUI Hint
+    dtype: gui_hint
+    hide: part
+
+inputs:
+-   label: in
+    dtype: float
+    vlen: 1
+-   label: in_Tx
+    dtype: byte
+    vlen: 1
+-   label: in_Rx
+    dtype: byte
+    vlen: 1
+
+outputs:
+-   label: out_env
+    dtype: float
+    vlen: 1
+
+templates:
+    imports: 'from b_BERTool_Channel_ff import b_BERTool_Channel_ff  # grc-generated
+        hier_block'
+    make: "b_BERTool_Channel_ff(\n    EsN0max=${ EsN0max },\n    EsN0min=${ EsN0min\
+        \ },\n    N_snr=${ N_snr },\n    Rs=${ Rs },\n    tipo_mod=${ tipo_mod },\n\
+        )\n<% win = 'self.%s'%id %>\n${ gui_hint() % win }"
+    callbacks:
+    - set_EsN0max(${ EsN0max })
+    - set_EsN0min(${ EsN0min })
+    - set_N_snr(${ N_snr })
+    - set_Rs(${ Rs })
+    - set_tipo_mod(${ tipo_mod })
+
+documentation: "Mancipe Andres, Padilla Astrid, Castillo Jeyson \nEste Bloque sirve\
+    \ a la vez como canal de Ruido Blanco Gausiano y como herramienta para calcular\
+    \ y grafica la curva de BER (Bit error Rate) o SER (simbol error ratio) para una\
+    \ senal con modulacion digital. Parametros usados: N_snr - numero de puntos que\
+    \ tendra la curva de BER; EsNomin: valor minimo de la relaci\xF3n Es/No; EsNomax:\
+    \ valor m\xE1ximo de la relacion Es/No. Las se\xF1ales de entrada son: in Tx \
+    \ para los  simbolos transmitidos; in Rx  para los simbolos recibidos; in es la\
+    \ entrante envolvente compleja de la se\xF1al modulada. Las salidas del bloque\
+    \ son: out env que es la saliente envolvente compleja con la adicion de ruido\
+    \ AWGN; out ser que son los valores de BER o SER disponibles. IMPORTANTE: que\
+    \ la curva sea BER o sea SER lo define el tipo de senal que se tiene en in Tx\
+    \ y en in Rx, donde se tiene en cada caso una senal M-aria. Asi que si M=2, estamos\
+    \ enviando y recibiendo bits, luego obtenemos curva de BER, pero si M>2 estamos\
+    \ hablando de curva de SER. \n/home/comu2_grupoc1/.local/state/gnuradio/b_BERTool_Channel_ff.py"
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_BERTool_Channel_ff.grc
+
+file_format: 1

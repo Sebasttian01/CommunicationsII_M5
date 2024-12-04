@@ -1,0 +1,42 @@
+id: b_de_M_PAM_bf
+label: b_de_M_PAM_bf
+category: '[comdiguis]'
+
+parameters:
+-   id: M
+    label: M
+    dtype: int
+    default: '4'
+    hide: none
+-   id: Nbps
+    label: Nbps
+    dtype: raw
+    default: '8'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: byte
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: float
+    vlen: 1
+
+templates:
+    imports: 'from b_de_M_PAM_bf import b_de_M_PAM_bf  # grc-generated hier_block'
+    make: "b_de_M_PAM_bf(\n    M=${ M },\n    Nbps=${ Nbps },\n)"
+    callbacks:
+    - set_M(${ M })
+    - set_Nbps(${ Nbps })
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santander
+
+    Es un modulador M-PAM. La entrada y la salida es de tipo Byte, pero en la entrada
+    lo que se esperan son unos y ceros, osea que la entrada es una senal PCM.
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_de_M_PAM_bf.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/BloquesDependientes/b_de_M_PAM_bf.grc
+
+file_format: 1

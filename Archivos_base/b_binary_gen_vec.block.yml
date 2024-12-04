@@ -1,0 +1,36 @@
+id: b_binary_gen_vec
+label: b_binary_vect_source_f
+category: '[comdiguis]'
+
+parameters:
+-   id: Vector
+    label: Vector
+    dtype: raw
+    default: '0'
+    hide: none
+
+inputs: []
+
+outputs:
+-   label: out
+    dtype: float
+    vlen: 1
+
+templates:
+    imports: 'from b_binary_gen_vec import b_binary_gen_vec  # grc-generated hier_block'
+    make: "b_binary_gen_vec(\n    Vector=${ Vector },\n)"
+    callbacks:
+    - set_Vector(${ Vector })
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santader
+
+    This is a binary vector generator. Its is useful to produce a paquet of bits that
+    generates repeatly. The paquet of bits corresponds to the binary version of the
+    parameter Vector. Examples for the parameter Vector are:   [100]  or  [101, 54,
+    12]. What the block does is to traslate the values of the vector to bits and then
+    to type float
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_binary_gen_vec.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_binary_gen_vec.grc
+
+file_format: 1

@@ -1,0 +1,64 @@
+id: b_quantizer_fx
+label: b_quantizer_fx
+category: '[comdiguis]'
+
+parameters:
+-   id: NivelesQ
+    label: NivelesQ
+    dtype: int
+    default: '256'
+    hide: none
+-   id: Vmax
+    label: Vmax
+    dtype: real
+    default: '.5'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: float
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: short
+    vlen: 1
+    optional: true
+-   label: out
+    dtype: float
+    vlen: 1
+    optional: true
+-   label: out
+    dtype: int
+    vlen: 1
+    optional: true
+-   label: out
+    dtype: byte
+    vlen: 1
+
+templates:
+    imports: 'from b_quantizer_fx import b_quantizer_fx  # grc-generated hier_block'
+    make: "b_quantizer_fx(\n    NivelesQ=${ NivelesQ },\n    Vmax=${ Vmax },\n)"
+    callbacks:
+    - set_NivelesQ(${ NivelesQ })
+    - set_Vmax(${ Vmax })
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santander
+
+    Este es un cuantificaador que recibe una senal tipo float, la cuantifica y entrega
+    en 4 posibles tipos de salida (Byte, short, int  o float).  Funciona bien para
+    cualquier niveles de cuantificacion que este en el rango del tipo de salida de
+    su interes. Por ejemplo, si va a usar la salida tipo Byte, el maximo nivel de
+    cuantizacion es 256 (osea 2^8), si es la tipo short, ese valor es 65536 (osea
+    2^16), si es tipo int, se supone que ese valor es 2^32. El tipo float lo usamos
+    mas que todo para poder visualizar la senal cuantificada directamente en un osciloscopio.  Los
+    parametros usados: Vmax: es el valor maximo de amplitud que puede llegar a alcanzar
+    la senal entrante, bien sea en el rango de los valores negativos o en los positivos,
+    pero aqui se registra ese valor sin signo, osea como un valor positivo o valor
+    absoluto ; NivelesQ - es el numero de niveles de cuantificacion a usar en todo
+    el rango dinamico de la senal
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_quantizer_fx.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_quantizer_fx.grc
+
+file_format: 1

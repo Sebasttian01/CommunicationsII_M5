@@ -1,0 +1,40 @@
+id: b_FLL_tunner
+label: b_FLL_tunner
+category: '[comdiguis]'
+
+parameters:
+-   id: ConstellationObject
+    label: Constellation Object
+    dtype: raw
+    default: '0'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_FLL_tunner import b_FLL_tunner  # grc-generated hier_block'
+    make: "b_FLL_tunner(\n    ConstellationObject=${ ConstellationObject },\n)"
+    callbacks:
+    - set_ConstellationObject(${ ConstellationObject })
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santander
+
+    Recibe una senal digital con modulacion basada en constelaciones, luego de pasar
+    por un canal que introduce desviaciones en fase y frecuencia, para entregar una
+    constelacion estable, pues corrige esas desviaciones. Parametros usados: Constellation
+    Object - es el modelo que contiene toda la informacion de la constelacion usada,
+    lo cual sirve de base para poder realizar las correcciones. El constellation Object
+    se puede crear mediante el bloque "Constellation Object"
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_FLL_tunner.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_FLL_tunner_cc.grc
+
+file_format: 1

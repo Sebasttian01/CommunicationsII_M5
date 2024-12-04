@@ -1,0 +1,52 @@
+id: b_1tubes_2tubes
+label: b_1tubes_2tubes
+category: '[comdiguis]'
+
+parameters:
+-   id: N
+    label: N
+    dtype: raw
+    default: '8'
+    hide: none
+-   id: N1
+    label: N1
+    dtype: raw
+    default: '5'
+    hide: none
+-   id: N2
+    label: N2
+    dtype: raw
+    default: '3'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out1
+    dtype: complex
+    vlen: 1
+-   label: out0
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_1tubes_2tubes import b_1tubes_2tubes  # grc-generated hier_block'
+    make: "b_1tubes_2tubes(\n    N=${ N },\n    N1=${ N1 },\n    N2=${ N2 },\n)"
+    callbacks:
+    - set_N(${ N })
+    - set_N1(${ N1 })
+    - set_N2(${ N2 })
+
+documentation: 'Homero Ortega Boada
+
+    Usado para extraer dos chorros de datos de diferentes velocidades (dos tubos)
+    en un solo gran tubo. N1 es el numero de espacios que ocupa en el gran tubo, el
+    primer tubo. N2 es para el segunto tubo
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_1tubes_2tubes.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_1tubes_2tubes.grc
+
+file_format: 1

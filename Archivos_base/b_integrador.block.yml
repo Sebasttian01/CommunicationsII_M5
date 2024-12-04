@@ -1,0 +1,43 @@
+id: b_integrador
+label: b_integrador
+category: '[comdiguis]'
+
+parameters:
+-   id: M
+    label: M
+    dtype: int
+    default: '0'
+    hide: none
+-   id: N
+    label: N
+    dtype: int
+    default: '8'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_integrador import b_integrador  # grc-generated hier_block'
+    make: "b_integrador(\n    M=${ M },\n    N=${ N },\n)"
+    callbacks:
+    - set_M(${ M })
+    - set_N(${ N })
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santander
+
+    Hace lo mismo que el b_acum_cc, pero divide por el numero de muestras acumulados
+    con lo cual se obtiene un integrador que se resetea cada N muestras. Es un acumulador
+    que se resetea cada N muestras. Arranca en la muestra M.
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_integrador.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_integrador_cc.grc
+
+file_format: 1

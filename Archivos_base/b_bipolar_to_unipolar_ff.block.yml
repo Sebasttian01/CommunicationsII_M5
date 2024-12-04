@@ -1,0 +1,28 @@
+id: b_bipolar_to_unipolar_ff
+label: b_bipolar_to_unipolar_ff
+category: '[comdiguis]'
+
+parameters: []
+
+inputs:
+-   label: in
+    dtype: float
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: float
+    vlen: 1
+
+templates:
+    imports: 'from b_bipolar_to_unipolar_ff import b_bipolar_to_unipolar_ff  # grc-generated
+        hier_block'
+    make: b_bipolar_to_unipolar_ff()
+    callbacks: []
+
+documentation: 'Homero Ortega
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_bipolar_to_unipolar_ff.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_bipolar_to_unipolar_ff.grc
+
+file_format: 1

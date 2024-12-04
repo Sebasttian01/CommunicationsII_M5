@@ -1,0 +1,65 @@
+id: b_Raised_cosine2_cc
+label: b_Raised_cosine2_cc
+category: '[comdiguis]'
+
+parameters:
+-   id: Ganancia
+    label: Ganancia
+    dtype: real
+    default: '1.'
+    hide: none
+-   id: ntaps
+    label: ntaps
+    dtype: int
+    default: '16'
+    hide: none
+-   id: rolloff
+    label: rolloff
+    dtype: real
+    default: '1'
+    hide: none
+-   id: sps
+    label: sps
+    dtype: int
+    default: '8'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+-   label: h[n]
+    dtype: complex
+    vlen: 1
+    optional: true
+
+templates:
+    imports: 'from b_Raised_cosine2_cc import b_Raised_cosine2_cc  # grc-generated
+        hier_block'
+    make: "b_Raised_cosine2_cc(\n    Ganancia=${ Ganancia },\n    ntaps=${ ntaps },\n\
+        \    rolloff=${ rolloff },\n    sps=${ sps },\n)"
+    callbacks:
+    - set_Ganancia(${ Ganancia })
+    - set_ntaps(${ ntaps })
+    - set_rolloff(${ rolloff })
+    - set_sps(${ sps })
+
+documentation: 'Done by: Homero Ortega Boada. Universidad Industrial de Santander
+
+    It is the Raised Cosine Filter. Usually gnuradio comes with the square root variant,
+    but this is the right one. This version2 is more computing economic than the first
+    one. Parameters: rolloff - is the rolloff factor or Exccess Bandwidth;  sps -
+    the number of samples per simbol the filter will produce, but it is at the same
+    time, the interpolation factor. Note that at the input must be only one sample
+    per simbol; ntaps - the number of components of the Impulse response to take into
+    account; the signal at the output will be interpolated by a factor of sps
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_Raised_cosine2_cc.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_RaisedCosine2_cc.grc
+
+file_format: 1

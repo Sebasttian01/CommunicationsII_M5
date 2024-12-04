@@ -1,0 +1,74 @@
+id: b_RRaised_cosine_cc
+label: b_RRaised_cosine_cc
+category: '[comdiguis]'
+
+parameters:
+-   id: Ganancia
+    label: Ganancia
+    dtype: real
+    default: '1.'
+    hide: none
+-   id: Interpolation
+    label: Interpolation
+    dtype: int
+    default: '1'
+    hide: none
+-   id: ntaps
+    label: ntaps
+    dtype: int
+    default: '16'
+    hide: none
+-   id: rolloff
+    label: rolloff
+    dtype: real
+    default: '1'
+    hide: none
+-   id: sps
+    label: sps
+    dtype: int
+    default: '8'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+-   label: h[n]
+    dtype: complex
+    vlen: 1
+    optional: true
+
+templates:
+    imports: 'from b_RRaised_cosine_cc import b_RRaised_cosine_cc  # grc-generated
+        hier_block'
+    make: "b_RRaised_cosine_cc(\n    Ganancia=${ Ganancia },\n    Interpolation=${\
+        \ Interpolation },\n    ntaps=${ ntaps },\n    rolloff=${ rolloff },\n   \
+        \ sps=${ sps },\n)"
+    callbacks:
+    - set_Ganancia(${ Ganancia })
+    - set_Interpolation(${ Interpolation })
+    - set_ntaps(${ ntaps })
+    - set_rolloff(${ rolloff })
+    - set_sps(${ sps })
+
+documentation: 'Done by: Homero Ortega Boada. Universidad Industrial de Santander
+
+    It is the Root Raised Cosine Filter. Usually gnuradio comes with the square root
+    variant, but this is the right one. Parameters: rolloff - is the rolloff factor
+    or Exccess Bandwidth;  sps - the number of samples per simbol the filter will
+    produce; ntaps- the number of components in the impulse response. Note that if
+    you use two such blocks one in the transmiter (Tx) and one in the receiver (Rx)
+    to obtain a matched filter, equivalent to a RC Filter that satisfies the Nyquist
+    ISI Criterion, the configuration have to be this way: At the Tx give: interpolation=samples
+    per symbol, ntaps= samples per symbol * number of taps; at the receiver give:  intepolation=1;
+    ntaps=number of taps
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_RRaised_cosine_cc.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_RRaisedCosine_cc.grc
+
+file_format: 1

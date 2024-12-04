@@ -1,0 +1,30 @@
+id: b_char2complex
+label: b_char2complex
+category: '[comdiguis]'
+
+parameters: []
+
+inputs:
+-   label: in
+    dtype: byte
+    vlen: 1
+-   label: in
+    dtype: byte
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_char2complex import b_char2complex  # grc-generated hier_block'
+    make: b_char2complex()
+    callbacks: []
+
+documentation: 'Homero Ortega Boada
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_char2complex.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_char2complex.grc
+
+file_format: 1

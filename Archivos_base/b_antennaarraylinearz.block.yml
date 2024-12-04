@@ -1,0 +1,60 @@
+id: b_antennaarraylinearz
+label: b_antennaarraylinearz
+category: '[en_prueba]'
+
+parameters:
+-   id: Dz
+    label: separacion en lambdas
+    dtype: real
+    default: '0.5'
+    hide: none
+-   id: phj_i_gr_0
+    label: angulo phi
+    dtype: real
+    default: '0'
+    hide: none
+-   id: theta_i_gr
+    label: angulo theta
+    dtype: real
+    default: '0'
+    hide: none
+
+inputs:
+-   label: in0
+    dtype: complex
+    vlen: 1
+-   label: in1
+    dtype: complex
+    vlen: 1
+-   label: in3
+    dtype: complex
+    vlen: 1
+-   label: in2
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_antennaarraylinearz import b_antennaarraylinearz  # grc-generated
+        hier_block'
+    make: "b_antennaarraylinearz(\n    Dz=${ Dz },\n    phj_i_gr_0=${ phj_i_gr_0 },\n\
+        \    theta_i_gr=${ theta_i_gr },\n)"
+    callbacks:
+    - set_Dz(${ Dz })
+    - set_phj_i_gr_0(${ phj_i_gr_0 })
+    - set_theta_i_gr(${ theta_i_gr })
+
+documentation: "Homero Ortega\nSimula el comportamiento del hardware de un arreglo\
+    \ de antenas m\xE1s basico que es el caso en que los radiadores est\xE1n dispuestos\
+    \ de manera lineal, sobre el eje z, donde Dz es la distancia entre los radiadores\
+    \ dada en longitudes de onda, por ejemplo Dz=0.5 significa media longitud de onda.\
+    \ N es el numeo de radiadores, distancias es la distantacia desde z=0 hasta cada\
+    \ radiador; fases son los desfases que sufre cada se\xF1al para llegar a un punto\
+    \ de observaci\xF3n ubicado en un angulo theta_i\n/home/comu2_grupoc1/.local/state/gnuradio/b_antennaarraylinearz.py"
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_vec_antennaarraylinearz.grc
+
+file_format: 1

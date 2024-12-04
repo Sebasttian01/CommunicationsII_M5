@@ -1,0 +1,27 @@
+id: b_binary_bipolar_simple_source_f
+label: b_binary_bipolar_simple_source_f
+category: '[comdiguis]'
+
+parameters: []
+
+inputs: []
+
+outputs:
+-   label: out
+    dtype: float
+    vlen: 1
+
+templates:
+    imports: 'from b_binary_bipolar_simple_source_f import b_binary_bipolar_simple_source_f  #
+        grc-generated hier_block'
+    make: b_binary_bipolar_simple_source_f()
+    callbacks: []
+
+documentation: 'Homero Ortega Boada. Universidad Industrial de Santader
+
+    Genera una senal binaria bipolar aleatoria tipo float
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_binary_bipolar_simple_source_f.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_binary_bipolar_simple_source.grc
+
+file_format: 1

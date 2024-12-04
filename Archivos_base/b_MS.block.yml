@@ -1,0 +1,34 @@
+id: b_MS
+label: b_MS
+category: '[comdiguis]'
+
+parameters:
+-   id: Constelacion
+    label: Tabla de Verdad
+    dtype: raw
+    default: '[1+.0j,-1+.0j, .0+1j,0 -1j ]'
+    hide: none
+-   id: N
+    label: Sobremuestreo
+    dtype: int
+    default: '1'
+    hide: none
+
+inputs: []
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_MS import b_MS  # grc-generated hier_block'
+    make: "b_MS(\n    Constelacion=${ Constelacion },\n    N=${ N },\n)"
+    callbacks:
+    - set_Constelacion(${ Constelacion })
+    - set_N(${ N })
+
+documentation: /home/comu2_grupoc1/.local/state/gnuradio/b_MS.py
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_MS_stream.grc
+
+file_format: 1

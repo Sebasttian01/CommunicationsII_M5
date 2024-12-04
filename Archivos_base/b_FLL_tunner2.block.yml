@@ -1,0 +1,36 @@
+id: b_FLL_tunner2
+label: b_FLL_tunner2
+category: '[comdiguis]'
+
+parameters:
+-   id: Constellation
+    label: Constellation
+    dtype: raw
+    default: (1,0)
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from b_FLL_tunner2 import b_FLL_tunner2  # grc-generated hier_block'
+    make: "b_FLL_tunner2(\n    Constellation=${ Constellation },\n)"
+    callbacks:
+    - set_Constellation(${ Constellation })
+
+documentation: "Homero Ortega Boada. Universidad Industrial de Santander\nRecibe una\
+    \ senal digital con modulacion basada en constelaciones, luego de pasar por un\
+    \ canal que introduce desviaciones en fase y frecuencia, para entregar una constelacion\
+    \ estable, pues corrige esas desviaciones. Parametros usados: Constellation -\
+    \ es el mvector que contiene los puntos de la constelacion usada, lo cual sirve\
+    \ de base para poder realizar las correcciones. \n/home/comu2_grupoc1/.local/state/gnuradio/b_FLL_tunner2.py"
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_FLL_tunner2_cc.grc
+
+file_format: 1

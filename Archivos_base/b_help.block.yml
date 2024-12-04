@@ -1,0 +1,25 @@
+id: b_help
+label: b_help
+category: '[comdiguis]'
+
+parameters: []
+
+inputs: []
+
+outputs: []
+
+templates:
+    imports: 'from b_help import b_help  # grc-generated hier_block'
+    make: 'b_help()
+
+        self.connect(self.${id})'
+    callbacks: []
+
+documentation: 'Homero Ortega Boada
+
+    Guardando aqui todos los bloques de programacion embebida
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_help.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_help.grc
+
+file_format: 1

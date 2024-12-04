@@ -1,0 +1,35 @@
+id: b_Gray_Decoder_BB
+label: b_Gray_Decoder_BB
+category: '[comdiguis]'
+
+parameters:
+-   id: M
+    label: Modulus
+    dtype: int
+    default: '8'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: byte
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: byte
+    vlen: 1
+
+templates:
+    imports: 'from b_Gray_Decoder_BB import b_Gray_Decoder_BB  # grc-generated hier_block'
+    make: "b_Gray_Decoder_BB(\n    M=${ M },\n)"
+    callbacks:
+    - set_M(${ M })
+
+documentation: 'Homero Ortega
+
+    apply Gray Decoding to input byte signal. This block may be paired with b_Gray_Encoder_BB
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_Gray_Decoder_BB.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_Gray_Decoder_BB.grc
+
+file_format: 1

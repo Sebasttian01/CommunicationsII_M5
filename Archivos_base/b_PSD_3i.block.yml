@@ -1,0 +1,86 @@
+id: b_PSD_3i
+label: QT GUI b_PSD_3i
+category: '[comdiguis]'
+flags: need_qt_gui
+
+parameters:
+-   id: Amp
+    label: Amplitud
+    dtype: raw
+    default: '1'
+    hide: none
+-   id: Ensayos
+    label: N_ensayos
+    dtype: raw
+    default: '1000000'
+    hide: none
+-   id: N
+    label: N_FFT
+    dtype: raw
+    default: '1024'
+    hide: none
+-   id: Subtitulo0
+    label: Subtitulo0
+    dtype: raw
+    default: '''espectro0'''
+    hide: none
+-   id: Subtitulo1
+    label: Subtitulo1
+    dtype: raw
+    default: '''espectro1'''
+    hide: none
+-   id: Subtitulo2
+    label: Subtitulo2
+    dtype: raw
+    default: '''espectro2'''
+    hide: none
+-   id: Titulo
+    label: Titulo
+    dtype: raw
+    default: '''espectro'''
+    hide: none
+-   id: samp_rate_audio
+    label: Fmuestreo
+    dtype: raw
+    default: '22000'
+    hide: none
+-   id: gui_hint
+    label: GUI Hint
+    dtype: gui_hint
+    hide: part
+
+inputs:
+-   label: in
+    dtype: float
+    vlen: 1
+-   label: in
+    dtype: float
+    vlen: 1
+-   label: in
+    dtype: float
+    vlen: 1
+
+outputs: []
+
+templates:
+    imports: 'from b_PSD_3i import b_PSD_3i  # grc-generated hier_block'
+    make: "b_PSD_3i(\n    Amp=${ Amp },\n    Ensayos=${ Ensayos },\n    N=${ N },\n\
+        \    Subtitulo0=${ Subtitulo0 },\n    Subtitulo1=${ Subtitulo1 },\n    Subtitulo2=${\
+        \ Subtitulo2 },\n    Titulo=${ Titulo },\n    samp_rate_audio=${ samp_rate_audio\
+        \ },\n)\n<% win = 'self.%s'%id %>\n${ gui_hint() % win }"
+    callbacks:
+    - set_Amp(${ Amp })
+    - set_Ensayos(${ Ensayos })
+    - set_N(${ N })
+    - set_Subtitulo0(${ Subtitulo0 })
+    - set_Subtitulo1(${ Subtitulo1 })
+    - set_Subtitulo2(${ Subtitulo2 })
+    - set_Titulo(${ Titulo })
+    - set_samp_rate_audio(${ samp_rate_audio })
+
+documentation: 'Homero Ortega
+
+    /home/comu2_grupoc1/.local/state/gnuradio/b_PSD_3i.py'
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_QT_PSD_3i.grc
+
+file_format: 1

@@ -1,0 +1,46 @@
+id: b_quantizer_fb
+label: b_quantizer_fb
+category: '[comdiguis]'
+
+parameters:
+-   id: NivelesQ
+    label: NivelesQ
+    dtype: int
+    default: '256'
+    hide: none
+-   id: Vmax
+    label: Vmax
+    dtype: real
+    default: '.5'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: float
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: byte
+    vlen: 1
+
+templates:
+    imports: 'from b_quantizer_fb import b_quantizer_fb  # grc-generated hier_block'
+    make: "b_quantizer_fb(\n    NivelesQ=${ NivelesQ },\n    Vmax=${ Vmax },\n)"
+    callbacks:
+    - set_NivelesQ(${ NivelesQ })
+    - set_Vmax(${ Vmax })
+
+documentation: "Homero Ortega Boada. Universidad Industrial de Santander\nEste es\
+    \ un cuantificador que recibe una senal tipo float, la cuantifica y entrega a\
+    \ tipo byte  (que es lo mismo que char en c++).  Funciona bien para cualquier\
+    \ niveles de cuantificacion que este en el rango del tipo Byte. As\xED, para el\
+    \ tipo Byte el maximo nivel de cuantizacion es 256 (osea 2^8).  Los parametros\
+    \ usados: Vmax: es el valor maximo de amplitud que puede llegar a alcanzar la\
+    \ senal entrante, bien sea en el rango de los valores negativos o en los positivos,\
+    \ pero aqui se registra ese valor sin signo, osea como un valor positivo o valor\
+    \ absoluto ; NivelesQ - es el numero de niveles de cuantificacion a usar en todo\
+    \ el rango dinamico de la senal\n/home/comu2_grupoc1/.local/state/gnuradio/b_quantizer_fb.py"
+grc_source: /home/comu2_grupoc1/CommunicationsII_M5/comdig_Lib_Bloques.3.8-master/b_quantizer_fb.grc
+
+file_format: 1
