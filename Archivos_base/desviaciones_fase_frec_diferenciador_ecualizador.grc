@@ -169,6 +169,7 @@ blocks:
     const_points: constelacion
     dims: '1'
     normalization: digital.constellation.AMPLITUDE_NORMALIZATION
+    npwr: '1.0'
     precision: '8'
     rot_sym: '4'
     soft_dec_lut: None
@@ -522,6 +523,7 @@ blocks:
     offset: '0'
     phase: '0'
     samp_rate: samp_rate
+    showports: 'False'
     type: complex
     waveform: analog.GR_COS_WAVE
   states:
@@ -757,6 +759,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     num_ports: '2'
+    showports: 'False'
     type: complex
     vlen: '1'
   states:
@@ -776,6 +779,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     num_ports: '1'
+    showports: 'False'
     type: complex
     vlen: '1'
   states:
@@ -795,6 +799,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     num_ports: '1'
+    showports: 'False'
     type: complex
     vlen: '1'
   states:
@@ -814,6 +819,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     num_ports: '1'
+    showports: 'False'
     type: byte
     vlen: '1'
   states:
@@ -833,6 +839,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     num_ports: '1'
+    showports: 'False'
     type: byte
     vlen: '1'
   states:
@@ -1110,9 +1117,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1064, 604.0]
+    coordinate: [1032, 480.0]
     rotation: 180
-    state: enabled
+    state: disabled
 - name: epy_block_0
   id: epy_block
   parameters:
@@ -3025,6 +3032,7 @@ blocks:
     state: enabled
 
 connections:
+- [analog_agc3_xx_0, '0', b_FLL_tunner2_0, '0']
 - [analog_agc3_xx_0, '0', digital_lms_dd_equalizer_cc_0, '0']
 - [analog_noise_source_x_0, '0', blocks_add_xx_0, '0']
 - [analog_noise_source_x_0, '0', virtual_sink_0_0, '0']
@@ -3106,3 +3114,4 @@ connections:
 
 metadata:
   file_format: 1
+  grc_version: v3.11.0.0git-810-g1ecb8565
